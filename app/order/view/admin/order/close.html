@@ -1,0 +1,32 @@
+<div id="modal-close" uk-modal>
+    <div class="uk-modal-dialog">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <div class="uk-modal-header">
+            <h2 class="uk-modal-title">订单取消</h2>
+        </div>
+        <form class="uk-form" data-dux="form-bind" data-advanced="false" data-callback="closeCallback"
+              action="{url('order/Order/close')}" method="post">
+            <div class="uk-modal-body">
+                <div class="uk-form-group">
+                    <select class="uk-select" name="type" data-dux="form-select" style="width: 100%" required>
+                        <option value="1">退款</option>
+                        <option value="0">不退款</option>
+                    </select>
+                </div>
+                <div class="uk-form-group">
+                    <textarea class="uk-textarea" name="remark"  placeholder="取消备注信息"></textarea>
+                </div>
+            </div>
+            <div class="uk-modal-footer uk-text-right">
+                <input type="hidden" name="order_id" value="{$info.order_id}">
+                <button class="uk-button uk-button-default uk-modal-close" type="button">取消</button>
+                <button class="uk-button uk-button-primary" type="submit">保存</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    window.closeCallback = function () {
+        window.location.reload();
+    }
+</script>

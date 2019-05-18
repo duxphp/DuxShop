@@ -1,0 +1,248 @@
+<div class="uk-flex">
+    <div style="width: 415px; margin-right: 1.5rem;">
+        <div class="uk-card uk-card-small uk-card-default dux-panel">
+            <div class="uk-card-body">
+                <div class="dux-phone" data-phone>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="uk-flex-1">
+        <div class="uk-card uk-card-small uk-card-default dux-panel">
+            <div class="uk-card-header">{$assignName}模板</div>
+            <div class="uk-card-body" data-element>
+                <!--loop{$elementType as $key => $vo}-->
+                <button class="uk-button uk-button-small uk-button-default" style="margin: 3px" type="button" data-type="{$key}">
+                    {$vo.name}
+                </button>
+                <!--{/loop}-->
+            </div>
+        </div>
+        <div class="uk-card uk-card-small uk-card-default dux-panel" data-phone-form style="display: none">
+            <div class="uk-card-body">
+                <form class="dux-form uk-form uk-form-stacked" data-dux="form-bind" data-callback="editorParsing"
+                    method="post" action="{url('editorParsing')}">
+                    <fieldset>
+                        <div data-phone-edit></div>
+                        <div class="uk-form-group">
+                            <div>
+                                <button class="uk-button uk-button-primary" type="submit">更新元素</button>
+                                <button data-phone-del class="uk-button uk-button-danger" type="button">删除元素</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+
+
+        <div class="uk-card uk-card-small uk-card-default dux-panel">
+            <div class="uk-card-header">页面设置</div>
+            <div class="uk-card-body">
+                <div class=" dux-form uk-form uk-form-stacked" data-page>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">页面名称</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" name="name" value="{$info.name}" placeholder="模板名称"
+                                required>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">页面标识</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" name="label" value="{$info.label}" {$info.system ? 'disabled' : '' } placeholder="模板标识">
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <div>
+                            <input type="hidden" name="tpl_id" value="{$info.tpl_id}">
+                            <button data-page-submit class="uk-button uk-button-primary" type="button">保存页面
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!--loop{$elementType as $key => $vo}-->
+<script type="text/html" data-phone-{$key}>
+    {$vo.phoneTpl}
+</script>
+<!--{/loop}-->
+
+<!--loop{$elementType as $key => $vo}-->
+<script type="text/html" data-edit-{$key}>
+    {$vo.editTpl}
+</script>
+<!--{/loop}-->
+
+<script>
+    var defaultData = {json_encode($defaultData)};
+    var data = {json_encode($data)};
+    Do('base', 'tpl', function () {
+        var phone = '[data-phone]';
+        var editor = '[data-phone-edit]';
+        var phoneForm = '[data-phone-form]';
+
+        window.phone = phone;
+        window.editor = editor;
+        window.phoneForm = phoneForm;
+
+        UIkit.sortable(phone, {
+            clsPlaceholder: "phone-placeholder"
+        });
+        var active = 0;
+
+        //监听顺序
+        UIkit.util.on(phone, 'moved', function () {
+            reset();
+        });
+
+        //重置顺序
+        var reset = function () {
+            var sort = [];
+            $(phone).find('.phone-element').each(function () {
+                sort.push($(this).data('key'));
+            });
+            var newData = [];
+            for (var i in sort) {
+                for (var x in data) {
+                    if (sort[i] == x) {
+                        data[x]['key'] = i;
+                        newData.push(data[x]);
+                    }
+                }
+            }
+            active = $(phone).find('.phone-active').index();
+            data = newData;
+            console.log(data);
+            init();
+        };
+
+        //重新绑定
+        var bindForm = function () {
+            $(editor).find('input[type="color"]').each(function () {
+                form.color(this, $(this).data());
+            });
+            $(editor).find('[data-dux="system-attach"]').each(function () {
+                system.attach(this, $(this).data());
+            });
+            $(editor).find('[data-dux="form-preview"]').each(function () {
+                form.preview(this, $(this).data());
+            });
+
+        };
+        //元素增加
+        $('[data-element]').on('click', 'button', function () {
+            var type = $(this).data('type');
+            var html = phoneRender(defaultData[type]);
+            html = '<div class="phone-element" data-key="' + ($(phone).find('.phone-element').length ? $(phone).find('.phone-element').length : 0) + '">' + html + '</div>';
+            $(phone).append(html);
+            data.push(defaultData[type]);
+            $(phoneForm).show();
+            $(phone).find('.phone-element:last').last().click();
+        });
+        //元素编辑
+        $(phone).on('click', '.phone-element', function () {
+            $(phone).find('.phone-element').removeClass('phone-active');
+            $(this).addClass('phone-active');
+            var key = $(this).data('key');
+            var params = data[key];
+            $(editor).html(editRender(params) + '<input class="uk-input" type="hidden" name="key" value="' + key + '"><input class="uk-input" type="hidden" name="tpl" value="' + params.tpl + '">');
+            active = $(this).index();
+            $(phoneForm).show();
+            bindForm();
+        });
+
+        //编辑器执行
+        $(phoneForm).on('click', '[data-js]', function () {
+            phoneJs[$(this).data('js')](this)
+        });
+
+        //编辑器删除
+        $(phoneForm).on('click', '[data-del]', function () {
+            $(this).parents('[data-item]').remove();
+        });
+
+        //删除元素
+        $(phoneForm).find('[data-phone-del]').on('click', function () {
+            $(phone).find('.phone-element').eq(active).remove();
+            reset();
+        });
+
+        //编辑回调
+        window.editorParsing = function (params) {
+            data[params.key] = params;
+            init();
+        };
+
+        var phoneRender = function (params) {
+            return laytpl($('[data-phone-' + params.tpl + ']').html()).render(params);
+        };
+
+        var editRender = function (params) {
+            return laytpl($('[data-edit-' + params.tpl + ']').html()).render(params);
+        };
+
+        //初始化预览器
+        var init = function () {
+            var html = '';
+            for (var i in data) {
+                html += '<div class="phone-element ' + (active == i ? 'phone-active' : '') + '" data-key="' + i + '">' + phoneRender(data[i]) + '</div>';
+            }
+            $(phone).html(html);
+            $(phone).find('.phone-element').eq(active).click();
+        };
+        init();
+
+        //页面保存
+        $('[data-page-submit]').on('click', function () {
+            app.ajax({
+                url: '{url("")}',
+                type: 'post',
+                data: {
+                    tpl_id: $('[data-page]').find('input[name="tpl_id"]').val(),
+                    name: $('[data-page]').find('input[name="name"]').val(),
+                    label: $('[data-page]').find('input[name="label"]').val(),
+                    content: data
+                },
+                success: function (msg) {
+                    notify.success({
+                        content: msg
+                    });
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+    (function ($, owner) {
+        <!--loop{$elementType as $key => $vo}-->
+            {$vo.editJs}
+            <!--{/loop}-->
+    }(jQuery, window.phoneJs = {}));
+</script>
+
+<style type="text/scss" dux-auto>
+    .dux-phone {
+        border: 1px solid #ddd;
+        background: #f5f5f5;
+        min-height: 600px;
+        padding: 10px;
+        .phone-element {
+            border: 1px dashed #ccc;
+            min-height: 20px;
+        }
+        .phone-placeholder, .phone-active {
+            border-color: #ee1d24;
+        }
+    }
+
+</style>

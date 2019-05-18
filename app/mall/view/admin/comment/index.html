@@ -1,0 +1,143 @@
+<div data-dux="table-bind" class="dux-table-layout">
+    <div class="dux-page-header uk-clearfix">
+        <div class="page-title">
+            <form class="dux-form uk-form  uk-form-inline" method="get" action="{url()}">
+                <div class="uk-form-group">
+                    <input type="text" name="name" class="uk-input" value="{$pageMaps.name}" placeholder="搜索">
+                </div>
+                <div class="uk-form-group">
+                    <select class="uk-select" name="type" placeholder="搜索类型" data-dux="form-select" data-minimum-results-for-search="-1">
+                        <option value="0">订单号</option>
+                        <option value="1" {$pageMaps.type== 1 ? 'selected' : ''}>会员信息</option>
+                        <option value="2" {$pageMaps.type== 2 ? 'selected' : ''}>收件人信息</option>
+                        <option value="3" {$pageMaps.type== 3 ? 'selected' : ''}>地址信息</option>
+                        <option value="4" {$pageMaps.type== 4 ? 'selected' : ''}>商品名称</option>
+                        <option value="5" {$pageMaps.type== 5 ? 'selected' : ''}>商品货号</option>
+                    </select>
+                </div>
+                <div class="uk-form-group">
+                    <select class="uk-select" name="level" data-dux="form-select" data-minimum-results-for-search="-1">
+                        <option value="0">评价类型</option>
+                        <option value="1" {$pageMaps.level == 1 ? 'selected' : ''} >好评</option>
+                        <option value="2" {$pageMaps.level == 2 ? 'selected' : ''} >中评</option>
+                        <option value="3" {$pageMaps.level == 3 ? 'selected' : ''} >差评</option>
+                    </select>
+                </div>
+                <div class="uk-form-group">
+                    <select class="uk-select" name="status" data-dux="form-select" data-minimum-results-for-search="-1">
+                        <option value="0">评价状态</option>
+                        <option value="1" {$pageMaps.status == 1 ? 'selected' : ''} >已评价</option>
+                        <option value="2" {$pageMaps.status == 2 ? 'selected' : ''} >未评价</option>
+                    </select>
+                </div>
+                <div class="uk-form-group">
+                    <button type="submit" class="uk-button uk-button-primary  "><i class="fa fa-search"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="dux-page-table">
+        <table class="uk-table uk-table-hover uk-table-middle dux-table" data-table>
+            <thead>
+            <tr>
+                <th width="50">
+                    <input type="checkbox" class="uk-checkbox" data-all value="">
+                </th>
+                <th colspan="2">商品</th>
+                <th width="200">用户</th>
+                <th>评价</th>
+                <th width="120" class="uk-text-center">状态</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!--if{$list}-->
+            <!--loop{(array)$list as $vo}-->
+            <tr>
+                <td>
+                    <input class="uk-checkbox" type="checkbox" name="id[]" value="{$vo.comment_id}">
+                </td>
+                <td width="100">
+                    <img src="{$vo.goods_image}" data-select width="100" height="100">
+                </td>
+                <td width="200">
+                    {$vo.goods_name}
+                    <p>{$vo.order_no}</p>
+                    <!--if{!empty($vo.spec)}-->
+                    <!--loop{$vo.spec as $v}-->
+                    <p>{$v.value}</p>
+                    <!--{/loop}-->
+                    <!--{/if}-->
+                    <p>￥{$vo.goods_price}*{$vo.goods_qty}</p>
+                    <p class="uk-text-danger"> 实付：￥{$vo.price_total}</p>
+                    <p>{date('Y-m-d H:i:s', $vo.order_create_time)}</p>
+                </td>
+                <td>
+                    <div class="uk-flex uk-flex-middle">
+                        <div class="">
+                            <img src="{$vo.user_avatar}" width="60" height="60">
+                        </div>
+                        <div class="uk-flex-1 uk-margin-small-left">
+
+                            <a href="javascript:;">{$vo.show_name}</a>
+                            <div uk-dropdown data-id="{$vo.user_id}" class="dux-user-show" data-dux="system-user"></div>
+
+                            <!--if{$vo.level <= 1}-->
+                            <div class="uk-text-danger">{$vo.level}星差评</div>
+                            <!--{/if}-->
+                            <!--if{$vo.level <= 3 && $vo.level > 1}-->
+                            <div class="uk-text-warning">{$vo.level}星中评</div>
+                            <!--{/if}-->
+                            <!--if{$vo.level > 3}-->
+                            <div class="uk-text-success">{$vo.level}星好评</div>
+                            <!--{/if}-->
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div>{date('Y-m-d H:i:s', $vo.time)}</div>
+                    <ul class="uk-thumbnav">
+                        <!--if{!empty($vo.spec)}-->
+                        <!--loop{$vo.spec as $v}-->
+                        <li class="uk-active"><a href=""><img src="" alt=""></a></li>
+                        <!--{/loop}-->
+                        <!--{/if}-->
+                    </ul>
+                    <div>
+                        <p>{$v.value}</p>
+                    </div>
+                    <p>{$vo.content}</p>
+                </td>
+
+                <td class="uk-text-center">
+                    <!--if{$vo.status}-->
+                    <span data-id="{$vo.comment_id}" data-name="status" data-url="{url('status')}" data-status="1" class="uk-text-success fa fa-circle"></span>
+                    <!--{else}-->
+                    <span data-id="{$vo.comment_id}" data-name="status" data-url="{url('status')}" data-status="0" class="uk-text-danger fa fa-circle"></span>
+                    <!--{/if}-->
+                </td>
+            </tr>
+            <!--{/loop}-->
+            <!--{else}-->
+            <tr>
+                <td class="uk-text-center" colspan="7">暂无评价</td>
+            </tr>
+            <!--{/if}-->
+            </tbody>
+        </table>
+    </div>
+    <div class="dux-page-foot uk-clearfix">
+        <form class="dux-form uk-form  uk-form-inline foot-batch"  data-batch action="{url('action')}">
+            <div class="uk-form-group">
+                <select class="uk-select" name="action">
+                    <option value="0">批量操作</option>
+                    <option value="1">已审核</option>
+                    <option value="2">未审核</option>
+                </select>
+            </div>
+            <div class="uk-form-group">
+                <button type="submit" class="uk-button uk-button-primary">批量处理</button>
+            </div>
+        </form>
+        {$page}
+    </div>
+</div>

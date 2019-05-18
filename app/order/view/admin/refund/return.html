@@ -1,0 +1,26 @@
+<div id="modal-return" uk-modal>
+    <div class="uk-modal-dialog">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <div class="uk-modal-header">
+            <h2 class="uk-modal-title">处理备注</h2>
+        </div>
+        <form class="uk-form   uk-form-horizontal " data-dux="form-bind" data-advanced="false" data-callback="returnCallback" action="{url('order/Refund/process')}" method="post">
+        <div class="uk-modal-body">
+            <div class="uk-form-group">
+                <textarea class="uk-textarea" name="remark" rows="5"  placeholder="">请将货品寄回售后处理</textarea>
+            </div>
+        </div>
+        <div class="uk-modal-footer uk-text-right">
+            <input type="hidden" name="status" value="1">
+            <input type="hidden" name="id" value="{$info.refund_id}">
+            <button class="uk-button uk-button-default uk-modal-close" type="button">取消</button>
+            <button class="uk-button uk-button-primary" type="submit">同意</button>
+        </div>
+        </form>
+    </div>
+</div>
+<script>
+    window.returnCallback = function () {
+        window.location.reload();
+    }
+</script>

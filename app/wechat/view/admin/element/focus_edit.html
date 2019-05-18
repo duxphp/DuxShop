@@ -1,0 +1,61 @@
+<div class="uk-form-group">
+    <label class=" uk-form-label">关注名称</label>
+    <div>
+        <input class="uk-input" type="text" name="data[name]" value="{{d.data.name}}">
+    </div>
+</div>
+<div class="uk-form-group">
+    <label class=" uk-form-label">关注描述</label>
+    <div>
+        <input class="uk-input" type="text" name="data[desc]" value="{{d.data.desc}}">
+    </div>
+</div>
+<div class="uk-form-group">
+    <label class=" uk-form-label">关注链接</label>
+    <div>
+        <input class="uk-input" type="text" name="data[url]" value="{{d.data.url}}">
+    </div>
+</div>
+<div class="uk-form-group">
+    <label class=" uk-form-label">LOGO</label>
+    <div>
+        <div class="uk-input-group uk-margin-bottom">
+            <input class="uk-input" type="text" name="data[logo]" id="logo"
+                value="{{d.data.logo ? d.data.logo : ''}}" placeholder="图片地址">
+            <span class="uk-input-group-btn">
+                <button class="uk-button uk-button-default" type="button" data-type="image" data-dux="system-attach"
+                    data-target="#logo"><i class="fa fa-upload"></i></button>
+            </span>
+            <span class="uk-input-group-btn">
+                <button class="uk-button uk-button-default" type="button" data-dux="form-preview"
+                    data-target="#logo"><i class="fa fa-image"></i></button>
+            </span>
+        </div>
+    </div>
+</div>
+<div class="uk-form-group">
+    <label class=" uk-form-label">二维码</label>
+    <div>
+        <div class="uk-input-group uk-margin-bottom">
+            <input class="uk-input" type="text" name="data[qrcode]" id="qrcode"
+                value="{{d.data.qrcode ? d.data.qrcode : ''}}" placeholder="图片地址">
+            <span class="uk-input-group-btn">
+                <button class="uk-button uk-button-default" type="button" data-type="image" data-dux="system-attach"
+                    data-target="#qrcode"><i class="fa fa-upload"></i></button>
+            </span>
+            <span class="uk-input-group-btn">
+                <button class="uk-button uk-button-default" type="button" data-dux="form-preview"
+                    data-target="#qrcode"><i class="fa fa-image"></i></button>
+            </span>
+        </div>
+    </div>
+</div>
+<div class="uk-form-group">
+    <label class=" uk-form-label">是否浮动</label>
+    <div class="uk-grid">
+        <label><input class="uk-radio" type="radio" name="style[float]" value="1" {{d.style.float == 1 ? 'checked' : ''}}>
+            浮动</label>
+        <label><input class="uk-radio" type="radio" name="style[float]" value="0" {{d.style.float == 1 ? '' : 'checked'}}>
+            滚动</label>
+    </div>
+</div>

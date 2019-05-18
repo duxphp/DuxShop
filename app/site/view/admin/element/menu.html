@@ -1,0 +1,14 @@
+<div class="phone-tpl-menu uk-grid uk-grid-collapse uk-child-width-1-{{d.style.column}}">
+    {{# for(var i in d.data) { }}
+    {{# if(d.data[i].image){ }}
+    <div class="item">
+        <div style="margin: 5px 0; padding: 0 5px; text-align: center">
+            <div class="image">
+                <img width="50" height="50" src="{{d.data[i].image}}">
+            </div>
+            <div class="title" style="margin-top: 5px;">{{d.data[i].text}}</div>
+        </div>
+    </div>
+    {{# } }}
+    {{# } }}
+</div>

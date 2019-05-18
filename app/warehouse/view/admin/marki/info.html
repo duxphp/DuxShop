@@ -1,0 +1,65 @@
+
+    <div class="uk-card uk-card-default uk-card-small dux-panel">
+        <div class="uk-card-header">{$assignName}配送员</div>
+        <div class="uk-card-body">
+            <form class="dux-form uk-form   uk-form-horizontal " data-dux="form-bind" method="post">
+                <fieldset>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">姓名</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" name="name" value="{$info.name}" placeholder="请输入配送员姓名" required>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">配送员电话</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" name="tel" value="{$info.tel}" placeholder="请输入配送员电话" >
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class="uk-form-label">绑定用户</label>
+                        <div class="uk-form-controls">
+                            <select class="uk-select" name="user_id" data-search="true"
+                                    data-url="{url('member/MemberUser/ajaxList')}" data-width="100%" data-dux="form-select" data-placeholder="输入会员信息搜索" >
+                                <!--if{$userInfo}-->
+                                <option value="{$userInfo.user_id}">{$userInfo.nickname}({$userInfo.tel ? $userInfo.tel : '无'})</option>
+                                <!--{/if}-->
+                            </select>
+
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">状态</label>
+                        <div class="uk-form-controls uk-form-controls-text">
+                            <?php $info['status'] = isset($info['status']) ? $info['status'] : 1;  ?><div class="uk-grid">
+                            <label>
+                                <!--if{$info['status']}-->
+                                <input class="uk-radio" name="status" value="1" checked="checked" type="radio">
+                                <!--{else}-->
+                                <input class="uk-radio" name="status" value="1" type="radio">
+                                <!--{/if}-->
+                                正常
+                            </label>
+                            <label>
+                                <!--if{!$info['status']}-->
+                                <input class="uk-radio" name="status" checked="checked" value="0" type="radio">
+                                <!--{else}-->
+                                <input class="uk-radio" name="status" value="0" type="radio">
+                                <!--{/if}-->
+                                关闭
+                            </label>
+                        </div></div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <div class="uk-form-controls">
+                            <input type="hidden" name="marki_id" value="{$info.marki_id}">
+                            <button class="uk-button uk-button-primary" type="submit" disabled>保存</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>

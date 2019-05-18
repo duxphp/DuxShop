@@ -1,0 +1,10 @@
+<div style="
+                        {{d.style.lrPadding ? 'padding-left: ' + Math.round(d.style.lrPadding/2) + 'px;padding-right: ' + Math.round(d.style.lrPadding/2) + 'px;' : ''}}
+                        {{d.style.tbPadding ? 'padding-top: ' + Math.round(d.style.tbPadding/2) + 'px;padding-bottom: ' + Math.round(d.style.tbPadding/2) + 'px;' : ''}}
+                        {{d.style.bgColor ? 'background-color: ' + d.style.bgColor + ';' : ''}}
+                        {{d.style.color ? 'color: ' + d.style.color + ';' : ''}}
+                        {{d.style.lineHeight ? 'line-height: ' + Math.round(d.style.lineHeight/2) + 'px;' : ''}}
+                        {{d.style.fontSize ? 'font-size: ' + Math.round(d.style.fontSize/2)+ 'px;' : ''}}
+                        {{d.style.textAlign ? 'text-align: ' + d.style.textAlign + ';' : ''}}
+">{{d.data.content}}
+</div>

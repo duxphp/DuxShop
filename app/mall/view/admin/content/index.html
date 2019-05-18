@@ -1,0 +1,99 @@
+<div data-dux="table-bind" class="dux-table-layout" class=" ">
+    <div class="dux-page-header uk-clearfix">
+        <div class="page-title">
+            <form class="dux-form uk-form  uk-form-inline" method="get" action="{url()}">
+                <div class="uk-form-group">
+                    <input type="text" name="keyword" class="uk-input" value="{$pageMaps.keyword}" placeholder="商品标题/编号">
+                </div>
+                <div class="uk-form-group">
+                    <select class="uk-select" name="order" placeholder="排序" data-dux="form-select">
+                        <option value="">默认排序</option>
+                        <option value="1" {$pageMaps.order == 1 ? 'selected' : ''}>价格 高->低</option>
+                        <option value="2" {$pageMaps.order == 2 ? 'selected' : ''}>价格 低->高</option>
+                        <option value="3" {$pageMaps.order == 3 ? 'selected' : ''}>销量 高->低</option>
+                        <option value="4" {$pageMaps.order == 4 ? 'selected' : ''}>销量 低->高</option>
+                        <option value="5" {$pageMaps.order == 5 ? 'selected' : ''}>库存 高->低</option>
+                        <option value="6" {$pageMaps.order == 6 ? 'selected' : ''}>库存 低->高</option>
+                    </select>
+                </div>
+                <div class="uk-form-group">
+                    <select class="uk-select" name="class_id" placeholder="商品分类" data-dux="form-select">
+                        <option value="">所有分类</option>
+                        <!--loop{$classList as $vo}-->
+                        <option value="{$vo.class_id}" {$vo.class_id == $pageMaps.class_id ? 'selected' : ''}>{$vo.cname}</option>
+                        <!--{/loop}-->
+                    </select>
+                </div>
+
+                <div class="uk-form-group">
+                    <select class="uk-select" name="brand_id" placeholder="品牌" data-dux="form-select">
+                        <option value="">所有品牌</option>
+                        <!--loop{$brandList as $vo}-->
+                        <option value="{$vo.brand_id}" {$vo.brand_id == $pageMaps.brand_id ? 'selected' : ''}>{$vo.name}</option>
+                        <!--{/loop}-->
+                    </select>
+                </div>
+                <div class="uk-form-group">
+                    <button type="submit" class="uk-button uk-button-primary"><i class="fa fa-search"></i></button>
+                </div>
+            </form>
+        </div>
+        <div class="page-action">
+            <a class="uk-button uk-button-block uk-button-primary" href="{url('add')}">添加</a>
+        </div>
+    </div>
+    <div class="dux-page-table">
+
+        <table class="uk-table uk-table-hover uk-table-middle dux-table" data-table>
+            <thead>
+            <tr>
+                <th colspan="2">商品</th>
+                <th>价格</th>
+                <th>销量/库存</th>
+                <th class="uk-text-center">状态</th>
+                <th class="uk-text-center" width="120">管理</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!--if{$list}-->
+            <!--loop{(array)$list as $vo}-->
+            <tr>
+                <td width="100"><img src="{$vo.image}" class="uk-image-thumbnail" width="80" height="80"></td>
+                <td>
+                    ({$vo.mall_id}) {$vo.title}({$vo.goods_no})
+                    <p>
+                        {$vo.class_path}
+                    </p>
+                </td>
+                <td class="uk-text-danger">￥{$vo.sell_price}</td>
+                <td>{$vo.sale}/{$vo.store}</td>
+                <td class="uk-text-center">
+                    <!--if{$vo.gift_status}-->
+                    <div><span class="uk-label uk-label-danger">赠品</span></div>
+                    <!--{/if}-->
+                    <!--if{$vo.status}-->
+                    <div><span class="uk-label uk-label-success">上架</span></div>
+                    <!--{else}-->
+                    <div><span class="uk-label uk-label-danger">下架</span></div>
+                    <!--{/if}-->
+                </td>
+                <td data-label="管理" class="uk-text-center">
+                    <a class="uk-button uk-button-primary uk-button-small" href="{url('edit', ['id'=>$vo[$pri]])}"
+                       title="编辑"><i class="fa fa-pencil"></i></a>
+                    <a class="uk-button uk-button-danger uk-button-small" href="javascript:;" data-url="{url('del')}"
+                       data-id="{$vo[$pri]}" title="删除" data-del><i class=" fa fa-trash"></i></a>
+                </td>
+            </tr>
+            <!--{/loop}-->
+            <!--{else}-->
+            <tr>
+                <td class="uk-text-center" colspan="6">暂无商品</td>
+            </tr>
+            <!--{/if}-->
+            </tbody>
+        </table>
+    </div>
+    <div class="dux-page-foot uk-clearfix">
+        {$page}
+    </div>
+</div>

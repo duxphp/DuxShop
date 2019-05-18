@@ -1,0 +1,365 @@
+<div class="uk-grid">
+    <div class="uk-width-2-3">
+        <div class="uk-card uk-card-default uk-card-body dux-small-box">
+            <div class="uk-card-title">退款信息</div>
+            <p>
+            <table class="uk-table uk-table-small  uk-table-middle ">
+                <tbody>
+                <tr>
+                    <td align="right" width="100">退款单号</td>
+                    <td>{$info.refund_no}</td>
+                </tr>
+                <tr>
+                    <td align="right" width="100">申请时间</td>
+                    <td>{date('Y-m-d H:i:s', $info.create_time)}</td>
+                </tr>
+                <tr>
+                    <td align="right">退款用户</td>
+                    <td>
+                        <a href="javascript:;">{$info.show_name}</a>
+                        <div uk-dropdown data-id="{$info.user_id}" class="dux-user-show" data-dux="system-user"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">退款状态</td>
+                    <td>
+                        <span class="uk-text-{$info.status_data.color}">{$info.status_data.title}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">退款类型</td>
+                    <td class="uk-text-danger">{$info.type_title}</td>
+                </tr>
+                <tr>
+                    <td align="right">退款金额</td>
+                    <td><span class="uk-text-danger">￥{$info.price} + ￥{$info.delivery_price} (运费)</span></td>
+                </tr>
+                <tr>
+                    <td align="right">退款原因</td>
+                    <td>{$info.cause}</td>
+                </tr>
+                <tr>
+                    <td align="right">退款描述</td>
+                    <td>{$info.content ? $info.content : '无'}</td>
+                </tr>
+                <tr>
+                    <td align="right">退款照片</td>
+                    <td>
+                        <!--if{$info.images}-->
+                        <!--loop{$info.images as $image}-->
+                        <a href="{$image}" target="_blank"><img src="{$image}" width="60" height="60"></a>
+                        <!--{/loop}-->
+                        <!--{else}-->
+                        无
+                        <!--{/if}-->
+                    </td>
+                </tr>
+                <!--if{$info.process_time}-->
+                <tr>
+                    <td align="right">处理时间</td>
+                    <td>{date('Y-m-d H:i:s', $info.process_time)}</td>
+                </tr>
+                <tr>
+                    <td align="right">处理备注</td>
+                    <td>{$info.process_remark ? $info.process_remark : '无'}</td>
+                </tr>
+                <!--{/if}-->
+                </tbody>
+            </table>
+            </p>
+        </div>
+        <br>
+        <!--if{$info.type}-->
+        <div class="uk-card uk-card-default uk-card-body dux-small-box">
+            <div class="uk-card-title">退货信息</div>
+            <p>
+            <table class="uk-table uk-table-small  uk-table-middle ">
+                <tbody>
+                <tr>
+                    <td align="right" width="100">退货快递</td>
+                    <td>{$info.delivery_name ? $info.delivery_name : '暂未填写'}</td>
+                </tr>
+                <tr>
+                    <td align="right" width="100">快递单号</td>
+                    <td>{$info.delivery_no ? $info.delivery_no : '暂未填写'}
+                        <!--if{$info.delivery_no}-->
+                        <a href="https://www.kuaidi100.com/chaxun?nu={$info.delivery_no}" target="_blank">[查询]</a>
+                        <!--{/if}-->
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            </p>
+        </div>
+        <br>
+        <!--{/if}-->
+        <div class="uk-card uk-card-default uk-card-body dux-small-box">
+            <div class="uk-card-title">订单商品</div>
+            <p>
+            <table class="uk-table uk-table-small  uk-table-middle dux-table">
+                <tbody>
+
+                <!--loop{$orderGoods as $vo}-->
+                <tr>
+                    <td width="100"><img src="{$vo.goods_image}" width="80" height="80"></td>
+                    <td>
+                        {$vo.goods_name}
+                        <div>
+                            {$vo.weight/1000}kg
+                            <!--if{!empty($vo.goods_options)}-->
+                            <!--loop{$vo.goods_options as $v}-->
+                            {$v.value}
+                            <!--{/loop}-->
+                            <!--{/if}-->
+                        </div>
+                        <div>
+                            <!--if{$vo.id == $info.order_goods_id}-->
+                            <span class="uk-text-danger">当前售后</span>
+                            <!--{else}-->
+                            <!--if{$vo.service_status == 1}-->
+                            <span class="uk-text-warning">售后中</span>
+                            <!--{/if}-->
+                            <!--if{$vo.service_status == 2}-->
+                            <span class="uk-text-success">已售后</span>
+                            <!--{/if}-->
+                            <!--{/if}-->
+
+                        </div>
+                    </td>
+                    <td>x {$vo.goods_qty}</td>
+                    <td align="right">
+                        <div>单价：￥{$vo.goods_price}</div>
+                        <div>优惠：￥{$vo.price_discount}</div>
+                        <div>小计：<span class="uk-text-danger">￥{$vo.price_total}</span></div>
+                    </td>
+                </tr>
+                <!--{/loop}-->
+                </tbody>
+            </table>
+            </p>
+        </div>
+        <br>
+        <div class="uk-card uk-card-default uk-card-body dux-small-box">
+            <div class="uk-card-title">订单信息</div>
+            <p>
+            <table class="uk-table uk-table-small  uk-table-middle ">
+                <tbody>
+                <tr>
+                    <td align="right" width="100">订单号</td>
+                    <td>{$orderInfo.order_no}</td>
+                </tr>
+                <tr>
+                    <td align="right" width="100">订单备注</td>
+                    <td>{$orderInfo.order_remark ? $info.order_remark : '无'}</td>
+                </tr>
+                <tr>
+                    <td align="right" width="100">配送方式</td>
+                    <td>{$orderInfo.take_id ? '商品自提' : '快递发货'}</td>
+                </tr>
+                <tr>
+                    <td align="right" width="100">付款方式</td>
+                    <td>{$orderInfo.pay_type ? '线上支付' : '线下支付'}</td>
+                </tr>
+                <tr>
+                    <td align="right" width="100">订单金额</td>
+                    <td><span class="uk-text-success">￥{$orderInfo.order_price}</span> (订单金额) <span class="uk-text-success">+ ￥{$orderInfo.delivery_price}</span>
+                        (运费) <span class="uk-text-warning"> - ￥{$orderInfo.pay_discount}</span> (优惠)
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right" width="100">付款金额</td>
+                    <td><span class="uk-text-danger">￥{$orderInfo.total_price}</span></td>
+                </tr>
+                <!--if{$orderInfo.pay_currency.exchange}-->
+                <!--loop{$orderInfo.pay_currency.exchange as $k => $v}-->
+                <tr>
+                    <td align="right">{$v.name}</td>
+                    <td>{$v.money}{$v.unit} 抵 {$v.deduct}元</td>
+                </tr>
+                <!--{/loop}-->
+                <!--{/if}-->
+                <!--if{$orderInfo.pay_currency.append}-->
+                <!--loop{$orderInfo.pay_currency.append as $k => $v}-->
+                <tr>
+                    <td align="right">{$v.name}</td>
+                    <td>{$v.money} {$v.unit}</td>
+                </tr>
+                <!--{/loop}-->
+                <!--{/if}-->
+                <tr>
+                    <td align="right">已退金额</td>
+                    <td>
+                        <!--if{bccomp($orderInfo.refund_price, 0, 2) === 1}-->
+                        ￥{$orderInfo.refund_price}
+                        <!--{else}-->
+                        ￥0
+                        <!--{/if}-->
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            </p>
+        </div>
+        <br>
+        <div class="uk-card uk-card-default uk-card-body dux-small-box">
+            <div class="uk-card-title">收件信息</div>
+            <p>
+            <table class="uk-table uk-table-small  uk-table-middle ">
+                <tbody>
+                <tr>
+                    <td align="right" width="100">收货人</td>
+                    <td>{$orderInfo.receive_name}</td>
+                </tr>
+                <tr>
+                    <td align="right">收货电话</td>
+                    <td>{$orderInfo.receive_tel}</td>
+                </tr>
+                <tr>
+                    <td align="right">收货地址</td>
+                    <td>{$orderInfo.receive_province} {$orderInfo.receive_city} {$orderInfo.receive_region} {$orderInfo.receive_address}
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">邮政编码</td>
+                    <td>{$orderInfo.receive_zip ? $orderInfo.receive_zip : '无'}</td>
+                </tr>
+                </tbody>
+            </table>
+            </p>
+        </div>
+
+    </div>
+    <div class="uk-width-1-3">
+        <ul class="dux-vertical-menu">
+
+            <!--if{$info.type == 1}-->
+            <li>
+                <!--if{$info.status == 1}-->
+                <a href="#modal-return" uk-toggle class="active green">
+                    <div class="icon"><i class="fa fa-check"></i></div>
+                    <div class="name">同意退货</div>
+                </a>
+                <!--{else}-->
+                <a href="javascript:;">
+                    <div class="icon"><i class="fa fa-check"></i></div>
+                    <div class="name">同意退货</div>
+                </a>
+                <!--{/if}-->
+            </li>
+            <li>
+                <!--if{$info.status == 1}-->
+                <a href="#modal-close" uk-toggle class="active red">
+                    <div class="icon"><i class="fa fa-close"></i></div>
+                    <div class="name">拒绝退货</div>
+                </a>
+                <!--{else}-->
+                <a href="javascript:;">
+                    <div class="icon"><i class="fa fa-close"></i></div>
+                    <div class="name">拒绝退货</div>
+                </a>
+                <!--{/if}-->
+            </li>
+
+            <li>
+                <!--if{$info.status == 2}-->
+                <a href="#modal-refund" uk-toggle class="active green">
+                    <div class="icon"><i class="fa fa-check"></i></div>
+                    <div class="name">同意退款</div>
+                </a>
+                <!--{else}-->
+                <a href="javascript:;">
+                    <div class="icon"><i class="fa fa-check"></i></div>
+                    <div class="name">同意退款</div>
+                </a>
+                <!--{/if}-->
+            </li>
+            <li>
+                <!--if{$info.status == 2}-->
+                <a href="#modal-close" uk-toggle class="active red">
+                    <div class="icon"><i class="fa fa-close"></i></div>
+                    <div class="name">拒绝退款</div>
+                </a>
+                <!--{else}-->
+                <a href="javascript:;">
+                    <div class="icon"><i class="fa fa-close"></i></div>
+                    <div class="name">拒绝退款</div>
+                </a>
+                <!--{/if}-->
+            </li>
+            <!--{else}-->
+            <li>
+                <!--if{$info.status == 2}-->
+                <a href="#modal-refund" uk-toggle class="active red">
+                    <div class="icon"><i class="fa fa-check"></i></div>
+                    <div class="name">同意退款</div>
+                </a>
+                <!--{else}-->
+                <a href="javascript:;">
+                    <div class="icon"><i class="fa fa-check"></i></div>
+                    <div class="name">同意退款</div>
+                </a>
+                <!--{/if}-->
+            </li>
+            <li>
+                <!--if{$info.status == 2}-->
+                <a href="#modal-close" uk-toggle class="active red">
+                    <div class="icon"><i class="fa fa-close"></i></div>
+                    <div class="name">拒绝退款</div>
+                </a>
+                <!--{else}-->
+                <a href="javascript:;">
+                    <div class="icon"><i class="fa fa-close"></i></div>
+                    <div class="name">拒绝退款</div>
+                </a>
+                <!--{/if}-->
+            </li>
+            <!--{/if}-->
+            <li>
+                <a href="#modal-remark" uk-toggle class="active orange">
+                    <div class="icon"><i class="fa fa-calendar-o"></i></div>
+                    <div class="name">管理员备注</div>
+                </a>
+            </li>
+        </ul>
+
+        <br>
+        <div class="uk-card uk-card-default uk-card-body dux-small-box">
+            <div class="uk-card-title">管理员备注</div>
+            <p>
+                <table class="uk-table uk-table-small  uk-table-middle" style="margin-bottom: 0;">
+                    <tbody>
+                    <tr>
+                        <td style="padding: 0;">
+                            <div class="dux-timeline">
+                                <!--if{$remarkList}-->
+                                <!--loop{$remarkList as $vo}-->
+                                <dl>
+                                    <dt>{date('Y-m-d H:i:s', $vo.time)}</dt>
+                                    <dd>
+                                        {$vo.content}
+            <p>{$vo.nickname} ({$vo.username})</p>
+            </dd>
+            </dl>
+            <!--{/loop}-->
+            <!--{else}-->
+            <dl>
+                <dt>{date('Y-m-d H:i:s')}</dt>
+                <dd>
+                    暂无备注
+                </dd>
+            </dl>
+            <!--{/if}-->
+        </div>
+        </td>
+        </tr>
+        </tbody>
+        </table>
+        </p>
+    </div>
+
+    </div>
+</div>
+<!--include{app/order/view/admin/refund/remark}-->
+<!--include{app/order/view/admin/refund/return}-->
+<!--include{app/order/view/admin/refund/refund}-->
+<!--include{app/order/view/admin/refund/close}-->

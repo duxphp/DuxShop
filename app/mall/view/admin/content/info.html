@@ -1,0 +1,929 @@
+<form class="dux-form uk-form   uk-form-horizontal " data-dux="form-bind" method="post">
+    <ul id="tab-body" class="uk-switcher">
+
+        <li id="tab1">
+            <div class="uk-card uk-card-default uk-card-small dux-panel">
+
+                <div class="uk-card-header">商品信息</div>
+                <div class="uk-card-body">
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">商品标题</label>
+                        <div class="uk-form-controls">
+                            <div class="uk-grid">
+                                <div class="uk-width-3-4"><input class="uk-input" type="text" name="title" value="{$info.title}"
+                                                                 placeholder="请输入商品标题" required></div>
+                                <div class="uk-width-1-4"><input class="uk-input" type="text" name="unit"
+                                                                 value="{$info.unit ? $info.unit : '个'}"
+                                                                 placeholder="商品单位" required></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">商品分类</label>
+                        <div class="uk-form-controls">
+                            <select class="uk-select" data-dux="form-select" name="class_id" id="class_id" data-placeholder="请选择商品分类"
+                                    required>
+                                <option value=""></option>
+                                <!--loop{(array)$classList as $vo}-->
+                                <option <!--if{$vo.class_id == $classId}--> selected <!--{/if}-->
+                                value="{$vo.class_id}" data-spec="{$vo.spec_group_id}">{$vo.cname}</option>
+                                <!--{/loop}-->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">商品品牌</label>
+                        <div class="uk-form-controls">
+                            <select class="uk-select" data-dux="form-select" name="brand_id" id="brand_id" data-placeholder="请选择商品品牌">
+                                <option value=""></option>
+                                <!--loop{(array)$brandList as $vo}-->
+                                <option <!--if{$vo.brand_id == $info.brand_id}--> selected <!--{/if}-->
+                                value="{$vo.brand_id}" >{$vo.name}</option>
+                                <!--{/loop}-->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">商品属性</label>
+                        <div class="uk-form-controls uk-form-controls-text">
+                            <div class="uk-grid">
+                                <label>
+                                    <input class="uk-checkbox" name="attr_rec" value="1" {$info.attr_rec ? 'checked' : ''} type="checkbox">
+                                    推荐
+                                </label>
+                                <label>
+                                    <input class="uk-checkbox" name="attr_new" value="1" {$info.attr_new ? 'checked' : ''} type="checkbox">
+                                    新品
+                                </label>
+                                <label>
+                                    <input class="uk-checkbox" name="attr_hot" value="1" {$info.attr_hot ? 'checked' : ''} type="checkbox">
+                                    热卖
+                                </label>
+                                <label>
+                                    <input class="uk-checkbox" name="attr_free" value="1" {$info.attr_free ? 'checked' : ''}
+                                    type="checkbox">
+                                    包邮
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">商品展示图</label>
+                        <div class="uk-form-controls">
+                            <button class="uk-button uk-button-primary" type="button"
+                                    data-dux="system-images"
+                                    data-type="image"
+                                    data-layout="#dux-images"
+                                    data-name="images"
+                                    data-multiple="true"
+                                    data-data='{json_encode($info.images)}'
+                            >
+                                上传组图
+                            </button>
+                            <ul class="dux-images uk-clearfix" id="dux-images" uk-sortable="cls-drag: uk-sortable-drag dux-images-drag"></ul>
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">规格属性</label>
+                        <div class="uk-form-controls">
+                            <table class="uk-table  uk-table-responsive  uk-table-striped uk-table-hover uk-table-middle dux-table dux-table-dialog"
+                                   style="border: 1px solid #ddd">
+                                <thead>
+                                <tr>
+                                    <th width="130">规格
+                                        <a href="javascript:;" id="add-spec-group">
+                                            <i class="fa fa-plus"></i>
+                                        </a>
+                                    </th>
+                                    <th>规格值</th>
+                                </tr>
+                                </thead>
+                                <tbody class="dux-spec-group">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">商品规格</label>
+                        <div class="uk-form-controls" style="min-height: 38px;">
+                            <div class="js-data-list" style="width: 100%; overflow-x: auto">
+                                <div class="uk-form-controls-text">暂无规格</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">积分赠送</label>
+                        <div class="uk-form-controls uk-form-controls-text">
+                            <div class="uk-grid">
+                                <label>
+                                    <input class="uk-radio" name="point_status" value="0" {$info['point_status'] == 0 ? 'checked="checked"' : ''}  type="radio">
+                                    不赠送
+                                </label>
+                                <label>
+                                    <input class="uk-radio" name="point_status" value="1" {$info['point_status'] == 1 ? 'checked="checked"' : ''}  type="radio">
+                                    按商品规格
+                                </label>
+                                <label>
+                                    <input class="uk-radio" name="point_status" value="2" {$info['point_status'] == 2 ? 'checked="checked"' : ''}  type="radio">
+                                    按实付金额
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">商品产地</label>
+                        <div class="uk-form-controls" data-dux="form-location">
+
+                            <div class="uk-grid uk-child-width-expand">
+                                <div>
+                                    <select class="uk-select" name="from_province" data-province="{$info.from_province}"></select>
+                                </div>
+                                <div>
+                                    <select class="uk-select" name="from_city" data-city="{$info.from_city}"></select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">供货商</label>
+                        <div class="uk-form-controls">
+                            <select class="uk-select" data-dux="form-select" name="supplier_id" id="supplier_id" data-placeholder="请选择商品供应商">
+                                <option value="">无供货商</option>
+                                <!--loop{(array)$supplierList as $vo}-->
+                                <option <!--if{$vo.supplier_id == $info.supplier_id}--> selected <!--{/if}-->
+                                value="{$vo.supplier_id}" >{$vo.name}</option>
+                                <!--{/loop}-->
+                            </select>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="uk-card uk-card-default uk-card-small dux-panel">
+                <div class="uk-card-header">
+                    商品属性
+                </div>
+                <div class="uk-card-body">
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">基本属性</label>
+                        <div class="uk-form-controls uk-form-controls-text">
+                            <div class="uk-grid">
+                                <label>
+                                    <?php $info['gift_status'] = isset($info['gift_status']) ? $info['gift_status'] : 0;  ?>
+                                    <input class="uk-checkbox" name="gift_status" value="1" {$info.gift_status ? 'checked' : ''}
+                                    type="checkbox">
+                                    赠品
+                                </label>
+                                <label>
+                                    <?php $info['service_status'] = isset($info['service_status']) ? $info['service_status'] : 1;  ?>
+                                    <input class="uk-checkbox" name="service_status" value="1" {$info.service_status ? 'checked' : ''}
+                                    type="checkbox">
+                                    退换货
+                                </label>
+                                <label>
+                                    <input class="uk-checkbox" name="invoice_status" value="1" {$info.invoice_status ? 'checked' : ''}
+                                    type="checkbox">
+                                    开具发票
+                                </label>
+                                <label>
+                                    <input class="uk-checkbox" name="discount_status" value="1" {$info.discount_status ? 'checked' : ''}
+                                    type="checkbox">
+                                    会员折扣
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">商品状态</label>
+                        <div class="uk-form-controls uk-form-controls-text">
+                            <?php $info['status'] = isset($info['status']) ? $info['status'] : 1;  ?>
+                            <div class="uk-grid">
+                                <label>
+                                    <!--if{$info['status']}-->
+                                    <input class="uk-radio" name="status" value="1" checked="checked" type="radio">
+                                    <!--{else}-->
+                                    <input class="uk-radio" name="status" value="1" type="radio">
+                                    <!--{/if}-->
+                                    上架
+                                </label>
+                                <label>
+                                    <!--if{!$info['status']}-->
+                                    <input class="uk-radio" name="status" checked="checked" value="0" type="radio">
+                                    <!--{else}-->
+                                    <input class="uk-radio" name="status" value="0" type="radio">
+                                    <!--{/if}-->
+                                    下架
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">运费类型</label>
+                        <div class="uk-form-controls uk-form-controls-text">
+                            <div class="uk-grid">
+                                <label>
+                                    <!--if{$info['freight_type']}-->
+                                    <input class="uk-radio" name="freight_type" value="1" checked="checked" type="radio">
+                                    <!--{else}-->
+                                    <input class="uk-radio" name="freight_type" value="1" type="radio">
+                                    <!--{/if}-->
+                                    模板
+                                </label>
+                                <label>
+                                    <!--if{!$info['freight_type']}-->
+                                    <input class="uk-radio" name="freight_type" checked="checked" value="0" type="radio">
+                                    <!--{else}-->
+                                    <input class="uk-radio" name="freight_type" value="0" type="radio">
+                                    <!--{/if}-->
+                                    固定
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">运费模板</label>
+                        <div class="uk-form-controls">
+                            <select name="freight_tpl" class="uk-select select-filter" data-dux="form-select" style="width: 100%"
+                                    data-placeholder="请选择运费模板" tabindex="-1">
+                                <!--loop{(array)$deliveryList as $key => $vo}-->
+                                <option value="{$vo.delivery_id}" {$vo.delivery_id== $info.freight_tpl ?
+                                'selected' : ''} >{$vo.name}</option>
+                                <!--{/loop}-->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">固定运费</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" name="freight_price" value="{$info.freight_price}"
+                                   placeholder="固定运费，0为包邮">
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">购买限额</label>
+                        <div class="uk-form-controls">
+                            <div class="uk-input-group">
+                                <select class="uk-select uk-input-group-label" name="purchase_status" style="width: 100px">
+                                    <option value="0" {$info.purchase_status ? '' : 'selected'}>不限购</option>
+                                    <option value="1" {$info.purchase_status == 1 ? 'selected' : ''}>单次限购</option>
+                                    <option value="2" {$info.purchase_status == 2 ? 'selected' : ''}>整体限购</option>
+                                </select>
+                                <input class="uk-input" type="number" name="purchase_limit"
+                                       value="{$info.purchase_limit ? $info.purchase_limit : ''}"
+                                       placeholder="单个商品单人限购数量" >
+                                <div class="uk-input-group-label">份</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <div class="uk-form-controls">
+                            <button class="uk-button uk-button-primary" type="submit" disabled>保存</button>
+                            <a class="uk-button uk-button-default" href="{url('index')}">返回</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li id="tab2">
+            <div class="uk-card uk-card-default uk-card-small dux-panel">
+                <div class="uk-card-header">
+                    基本参数
+                </div>
+                <div class="uk-card-body">
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">上架时间</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" data-dux="form-date" data-type="datetime" name="up_time"
+                                   value="{$info.up_time ? date('Y-m-d H:i:s', $info.up_time) : ''}"
+                                   placeholder="商品上架时间" readonly>
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">下架时间</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" data-dux="form-date" data-type="datetime" name="down_time"
+                                   value="{$info.down_time ? date('Y-m-d H:i:s', $info.down_time) : ''}"
+                                   placeholder="商品下架时间" readonly>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">商品顺序</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" name="sort" value="{$info.sort ? $info.sort : 0}"
+                                   placeholder="商品排序,按照从大->小排序列表">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="uk-card uk-card-default uk-card-small dux-panel">
+                <div class="uk-card-header">
+                    自定义参数
+                </div>
+                <div class="uk-card-body">
+                    <label class=" uk-form-label">商品参数</label>
+                    <div class="uk-form-controls">
+                        <button class="uk-button uk-button-primary" type="button" id="add-params">添加参数</button>
+                        <p class="uk-margin-top"></p>
+                        <table class="uk-table uk-table-hover uk-table-middle dux-table dux-table " data-table>
+                            <thead>
+                            <tr>
+                                <th>参数名称</th>
+                                <th>参数值</th>
+                                <th class="uk-text-center" width="200">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody id="params-list">
+                            <!--loop{(array)$info.params as $vo}-->
+                            <tr>
+                                <td>
+                                    <input class="uk-input" type="text" name="params[key][]" value="{$vo.key}">
+                                </td>
+                                <td>
+                                    <input class="uk-input" type="text" name="params[value][]" value="{$vo.value}">
+                                </td>
+                                <td>
+                                    <button class="uk-button uk-button-primary uk-button-small js-up" type="button">上移
+                                    </button>
+                                    <button class="uk-button uk-button-primary uk-button-small js-down" type="button">
+                                        下移
+                                    </button>
+                                    <button class="uk-button uk-button-danger uk-button-small js-del" type="button">删除
+                                    </button>
+                                </td>
+                            </tr>
+                            <!--{/loop}-->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="uk-form-group">
+                        <div class="uk-form-controls">
+                            <button class="uk-button uk-button-primary" type="submit" disabled>保存</button>
+                            <a class="uk-button uk-button-default" href="{url('index')}">返回</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li id="tab3">
+            <div class="uk-card uk-card-default uk-card-small dux-panel">
+                <div class="uk-card-header">商品详情</div>
+                <div class="uk-card-body">
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">详情内容</label>
+                        <div class="uk-form-controls">
+                            <textarea data-dux="form-editor" name="content">{html_out($info.content)}</textarea>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">关键词</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" name="keyword" value="{$info.keyword}" data-dux="form-tags"
+                                   data-default-text="">
+                            <div class="uk-form-help">
+                                可选,商品关键词
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">商品描述</label>
+                        <div class="uk-form-controls">
+                            <textarea class="uk-textarea" name="description" rows="3">{$info.description}</textarea>
+                            <div class="uk-form-help">
+                                可选,商品描述
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <div class="uk-form-controls">
+                            <button class="uk-button uk-button-primary" type="submit" disabled>保存</button>
+                            <a class="uk-button uk-button-default" href="{url('index')}">返回</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <!--if{$hookHtml}-->
+        <!--loop{$hookHtml as $key => $vo}-->
+        <li id="tab-{$key}">
+            {$vo.html}
+        </li>
+        <!--{/loop}-->
+        <!--{/if}-->
+    </ul>
+    <input type="hidden" name="mall_id" value="{$info.mall_id}">
+</form>
+
+<script id="tpl-params" type="text/html">
+    <tr>
+        <td>
+            <input class="uk-input" type="text" name="params[key][]" value="">
+        </td>
+        <td>
+            <input class="uk-input" type="text" name="params[value][]" value="">
+        </td>
+        <td>
+            <button class="uk-button uk-button-primary uk-button-small js-up" type="button">上移</button>
+            <button class="uk-button uk-button-primary uk-button-small js-down" type="button">下移</button>
+            <button class="uk-button uk-button-danger uk-button-small js-del" type="button">删除</button>
+        </td>
+    </tr>
+</script>
+
+<script id="tpl-spec" type="text/html">
+    {{# var specList = d.data.spec_list; }}
+    {{# var specCount = specList.length; }}
+    <div class="">
+        <table class="uk-table  uk-table-responsive  uk-table-striped uk-table-hover uk-table-middle dux-table dux-table-dialog  uk-text-nowrap"
+               style="border: 1px solid #ddd">
+            <thead>
+            <tr>
+                {{# var head = d.head; }}
+                {{# for(var i in head){ }}
+                <th>{{ head[i].name }}</th>
+                {{# } }}
+                <th>商品货号</th>
+                <th data-label="条形码">条形码</th>
+                <th width="80">销售价 <a href="javascript:;" class="fa fa-edit spec-value-set"></a></th>
+                <th width="80">市场价 <a href="javascript:;" class="fa fa-edit spec-value-set"></a></th>
+                <th width="80">成本价 <a href="javascript:;" class="fa fa-edit spec-value-set"></a></th>
+                <th width="80">最低购买量 <a href="javascript:;" class="fa fa-edit spec-value-set"></a></th>
+                <th width="80">库存 <a href="javascript:;" class="fa fa-edit spec-value-set"></a></th>
+                <th width="80">重量(克) <a href="javascript:;" class="fa fa-edit spec-value-set"></a></th>
+                <th width="80">赠送积分<a href="javascript:;" class="fa fa-edit spec-value-set"></a></th>
+                {{# if(specCount > 1){ }}
+                <th class="uk-text-center" width="60">操作</th>
+                {{# } }}
+            </tr>
+            </thead>
+            <tbody>
+            {{# for(var i in specList){ }}
+            <tr>
+                <input type="hidden" name="data[id][{{ i }}]" {{# if(!$.isEmptyObject(d.data.id[i])){ }}
+                       value="{{ d.data.id[i] }}" {{# } }}/>
+                {{# for(var item in specList[i]){ }}
+                <input type="hidden" name="data[spec][{{ i }}][]" value='{{ JSON.stringify(specList[i][item]) }}'>
+                <td>{{ specList[i][item].value }}</td>
+                {{# } }}
+                {{# if($.isEmptyObject(d.data.goods_no)){ }}
+                <td>
+                    <input class="uk-input goods_no" type="text" name="data[goods_no][{{ i }}]"
+                           value="{{ defaultProductNo+'_'+i }}" required></td>
+                <td>
+                    <input class="uk-input barcode" type="text" name="data[barcode][{{ i }}]" value="0">
+                </td>
+                <td>
+                    <input class="uk-input sell_price" type="text" name="data[sell_price][{{ i }}]" value="0" required>
+                </td>
+                <td>
+                    <input class="uk-input market_price" type="text" name="data[market_price][{{ i }}]" value="0" required>
+                </td>
+                <td>
+                    <input class="uk-input cost_price" type="text" name="data[cost_price][{{ i }}]" value="0" required>
+                </td>
+                <td>
+                    <input class="uk-input min_num" type="text" name="data[min_num][{{ i }}]" value="1" required>
+                </td>
+                <td>
+                    <input class="uk-input store" type="text" name="data[store][{{ i }}]" value="0" required>
+                </td>
+                <td>
+                    <input class="uk-input weight" type="text" name="data[weight][{{ i }}]" value="0" required>
+                </td>
+                <td>
+                    <input class="uk-input give_point" type="text" name="data[give_point][{{ i }}]" value="0" required>
+                </td>
+                {{# }else{ }}
+                <td>
+                    <input class="uk-input goods_no" type="text" name="data[goods_no][{{ i }}]" {{#
+                           if(!$.isEmptyObject(d.data.goods_no[i])){ }} value="{{ d.data.goods_no[i] }}" {{# }else{ }}
+                           value="{{ defaultProductNo+'_'+i }}" {{# } }} required></td>
+                <td>
+                    <input class="uk-input barcode" type="text" name="data[barcode][{{ i }}]" {{#
+                           if(!$.isEmptyObject(d.data.barcode[i])){ }} value="{{ d.data.barcode[i] }}" {{# } }}
+                           required>
+                </td>
+                <td>
+                    <input class="uk-input sell_price" type="text" name="data[sell_price][{{ i }}]" {{#
+                           if(!$.isEmptyObject(d.data.sell_price[i])){ }} value="{{ d.data.sell_price[i] }}" {{# } }}
+                           required>
+                </td>
+                <td>
+                    <input class="uk-input market_price" type="text" name="data[market_price][{{ i }}]" {{#
+                           if(!$.isEmptyObject(d.data.market_price[i])){ }} value="{{ d.data.market_price[i] }}" {{# }
+                           }} required>
+                </td>
+                <td>
+                    <input class="uk-input cost_price" type="text" name="data[cost_price][{{ i }}]" {{#
+                           if(!$.isEmptyObject(d.data.cost_price[i])){ }} value="{{ d.data.cost_price[i] }}" {{# } }}
+                           required>
+                </td>
+                <td>
+                    <input class="uk-input min_num" type="text" name="data[min_num][{{ i }}]" {{#
+                           if(!$.isEmptyObject(d.data.min_num[i])){ }} value="{{ d.data.min_num[i] }}" {{# } }} required>
+                </td>
+                <td>
+                    <input class="uk-input store" type="text" name="data[store][{{ i }}]" {{#
+                           if(!$.isEmptyObject(d.data.store[i])){ }} value="{{ d.data.store[i] }}" {{# } }} required>
+                </td>
+                <td>
+                    <input class="uk-input weight" type="text" name="data[weight][{{ i }}]" {{#
+                           if(!$.isEmptyObject(d.data.weight[i])){ }} value="{{ d.data.weight[i] }}" {{# } }} required>
+                </td>
+                <td>
+                    <input class="uk-input give_point" type="text" name="data[give_point][{{ i }}]" {{#
+                           if(!$.isEmptyObject(d.data.give_point[i])){ }} value="{{ d.data.give_point[i] }}" {{# } }} required>
+                </td>
+                {{# } }}
+                {{# if(specCount > 1){ }}
+                <td class="uk-text-center">
+                    <a href="javascript:;" class="uk-button uk-button-danger uk-button-small js-del"><i
+                            class="fa fa-remove"></i></a>
+                </td>
+                {{# } }}
+            </tr>
+            {{# } }}
+            </tbody>
+        </table>
+    </div>
+</script>
+<script id="tpl-spec-default" type="text/html">
+    <div class="">
+        <table class="uk-table  uk-table-responsive  uk-table-striped uk-table-hover uk-table-middle dux-table dux-table-dialog uk-text-nowrap"
+               style="border: 1px solid #ddd">
+            <thead>
+            <tr>
+                <th>商品编码</th>
+                <th>条形码</th>
+                <th>销售价</th>
+                <th>市场价</th>
+                <th>成本价</th>
+                <th>最低购买量</th>
+                <th>库存</th>
+                <th>重量(克)</th>
+                <th>赠送积分</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><input class="uk-input goods_no" type="text" name="data[goods_no][0]" value="{{ d.no }}"></td>
+                <td><input class="uk-input barcode" type="text" name="data[barcode][0]" value=""></td>
+                <td><input class="uk-input sell_price" type="text" name="data[sell_price][0]" value=""></td>
+                <td><input class="uk-input market_price" type="text" name="data[market_price][0]" value=""></td>
+                <td><input class="uk-input cost_price" type="text" name="data[cost_price][0]" value=""></td>
+                <td><input class="uk-input min_num" type="text" name="data[min_num][0]" value="1"></td>
+                <td><input class="uk-input store" type="text" name="data[store][0]" value=""></td>
+                <td><input class="uk-input weight" type="text" name="data[weight][0]" value=""></td>
+                <td><input class="uk-input give_point" type="text" name="data[give_point][0]" value=""></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</script>
+
+
+<script id="tpl-spec-group" type="text/html">
+    {{# for(var i in d.data){ }}
+    <tr>
+        <td data-label>
+            <span class="uk-flex uk-flex-middle"><span class="uk-input-group "><input type="text" class="uk-input spec-name"
+                                                                                      value="{{d.data[i].name}}"><a
+                    class="uk-input-group-label uk-text-danger spec-del" href="javascript:;"><i class="fa fa-times"></i></a></span>
+        </td>
+        <td>
+            <div class=" spec-list">
+                {{# var items = d.data[i].value.split(','); }}
+                {{# for(var x in items){ }}
+                {{# if(items[x]){ }}
+                <span class="list-item uk-flex uk-flex-middle"><span class="uk-input-group "><span
+                        class="uk-input uk-input-group-label"><input class="uk-checkbox" type="checkbox" {{d.checkbox ? 'checked' : ''}}></span><input value="{{items[x]}}"
+                                                                                             type="text"
+                                                                                             class="uk-input"><a
+                        class="uk-input-group-label uk-text-danger spec-value-del" href="javascript:;"><i
+                        class="fa fa-times"></i></a></span></span>
+                {{# } }}
+                {{# } }}
+                <span class=" list-add uk-flex uk-flex-middle"><button class="uk-button uk-button-primary js-spec-value"
+                                                                       type="button">添加</button></span>
+            </div>
+        </td>
+    </tr>
+    {{# } }}
+</script>
+
+<script id="tpl-spec-value" type="text/html">
+    <span class="list-item uk-flex uk-flex-middle">
+        <span class="uk-input-group ">
+        <span class="uk-input uk-input-group-label"><input  class="uk-checkbox"type="checkbox" checked></span>
+        <input value="{{d.value}}" type="text" class="uk-input">
+        <a class="uk-input-group-label uk-text-danger spec-value-del" href="javascript:;">
+            <i class="fa fa-times"></i>
+        </a>
+        </span>
+    </span>
+</script>
+
+
+<script>
+    var defaultProductNo = '{$productNo}';
+    var proDataJson = {$proDataJson};
+    var proHeadJson = {$proHeadJson};
+    var specJson = {$specJson};
+    Do('base', 'select', 'tpl', function () {
+
+        /**
+         * 添加规格
+         */
+        $('#add-spec-group').on('click', function () {
+
+            UIkit.modal.prompt('输入规格名:', '', {
+                labels: {
+                    ok: '确认',
+                    cancel: '取消'
+                }
+            }).then(function (name) {
+                if (!name) {
+                    return;
+                }
+                var gettpl = $('#tpl-spec-group').html();
+                var data = [
+                    {
+                        "name": name,
+                        "value": ''
+                    }
+                ];
+                laytpl(gettpl).render({data: data, checkbox: false}, function (html) {
+                    $('.dux-spec-group').append(html);
+                });
+            });
+        });
+        $('.dux-spec-group').on('click', '.spec-del', function () {
+            $(this).parents('tr').remove();
+            createSpecData();
+        });
+
+
+        /**
+         * 添加规格值
+         */
+        $('.dux-spec-group').on('click', '.js-spec-value', function () {
+            var $el = $(this);
+
+            UIkit.modal.prompt('添加规格值:', '', {
+                labels: {
+                    ok: '确认',
+                    cancel: '取消'
+                }
+            }).then(function (name) {
+                if (!name) {
+                    return;
+                }
+                var gettpl = $('#tpl-spec-value').html();
+                laytpl(gettpl).render({"value": name}, function (html) {
+                    $el.parent().before(html);
+                    createSpecData();
+                });
+            });
+        });
+
+        $('.dux-spec-group').on('click', '.spec-value-del', function () {
+            $(this).parents('.list-item').remove();
+            createSpecData();
+        });
+
+        var initSpec = function () {
+            var gettpl = $('#tpl-spec-group').html();
+            laytpl(gettpl).render({data: specJson, checkbox: true}, function (html) {
+                $('.dux-spec-group').html(html);
+            });
+        };
+
+        if (!$.isEmptyObject(specJson)) {
+            initSpec();
+        }
+
+        /**
+         * 选择规格
+         */
+        $('.dux-spec-group').on('click', 'input[type="checkbox"]', function () {
+            createSpecData();
+        });
+        $('.dux-spec-group').on('blur', 'input[type="text"]', function () {
+            createSpecData();
+        });
+
+        var createSpecData = function () {
+            var specValueData = {};
+            var specData = {};
+            $('.dux-spec-group').find('tr').each(function (i) {
+                specData[i] = {id: i, name: $(this).find('.spec-name').val()};
+                specValueData[i] = [];
+                $(this).find('input[type="checkbox"]:checked').each(function () {
+                    var value = $(this).parents('.list-item').find('input[type="text"]').val();
+                    if (value) {
+                        specValueData[i].push(value);
+                    }
+                });
+            });
+            if (specValueData.length < 1) {
+                return;
+            }
+
+            for (var i in specValueData) {
+                if (specValueData[i].length < 1) {
+                    delete specData[i];
+                    delete specValueData[i];
+                }
+            }
+
+            var specMaxData = descartes(specValueData, specData);
+            addData(specData, {
+                spec_list: specMaxData
+            });
+
+        };
+
+        var descartes = function (list, specData) {
+            //parent上一级索引;count指针计数
+            var point = {};
+            var result = [];
+            var pIndex = null;
+            var tempCount = 0;
+            var temp = [];
+
+            //根据参数列生成指针对象
+            for (var index in list) {
+                if (typeof list[index] == 'object') {
+                    point[index] = {'parent': pIndex, 'count': 0};
+                    pIndex = index;
+                }
+            }
+            //单维度数据结构直接返回
+            if (pIndex == null) {
+                return list;
+            }
+            //动态生成笛卡尔积
+            while (true) {
+                for (var index in list) {
+                    tempCount = point[index]['count'];
+                    temp.push({
+                        "id": specData[index].id,
+                        "name": specData[index].name,
+                        "value": list[index][tempCount]
+                    });
+                }
+
+                //压入结果数组
+                result.push(temp);
+                temp = [];
+                //检查指针最大值问题
+                while (true) {
+                    if (point[index]['count'] + 1 >= list[index].length) {
+                        point[index]['count'] = 0;
+                        pIndex = point[index]['parent'];
+                        if (pIndex == null) {
+                            return result;
+                        }
+
+                        //赋值parent进行再次检查
+                        index = pIndex;
+                    } else {
+                        point[index]['count']++;
+                        break;
+                    }
+                }
+            }
+        };
+
+        /**
+         * 添加商品规格
+         * @param head
+         * @param data
+         * @returns {boolean}
+         */
+        window.addData = function addData(head, data) {
+            if ($.isEmptyObject(data.spec_list)) {
+                addDefaultData();
+                return false;
+            }
+            data = $.extend({
+                id: {},
+                goods_no: {},
+                barcode: {},
+                store: {},
+                sell_price: {},
+                market_price: {},
+                cost_price: {},
+                weight: {},
+                spec_list: {}
+            }, data);
+            var gettpl = $('#tpl-spec').html();
+            laytpl(gettpl).render({data: data, head: head}, function (html) {
+                $('.js-data-list').html(html);
+            });
+        };
+        $('.js-data-list').on('click', '.js-del', function () {
+            if ($('.js-data-list tbody').find('tr').length > 1) {
+                $(this).parents('tr').remove();
+            } else {
+                addDefaultData();
+            }
+        });
+
+        function addDefaultData() {
+            var gettpl = $('#tpl-spec-default').html();
+            laytpl(gettpl).render({no: defaultProductNo}, function (html) {
+                $('.js-data-list').html(html);
+            });
+        }
+
+        if ($.isEmptyObject(proDataJson)) {
+            addDefaultData();
+        } else {
+            addData(proHeadJson, proDataJson);
+        }
+
+        /**
+         * 批量设置
+         */
+        $('.js-data-list').on('click', '.spec-value-set', function () {
+            var $el = $(this), i = $el.parent().index();
+            UIkit.modal.prompt('批量设置:', '', {
+                labels: {
+                    ok: '确认',
+                    cancel: '取消'
+                }
+            }).then(function (text) {
+                if (!text) {
+                    return;
+                }
+                $('.js-data-list').find('tr').each(function () {
+                    $(this).find('td').eq(i).find('input[type="text"]').val(text);
+                });
+            });
+
+        });
+
+
+        $('#add-params').click(function () {
+            var gettpl = $('#tpl-params').html();
+            laytpl(gettpl).render([], function (html) {
+                $('#params-list').append(html);
+            });
+        });
+        $('#params-list').on('click', '.js-up', function () {
+            var $tr = $(this).parents("tr");
+            if ($tr["index"]() != 0) {
+                $tr["prev"]().before($tr);
+            }
+        });
+        $('#params-list').on('click', '.js-down', function () {
+            var trLength = $(this).parents('table').find(".js-down").length;
+            var $tr = $(this).parents("tr");
+            if ($tr["index"]() != trLength - 1) {
+                $tr["next"]().after($tr);
+            }
+        })
+        $('#params-list').on('click', '.js-del', function () {
+            $(this).parents('tr').remove();
+        });
+
+    });
+</script>
+
+
+<script>
+    UIkit.tab('#tab-menu', {
+        connect: '#tab-body'
+    });
+    $('.next').on('click', function () {
+        UIkit.tab('.top-menu').show($(this).parents('li').index() + 1);
+    });
+    window.progress = function (rate) {
+        $(this).addClass('loading');
+        $(this).find('.progress').text(rate + '%');
+    };
+    window.upload = function (info) {
+        $(this).removeClass('loading');
+        $(this).find('img').attr('src', info.url);
+    };
+</script>

@@ -1,0 +1,8 @@
+/data/cache/*
+/data/storage/*
+/data/log/*
+/upload/*
+composer.lock
+install.lock
+/vendor
+/.idea

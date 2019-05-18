@@ -1,0 +1,179 @@
+<div data-dux="table-bind" class="dux-table-layout">
+    <div class="dux-page-header uk-clearfix">
+        <div class="page-title">
+            <form class="dux-form uk-form  uk-form-inline" method="get" action="{url()}">
+                <div class="uk-form-group">
+                    <input type="text" name="username" class="uk-input" value="{$pageMaps.username}" placeholder="搜索">
+                </div>
+                <div class="uk-form-group">
+                    <select name="status" class="uk-select">
+                        <option value="0">全部状态</option>
+                        <option value="1" {$pageMaps.status == 1 ? 'selected' : ''} >申请中</option>
+                        <option value="2" {$pageMaps.status == 2 ? 'selected' : ''} >已通过</option>
+                        <option value="3" {$pageMaps.status == 3 ? 'selected' : ''} >未通过</option>
+                    </select>
+                </div>
+                <div class="uk-form-group">
+                    <button type="submit" class="uk-button uk-button-primary"><i class="fa fa-search"></i></button>
+                </div>
+            </form>
+        </div>
+        <div class="page-action">
+        </div>
+    </div>
+    <div class="dux-page-table">
+        <table class="uk-table uk-table-hover uk-table-middle dux-table" data-table>
+            <thead>
+            <tr>
+                <th>用户</th>
+                <th>姓名</th>
+                <th>身份证正面</th>
+                <th>身份证反面</th>
+                <th>手持身份证</th>
+                <th>申请时间</th>
+                <th>审核备注</th>
+                <th class="uk-text-center">审核状态</th>
+                <th class="uk-text-center" width="140">审核</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!--loop{$list as $vo}-->
+            <tr>
+                <td>
+                    <a href="javascript:;">{$vo.show_name}</a>
+                    <div uk-dropdown data-id="{$vo.user_id}" class="dux-user-show" data-dux="system-user"></div>
+                </td>
+                <td>
+                    <div>{$vo.name}</div>
+                    <p>{$vo.idcard}</p>
+                </td>
+                <td>
+                    <!--if{$vo.card_image}-->
+                    <a href="{$vo.card_image}" target="_blank">查看</a>
+                    <div uk-dropdown>
+                        <img src="{$vo.card_image}" class="uk-image-thumbnail" width="400px" >
+                    </div>
+                    <!--{else}-->
+                    无
+                    <!--{/if}-->
+                </td>
+                <td>
+                    <!--if{$vo.card_image}-->
+                    <a href="{$vo.card_image_back}" target="_blank">查看</a>
+                    <div uk-dropdown>
+                        <img src="{$vo.card_image_back}" class="uk-image-thumbnail" width="400px" >
+                    </div>
+                    <!--{else}-->
+                    无
+                    <!--{/if}-->
+                </td>
+                <td>
+                    <!--if{$vo.card_image}-->
+                    <a href="{$vo.card_image_hand}" target="_blank">查看</a>
+                    <div uk-dropdown>
+                        <img src="{$vo.card_image_hand}" class="uk-image-thumbnail" width="400px" >
+                    </div>
+                    <!--{else}-->
+                    无
+                    <!--{/if}-->
+                </td>
+                <td>
+                    {date('Y-m-d H:i:s', $vo.time)}
+                </td>
+                <td>{$vo.remark ? $vo.remark : '无'}</td>
+                <!--if{!$vo.status}-->
+                <td class="uk-text-center uk-text-danger">
+                    失败
+                </td>
+                <!--{/if}-->
+
+                <!--if{$vo.status == 1}-->
+                <td class="uk-text-center uk-text-warning">
+                    审核中
+                </td>
+                <!--{/if}-->
+
+                <!--if{$vo.status == 2}-->
+                <td class="uk-text-center uk-text-success">
+                    审核成功
+                </td>
+                <!--{/if}-->
+                <td class="uk-text-center">
+
+                    <!--if{$vo.status <> 2}-->
+                    <button type="button" {$vo.status == 2 ? 'disabled' : ''}  class="uk-button uk-button-primary uk-button-small" href="javascript:;" data-id="{$vo.real_id}" data-audit><i class="fa fa-legal"></i></button>
+                    <!--{else}-->
+                    <a class="uk-button uk-button-primary uk-button-small" href="{url('edit', ['id' => $vo.real_id])}"><i class="fa fa-edit"></i></a>
+                    <!--{/if}-->
+                    <a class="uk-button uk-button-danger uk-button-small" href="javascript:;" data-url="{url('del')}" data-id="{$vo[$pri]}" title="删除" data-del><i class=" fa fa-trash"></i></a>
+                </td>
+            </tr>
+            <!--{/loop}-->
+            <!--if{empty($list)}-->
+            <tr>
+                <td colspan="10" class="uk-text-center">暂无实名申请</td>
+            </tr>
+            <!--{/if}-->
+            </tbody>
+        </table>
+    </div>
+    <div class="dux-page-foot uk-clearfix">
+        {$page}
+    </div>
+</div>
+<div id="dialog">
+    <div class="uk-modal-dialog">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <div class="uk-modal-header">
+            <h2 class="uk-modal-title">审核状态</h2>
+        </div>
+        <div class="uk-modal-body uk-form   uk-form-horizontal">
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">审核状态</label>
+                        <div class="uk-form-controls">
+                            <div>
+                                <select class="uk-select" name="status" data-dux="form-select" required>
+                                    <option value="2">通过</option>
+                                    <option value="0">不通过</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">审核备注</label>
+                        <div class="uk-form-controls">
+                            <textarea class="uk-textarea" name="remark"  placeholder="用户审核备注"></textarea>
+                        </div>
+                    </div>
+        </div>
+        <div class="uk-modal-footer uk-text-right">
+            <button class="uk-button uk-button-default uk-modal-close" type="button">取消</button>
+            <a href="JavaScript:;" class="uk-button uk-button-primary" data-audit>审核</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    Do('base', function () {
+        var id = 0;
+        $('[data-table]').on('click', '[data-audit]', function () {
+            id = $(this).data('id');
+            UIkit.modal('#dialog').show();
+        });
+        $('#dialog').on('click', '[data-audit]', function () {
+            app.ajax({
+                url: '{url("check")}',
+                type: 'post',
+                data: {
+                    id: id,
+                    status: $('#dialog').find('select[name="status"]').val(),
+                    remark: $('#dialog').find('textarea[name="remark"]').val(),
+                },
+                success: function () {
+                    window.location.reload();
+                }
+            });
+        });
+
+    });
+</script>

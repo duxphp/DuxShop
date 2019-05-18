@@ -1,0 +1,25 @@
+<div id="modal-remark" uk-modal>
+    <div class="uk-modal-dialog">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <div class="uk-modal-header">
+            <h2 class="uk-modal-title">管理员备注</h2>
+        </div>
+        <form class="uk-form   uk-form-horizontal " data-dux="form-bind" data-advanced="false" data-callback="remarkCallback" action="{url('order/Refund/remark')}" method="post">
+            <div class="uk-modal-body">
+                <div class="uk-form-group">
+                    <textarea class="uk-textarea" name="content" rows="5"  placeholder="管理员备注只有管理员可查看"></textarea>
+                </div>
+            </div>
+            <div class="uk-modal-footer uk-text-right">
+                <input type="hidden" name="id" value="{$info.refund_id}">
+                <button class="uk-button uk-button-default uk-modal-close" type="button">取消</button>
+                <button class="uk-button uk-button-primary" type="submit">保存</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    window.remarkCallback = function () {
+        window.location.reload();
+    }
+</script>

@@ -1,0 +1,201 @@
+<div class="uk-card uk-card-default uk-card-small dux-panel">
+    <div class="uk-card-body">
+        <form class="dux-form uk-form   uk-form-horizontal " method="post" action="{url()}" data-dux="form-bind">
+            <fieldset>
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">图形验证码</label>
+                    <div class="uk-form-controls uk-form-controls-text">
+                        <div class="uk-grid">
+                            <label>
+                                <!--if{$info.verify_image}-->
+                                <input class="uk-radio" name="verify_image" value="1" checked="checked" type="radio">
+                                <!--{else}-->
+                                <input class="uk-radio" name="verify_image" value="1" type="radio">
+                                <!--{/if}-->
+                                开启
+                            </label>
+                            <label>
+                                <!--if{!$info.verify_image}-->
+                                <input class="uk-radio" name="verify_image" checked="checked" value="0" type="radio">
+                                <!--{else}-->
+                                <input class="uk-radio" name="verify_image" value="0" type="radio">
+                                <!--{/if}-->
+                                关闭
+                            </label>
+                        </div>
+                        <div class="uk-form-help">注册、找回密码等操作时需要填写图形验证码</div>
+                    </div>
+                </div>
+
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">验证码状态</label>
+                    <div class="uk-form-controls uk-form-controls-text">
+                        <div class="uk-grid">
+                            <label>
+                                <!--if{$info.verify_status}-->
+                                <input class="uk-radio" name="verify_status" value="1" checked="checked" type="radio">
+                                <!--{else}-->
+                                <input class="uk-radio" name="verify_status" value="1" type="radio">
+                                <!--{/if}-->
+                                开启
+                            </label>
+                            <label>
+                                <!--if{!$info.verify_status}-->
+                                <input class="uk-radio" name="verify_status" checked="checked" value="0" type="radio">
+                                <!--{else}-->
+                                <input class="uk-radio" name="verify_status" value="0" type="radio">
+                                <!--{/if}-->
+                                关闭
+                            </label>
+                        </div>
+                        <div class="uk-form-help">验证码针对注册修改密码等，实名认证找回密码等需验证密码</div>
+                    </div>
+                </div>
+
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">短信验证码模板</label>
+                    <div class="uk-form-controls">
+                        <!--if{$classSend.sms.var}-->
+                        <?php $info['verify_sms_tpl'] = unserialize($info['verify_sms_tpl']); ?>
+                        <input class="uk-input" type="text" name="verify_sms_tpl[id]" value="{$info.verify_sms_tpl.id}" placeholder="模板ID">
+                        <div class="uk-form-help">请填写验证码模板</div>
+                        <table class="uk-table uk-table-hover uk-table-small dux-table" style="border: 1px solid #ddd">
+                            <thead>
+                            <tr>
+                                <th>变量内容</th>
+                                <th>变量名</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!--if{!empty($info.verify_sms_tpl.data)}-->
+                            <!--loop{$info.verify_sms_tpl.data.key as $key => $vo}-->
+                            <tr>
+                                <td>
+                                    <input class="uk-input" type="text" name="verify_sms_tpl[data][key][]" value="{$vo}" >
+                                </td>
+                                <td>
+                                    <input class="uk-input" type="text" name="verify_sms_tpl[data][val][]" value="{$info.verify_sms_tpl.data.val[$key]}">
+                                </td>
+                            </tr>
+                            <!--{/loop}-->
+                            <!--{else}-->
+                            <!--loop{$tplData as $key => $vo}-->
+                            <tr>
+                                <td>
+                                    <input class="uk-input" type="text" name="verify_sms_tpl[data][key][]" value="{$vo}" >
+                                </td>
+                                <td>
+                                    <input class="uk-input" type="text" name="verify_sms_tpl[data][val][]" value="">
+                                </td>
+                            </tr>
+                            <!--{/loop}-->
+                            <!--{/if}-->
+                            </tbody>
+                        </table>
+                        <!--{else}-->
+                        <!--if{$classSend.sms.editor}-->
+                        <textarea data-dux="form-editor" name="verify_sms_tpl">{html_out($info.verify_sms_tpl)}</textarea>
+                        <!--{else}-->
+                        <textarea class="uk-textarea" name="verify_sms_tpl" rows="6">{$info.verify_sms_tpl}</textarea>
+                        <!--{/if}-->
+                        <!--{/if}-->
+
+                        <div class="uk-form-help">变量内容使用:
+                            <!--loop{$tplData as $v}-->
+                            [{$v}]
+                            <!--{/loop}-->
+                            时将会自动转换为对应内容，如没有预设变量将显示设置内容
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">邮件验证码模板</label>
+                    <div class="uk-form-controls">
+                        <!--if{$classSend.mail.var}-->
+                        <?php $info['verify_mail_tpl'] = unserialize($info['verify_mail_tpl']); ?>
+                        <input class="uk-input" type="text" name="verify_mail_tpl[id]" value="{$info.verify_mail_tpl.id}" placeholder="模板ID">
+                        <div class="uk-form-help">请填写验证码模板</div>
+                        <table class="uk-table uk-table-hover uk-table-small dux-table" style="border: 1px solid #ddd">
+                            <thead>
+                            <tr>
+                                <th>变量内容</th>
+                                <th>变量名</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!--if{!empty($info.verify_mail_tpl.data)}-->
+                            <!--loop{$info.verify_mail_tpl.data.key as $key => $vo}-->
+                            <tr>
+                                <td>
+                                    <input class="uk-input" type="text" name="verify_mail_tpl[data][key][]" value="{$vo}" >
+                                </td>
+                                <td>
+                                    <input class="uk-input" type="text" name="verify_mail_tpl[data][val][]" value="{$info.verify_mail_tpl.data.val[$key]}">
+                                </td>
+                            </tr>
+                            <!--{/loop}-->
+                            <!--{else}-->
+                            <!--loop{$tplData as $key => $vo}-->
+                            <tr>
+                                <td>
+                                    <input class="uk-input" type="text" name="verify_mail_tpl[data][key][]" value="{$vo}" >
+                                </td>
+                                <td>
+                                    <input class="uk-input" type="text" name="verify_mail_tpl[data][val][]" value="">
+                                </td>
+                            </tr>
+                            <!--{/loop}-->
+                            <!--{/if}-->
+                            </tbody>
+                        </table>
+                        <!--{else}-->
+                        <!--if{$classSend.mail.editor}-->
+                        <textarea data-dux="form-editor" name="verify_mail_tpl">{html_out($info.verify_mail_tpl)}</textarea>
+                        <!--{else}-->
+                        <textarea class="uk-textarea" name="verify_mail_tpl" rows="6">{$info.verify_mail_tpl}</textarea>
+                        <!--{/if}-->
+                        <!--{/if}-->
+
+                        <div class="uk-form-help">变量内容使用:
+                            <!--loop{$tplData as $v}-->
+                            [{$v}]
+                            <!--{/loop}-->
+                            时将会自动转换为对应内容，如没有预设变量将显示设置内容
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">发送间隔</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="number" name="verify_second" placeholder="请设置发送间隔" value="{$info.verify_second}" required>
+                        <div class="uk-form-help">单位:秒</div>
+                    </div>
+                </div>
+
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">发送限制</label>
+                    <div class="uk-form-controls dux-form uk-form">
+                        <div class="uk-input-group">
+                            <span class="uk-input-group-label">每</span>
+                            <input class="uk-input" type="number" name="verify_minute" value="{$info.verify_minute}">
+                            <span class="uk-input-group-label">分钟发送</span>
+                            <input type="number" name="verify_minute_num" value="{$info.verify_minute_num}" class="uk-input" required>
+                            <span class="uk-input-group-label">条验证码</span>
+                            <input class="uk-input" type="number" name="verify_expire" placeholder="设置验证码有效期" value="{$info.verify_expire}" required>
+                            <span class="uk-input-group-label">秒有效期</span>
+                        </div>
+                        <div class="uk-form-help">指定分钟内发送条数限制,针对单个接收帐号</div>
+                    </div>
+                </div>
+
+                <div class="uk-form-group">
+                    <div class="uk-form-controls">
+                        <button class="uk-button uk-button-primary" type="submit">保存</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

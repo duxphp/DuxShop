@@ -1,0 +1,20 @@
+<div class="uk-form-group">
+    <label class=" uk-form-label">图片地址</label>
+    <div>
+        <div class="uk-input-group uk-margin-bottom">
+            <input class="uk-input" type="text" name="data[image]" id="image" value="{{d.data.image ? d.data.image : ''}}" placeholder="图片地址">
+            <span class="uk-input-group-btn">
+                <button class="uk-button uk-button-default" type="button" data-type="image" data-dux="system-attach" data-target="#image"><i class="fa fa-upload"></i></button>
+            </span>
+            <span class="uk-input-group-btn">
+                <button class="uk-button uk-button-default" type="button" data-dux="form-preview" data-target="#image"><i class="fa fa-image"></i></button>
+            </span>
+        </div>
+    </div>
+</div>
+<div class="uk-form-group">
+    <label class=" uk-form-label">图片链接</label>
+    <div>
+        <input class="uk-input" type="text" name="data[url]" value="{{d.data.url ? d.data.url : ''}}">
+    </div>
+</div>

@@ -1,0 +1,87 @@
+<div id="modal-print" uk-modal>
+    <div class="uk-modal-dialog">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <div class="uk-modal-header">
+            <h2 class="uk-modal-title">电子面单打印</h2>
+        </div>
+        <?php $printList = target('order/OrderConfigPrinter')->loadList(['status' => 1]); ?>
+        <form class="uk-form uk-form-horizontal " data-dux="form-bind" data-advanced="false"
+              data-callback="printCallback" action="{url('order/Delivery/print')}" method="post">
+            <div class="uk-modal-body">
+                <div class="uk-form-group">
+                    <select class="uk-select" name="print" data-dux="form-select" style="width: 100%" required>
+                        <option value="1">已打印</option>
+                        <option value="0">未打印</option>
+                    </select>
+                </div>
+                <div class="uk-form-group">
+                    <select class="uk-select" name="type" data-dux="form-select" style="width: 100%" required>
+                        <!--loop{$printList as $vo}-->
+                        <option value="{$vo.name}">{$vo.name} ({$vo.description})</option>
+                        <!--{/loop}-->
+                    </select>
+                </div>
+                <div class="uk-form-group">
+                    <table class="uk-table  uk-table-hover uk-table-middle dux-table">
+                        <thead>
+                        <tr>
+                            <th width="20"><input type="checkbox" class="select-all uk-checkbox"></th>
+                            <th>快递</th>
+                            <th>单号</th>
+                            <th>状态</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!--loop{$deliveryList as $vo}-->
+                        <tr>
+                            <td><input class="uk-checkbox" type="checkbox" name="id[]" value="{$vo.delivery_id}"></td>
+                            <td>
+                                {$vo.delivery_name}
+                            </td>
+                            <td>
+                                {$vo.delivery_no}
+                            </td>
+                            <td>
+                                {$vo.print_status ? '已打印' : '未打印'}
+                            </td>
+                        </tr>
+                        <!--{/loop}-->
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <div class="uk-modal-footer uk-text-right">
+                <button class="uk-button uk-button-default uk-modal-close" type="button">取消</button>
+                <button class="uk-button uk-button-primary" type="submit">打印</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    $('#modal-print .select-all').change(function () {
+        if ($(this).prop('checked')) {
+            $('table').find('input[type=checkbox]').prop('checked', true);
+        } else {
+            $('table').find('input[type=checkbox]').prop('checked', false);
+        }
+    });
+    window.printCallback = function (data) {
+        if (data.type == 'js') {
+            eval($data.data);
+        } else if (data.type == 'url') {
+            window.location.href = data.data;
+        } else if (data.type == 'form') {
+            var form = $(data.data);
+            $(document.body).append(form);
+            form.submit();
+        } else {
+            app.error('未知打印类型');
+            return;
+        }
+        UIkit.modal('#modal-print').hide();
+        setTimeout(function () {
+            window.location.reload();
+        }, 2000);
+    }
+</script>

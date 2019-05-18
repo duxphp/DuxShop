@@ -1,0 +1,134 @@
+<div data-dux="table-bind" class="dux-table-layout">
+
+    <div class="dux-page-header uk-clearfix">
+        <div class="page-title">
+            <form id="form" method="get" action="{url()}">
+                <div class="dux-form uk-form  uk-form-inline" data-dux="form-location">
+                    <div class="uk-form-group">
+                        <select class="uk-select" name="province" data-province="{$pageMaps.province}">
+                        </select>
+                    </div>
+                    <div class="uk-form-group">
+                        <select class="uk-select" name="city" data-city="{$pageMaps.city}">
+                        </select>
+                    </div>
+                    <div class="uk-form-group">
+                        <select class="uk-select" name="region" data-region="{$pageMaps.region}">
+                        </select>
+                    </div>
+                    <div class="uk-form-group">
+                        <select class="uk-select" name="street" data-street="{$pageMaps.street}">
+                        </select>
+                    </div>
+                    <div class="uk-form-group">
+                            <select class="uk-select" name="marki_id" data-dux="form-select"
+                                data-minimum-results-for-search="-1">
+                                <option value="">请选择配送员</option>
+                                <!--loop{$markiList as $vo}-->
+                                <option value="{$vo.marki_id}" {$pageMaps.marki_id == $vo.marki_id ? 'selected' : '' }>{$vo.name}</option>
+                                <!--{/loop}-->
+                            </select>
+                        </div>
+                </div>
+                <div class="dux-form uk-form  uk-form-inline uk-margin-top" >
+                    
+                    <div class="uk-form-group">
+                        <select class="uk-select" name="status" data-dux="form-select"
+                            data-minimum-results-for-search="-1">
+                            <option value="0">状态</option>
+                            <option value="1" <!--if{$pageMaps.status==1}-->selected
+                                <!--{/if}-->>配送中</option>
+                            <option value="2" <!--if{$pageMaps.status==2}-->selected
+                                <!--{/if}-->>已收货</option>
+                        </select>
+                    </div>
+                    <div class="uk-form-group">
+                        <select class="uk-select" name="time_type" data-dux="form-select"
+                            data-minimum-results-for-search="-1">
+                            <option value="0">配送时间</option>
+                            <option value="1" {$pageMaps.time_type ? 'selected' : '' }>下单时间</option>
+                        </select>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <input type="text" name="start_time" class="uk-input" value="{$pageMaps.start_time}"
+                            data-dux="form-date" data-type="datetime" placeholder="开始时间">
+                    </div>
+                    <div class="uk-form-group">
+                        <input type="text" name="stop_time" class="uk-input" value="{$pageMaps.stop_time}"
+                            data-dux="form-date" data-type="datetime" placeholder="结束时间">
+                    </div>
+                    <div class="uk-form-group">
+                        <button type="submit" class="uk-button uk-button-primary"><i class="fa fa-search"></i></button>
+                    </div>
+                    <div class="uk-form-group">
+                        <a href="JavaScript:;" id="export" class="uk-button uk-button-primary">导出</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="dux-page-table">
+        <table class="uk-table uk-table-hover uk-table-middle dux-table" data-table>
+            <thead>
+                <tr>
+                    <th colspan="2">订单</th>
+                    <th>配送员</th>
+                    <th>收货信息</th>
+                    <th width="170">配送/收货时间</th>
+                    <th class="uk-text-center">收货状态</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!--loop{$list as $vo}-->
+                <tr>
+                    <td width="100">
+                        <img src="{$vo.order_image}" width="100" height="100" class="uk-image-thumbnail">
+                    </td>
+                    <td>
+                        <a href="{url($vo.order_app . '/Order/info', ['id' => $vo.order_id])}" target="_blank">
+                            {$vo.order_title}
+                        </a>
+                        <p>{$vo.order_no}</p>
+                        <p>{date('Y-m-d H:i:s', $vo.order_create_time)}</p>
+                    </td>
+                    <td>
+                        {$vo.marki_name}
+                        <p>{$vo.marki_tel}</p>
+                    </td>
+                    <td>
+                        {$vo.receive_name}
+                        <p>{$vo.receive_tel}</p>
+                        <p>{$vo.receive_province} {$vo.receive_city} {$vo.receive_region}</p>
+                        <p>{$vo.receive_address}</p>
+                    </td>
+
+                    <td>
+                        {date('Y-m-d H:i:s', $vo.create_time)}
+                        <p>{$vo.receive_time ? date('Y-m-d H:i:s', $vo.receive_time) : '配送中'}</p>
+                    </td>
+
+                    <td class="uk-text-center">
+                        <!--if{$vo.receive_status}-->
+                        <span class="uk-text-success">已收货</span>
+                        <!--{else}-->
+                        <span class="uk-text-success">配送中</span>
+                        <!--{/if}-->
+                    </td>
+                </tr>
+                <!--{/loop}-->
+            </tbody>
+        </table>
+    </div>
+    <div class="dux-page-foot uk-clearfix">
+        {$page}
+    </div>
+</div>
+<script>
+    Do('base', function () {
+        $('#export').on('click', function () {
+            var data = $.param($('#form').serializeArray());
+            window.location.href = "{url('export')}?" + data;
+        });
+    });
+</script>

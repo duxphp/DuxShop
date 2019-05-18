@@ -1,0 +1,89 @@
+<div class="uk-card uk-card-default uk-card-small dux-panel">
+    <div class="uk-card-body">
+        <form class="dux-form uk-form   uk-form-horizontal " method="post" action="{url()}" data-dux="form-bind">
+            <fieldset>
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">快递接口</label>
+                    <div class="uk-form-controls">
+                        <select name="waybill_type" class="uk-select" data-dux="form-select" required>
+                            <!--loop{$waybillList as $key => $vo}-->
+                            <option value="{$key}" <!--if{ $key==$info['waybill_type'] }--> selected
+                                <!--{/if}-->
+                                >{$vo.name}</option>
+                            <!--{/loop}-->
+                        </select>
+                        <div class="uk-form-help">选择所使用的快递查询与面单接口</div>
+                    </div>
+                </div>
+
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">自动取消(分钟)</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="number" placeholder="请输入分钟数" name="cancel_hour"
+                            value="{$info.cancel_hour}">
+                        <div class="uk-form-help">订单未付款多长时间后自动取消</div>
+                    </div>
+                </div>
+
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">自动确认(天)</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="number" placeholder="请输入天数" name="confirm_day"
+                            value="{$info.confirm_day}">
+                        <div class="uk-form-help">订单发货多少天后自动确认收货</div>
+                    </div>
+                </div>
+
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">售后期限(天)</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="number" placeholder="请输入天数" name="service_day"
+                            value="{$info.service_day}">
+                        <div class="uk-form-help">订单完成后多长时间内可申请售后</div>
+                    </div>
+                </div>
+
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">付款方式</label>
+                    <div class="uk-form-controls uk-form-controls-text">
+                        <div class="uk-grid">
+                            <label>
+                                <input class="uk-checkbox" name="pay_type[]" {in_array(0, $info.pay_type) ? 'checked' : '' } value="0"
+                                    type="checkbox">
+                                在线支付
+                            </label>
+                            <label>
+                                <input class="uk-checkbox" name="pay_type[]" {in_array(1, $info.pay_type) ? 'checked' : '' } value="1"
+                                    type="checkbox">
+                                货到付款
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">到付提示</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="text" placeholder="" name="pay_tip" value="{$info.pay_tip}">
+                        <div class="uk-form-help">选择到付时二次确认提示信息</div>
+                    </div>
+                </div>
+
+                <div class="uk-form-group">
+                    <label class="uk-form-label">到付协议</label>
+                    <div class="uk-form-controls">
+                        <textarea data-dux="form-editor" name="pay_agreement">{html_out($info.pay_agreement)}</textarea>
+                        <div class="uk-form-help">货到付款协议</div>
+                    </div>
+                </div>
+                
+                <div class="uk-form-group">
+                    <div class="uk-form-controls">
+                        <button class="uk-button uk-button-primary" type="submit">保存</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

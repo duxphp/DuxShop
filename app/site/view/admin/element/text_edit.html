@@ -1,0 +1,58 @@
+<div class="uk-form-group">
+    <label class=" uk-form-label">文本内容</label>
+    <div>
+        <input class="uk-input" type="text" name="data[content]" value="{{d.data.content}}">
+    </div>
+</div>
+<div class="uk-form-group">
+    <label class=" uk-form-label">文本链接</label>
+    <div>
+        <input class="uk-input" type="text" name="data[url]" value="{{d.data.url}}">
+    </div>
+</div>
+<div class="uk-form-group">
+    <label class=" uk-form-label">文本大小</label>
+    <div>
+        <input class="uk-input" type="number" name="style[fontSize]" value="{{d.style.fontSize}}">
+    </div>
+</div>
+<div class="uk-form-group">
+    <label class=" uk-form-label">文本行高</label>
+    <div>
+        <input class="uk-input" type="number" name="style[lineHeight]" value="{{d.style.lineHeight}}">
+    </div>
+</div>
+<div class="uk-form-group">
+    <label class=" uk-form-label">对齐方式</label>
+    <div>
+        <select class="uk-select" name="style[textAlign]">
+            <option value="left" {{d.style.textAlign == 'left' ? 'selected' : ''}}>左对齐</option>
+            <option value="center" {{d.style.textAlign == 'center' ? 'selected' : ''}}>居中</option>
+            <option value="right" {{d.style.textAlign == 'right' ? 'selected' : ''}}>右对齐</option>
+        </select>
+    </div>
+</div>
+<div class="uk-form-group">
+    <label class=" uk-form-label">文本颜色</label>
+    <div>
+        <input class="uk-input" type="color" name="style[color]" value="{{d.style.color}}">
+    </div>
+</div>
+<div class="uk-form-group">
+    <label class=" uk-form-label">背景颜色</label>
+    <div>
+        <input class="uk-input" type="color" name="style[bgColor]" value="{{d.style.bgColor}}">
+    </div>
+</div>
+<div class="uk-form-group">
+    <label class=" uk-form-label">左右填充</label>
+    <div>
+        <input class="uk-input" type="text" name="style[lrPadding]" value="{{d.style.lrPadding}}">
+    </div>
+</div>
+<div class="uk-form-group">
+    <label class=" uk-form-label">上下填充</label>
+    <div>
+        <input class="uk-input" type="text" name="style[tbPadding]" value="{{d.style.tbPadding}}">
+    </div>
+</div>

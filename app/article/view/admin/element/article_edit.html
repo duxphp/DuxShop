@@ -1,0 +1,18 @@
+<?php $treeList = target('article/ArticleClass')->loadTreeList(); ?>
+<div class="uk-form-group">
+    <label class=" uk-form-label">文章分类</label>
+    <div>
+        <select name="style[class]" class="uk-select">
+            <option value="0">全部分类</option>
+            <!--loop{$treeList as $vo}-->
+            <option value="{$vo.class_id}" {{d.style.class == {$vo.class_id} ? 'selected' : ''}}>{$vo.cname}</option>
+            <!--{/loop}-->
+        </select>
+    </div>
+</div>
+<div class="uk-form-group">
+    <label class=" uk-form-label">文章数量</label>
+    <div>
+        <input class="uk-input" type="text" name="style[limit]" value="{{d.style.limit}}">
+    </div>
+</div>

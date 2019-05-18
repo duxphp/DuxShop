@@ -1,0 +1,104 @@
+<div data-dux="table-bind" class="dux-table-layout">
+
+    <div class="dux-page-header uk-clearfix">
+        <div class="page-title">
+            <form id="form" method="get" action="{url()}">
+                <div class="dux-form uk-form uk-form-inline" >
+                    <div class="uk-form-group">
+                        <select class="uk-select" name="supplier_id" data-dux="form-select"
+                                data-minimum-results-for-search="-1">
+                            <option value="">请选择供货商</option>
+                            <!--loop{$supplierList as $vo}-->
+                            <option value="{$vo.supplier_id}" {$pageMaps.supplier_id == $vo.supplier_id ? 'selected' : '' }>{$vo.name}</option>
+                            <!--{/loop}-->
+                        </select>
+                    </div>
+                    <div class="uk-form-group">
+                        <select class="uk-select" name="time_type" data-dux="form-select"
+                            data-minimum-results-for-search="-1">
+                            <option value="0">支付时间</option>
+                            <option value="1" {$pageMaps.time_type ? 'selected' : '' }>下单时间</option>
+                        </select>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <input type="text" name="start_time" class="uk-input" value="{$pageMaps.start_time}"
+                            data-dux="form-date" data-type="datetime" placeholder="开始时间">
+                    </div>
+                    <div class="uk-form-group">
+                        <input type="text" name="stop_time" class="uk-input" value="{$pageMaps.stop_time}"
+                            data-dux="form-date" data-type="datetime" placeholder="结束时间">
+                    </div>
+
+
+                    <div class="uk-form-group">
+                        <select class="uk-select" name="order" data-dux="form-select"
+                                data-minimum-results-for-search="-1">
+                            <option value="0">排序</option>
+                            <option value="1" {$pageMaps.order == 1 ? 'selected' : '' }>销售额</option>
+                            <option value="2" {$pageMaps.order == 2 ? 'selected' : '' }>实付款</option>
+                            <option value="3" {$pageMaps.order == 3 ? 'selected' : '' }>销售量</option>
+                        </select>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <button type="submit" class="uk-button uk-button-primary"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="uk-alert-primary" uk-alert>
+        <p>
+            总销售商品 {$info.total_qty ? $info.total_qty : 0} 件 {$info.total_price ? $info.total_price : 0} 元，实际支付额 {$info.total_pay ? $info.total_pay : 0} 元
+        </p>
+    </div>
+    <div class="dux-page-table">
+        <table class="uk-table uk-table-hover uk-table-middle dux-table" data-table>
+            <thead>
+                <tr>
+                    <th colspan="2">商品</th>
+                    <th>销售额/实付额</th>
+                    <th>销售量</th>
+                    <th width="200">供货商</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!--loop{$list as $vo}-->
+                <tr>
+                    <td width="90">
+                        <img src="{$vo.goods_image}" width="80" height="80">
+                    </td>
+                    <td>
+                        {$vo.goods_name}
+                        <p>
+                            ￥{$vo.goods_price}
+                        </p>
+                        <p>
+                            <!--if{$vo.goods_options}-->
+                            <!--loop{$vo.goods_options as $v}-->
+                            {$v.value}
+                            <!--{/loop}-->
+                            <!--{/if}-->
+                        </p>
+
+                    </td>
+                    <td>
+                        <span class="uk-text-danger">￥{$vo.total_price}</span> / <span class="uk-text-warning">￥{$vo.total_pay}</span>
+                    </td>
+                    <td>
+                        {$vo.total_qty}
+                    </td>
+                    <td>
+                        {$vo.supplier_name}
+                        <p>{$vo.supplier_tel}</p>
+                    </td>
+                </tr>
+                <!--{/loop}-->
+            </tbody>
+        </table>
+    </div>
+    <div class="dux-page-foot uk-clearfix">
+        {$page}
+    </div>
+</div>

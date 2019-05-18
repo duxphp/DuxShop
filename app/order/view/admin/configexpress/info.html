@@ -1,0 +1,103 @@
+ 
+    <div class="uk-card uk-card-default uk-card-small dux-panel">
+        <div class="uk-card-header">{$assignName}物流</div>
+        <div class="uk-card-body">
+            <form class="dux-form uk-form   uk-form-horizontal " data-dux="form-bind" method="post">
+                <fieldset>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">物流名称</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" name="name" value="{$info.name}" placeholder="请输入物流名称" required>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">物流标识</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" name="label" value="{$info.label}" placeholder="请输入物流标识" required>
+                            <div class="uk-form-help">物流标识请参考对于物流接口的编码表</div>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">物流网址</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" name="url" value="{$info.url}" placeholder="请输入物流网址">
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">电子面单</label>
+                        <div class="uk-form-controls uk-form-controls-text">
+                            <div class="uk-grid">
+                                <label>
+                                    <input class="uk-radio" name="place_status" value="1" {$info.place_status ? 'checked="checked"' : ''}  type="radio">
+                                    开启
+                                </label>
+                                <label>
+                                    <input class="uk-radio" name="place_status" value="0" {$info.place_status ? '' : 'checked="checked"'}  type="radio">
+                                    不开启
+                                </label>
+                            </div>
+                            <div class="uk-form-help">
+                                开启后请根据<a href="http://www.kdniao.com/file/%E5%BF%AB%E9%80%92%E9%B8%9F%E7%94%B5%E5%AD%90%E9%9D%A2%E5%8D%95%E5%AE%A2%E6%88%B7%E5%8F%B7%E5%8F%82%E6%95%B0%E5%AF%B9%E7%85%A7%E8%A1%A8.xlsx" target="_blank">快递鸟电子面单客户号参数对照表</a>进行设置
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">面单客户号</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" name="customer_name" value="{$info.customer_name}" placeholder="请输入快递方客户号">
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">面单客户密码</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" name="customer_pwd" value="{$info.customer_pwd}" placeholder="请输入快递方客户密码">
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">快递月结号</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" name="month_code" value="{$info.month_code}" placeholder="请输入快递方月结号">
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">快递网点</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" name="send_site" value="{$info.send_site}" placeholder="请输入快递方网点名称或者编码">
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">网点人员</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" name="send_staff" value="{$info.send_staff}" placeholder="请输入快递方网点快递员">
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">仓库编码</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" name="ware_house_id" value="{$info.ware_house_id}" placeholder="请输入快运仓库编码">
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">快运寄件人</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" name="ware_name" value="{$info.ware_name}" placeholder="请输入快运寄件人">
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <div class="uk-form-controls">
+                            <input type="hidden" name="express_id" value="{$info.express_id}">
+                            <button class="uk-button uk-button-primary" type="submit" disabled>保存</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div> 

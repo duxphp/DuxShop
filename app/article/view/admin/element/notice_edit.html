@@ -1,0 +1,47 @@
+<?php $treeList = target('article/ArticleClass')->loadTreeList(); ?>
+<div class="uk-form-group">
+    <label class=" uk-form-label">文章分类</label>
+    <div>
+        <select name="style[class]" class="uk-select">
+            <option value="0">全部分类</option>
+            <!--loop{$treeList as $vo}-->
+            <option value="{$vo.class_id}" {{d.style.class == {$vo.class_id} ? 'selected' : ''}}>{$vo.cname}</option>
+            <!--{/loop}-->
+        </select>
+    </div>
+</div>
+<div class="uk-form-group">
+    <label class=" uk-form-label">文本颜色</label>
+    <div>
+        <input class="uk-input" type="color" name="style[color]" value="{{d.style.color}}">
+    </div>
+</div>
+<div class="uk-form-group">
+    <label class=" uk-form-label">背景颜色</label>
+    <div>
+        <input class="uk-input" type="color" name="style[bgColor]" value="{{d.style.bgColor}}">
+    </div>
+</div>
+<div class="uk-form-group">
+    <label class=" uk-form-label">文章数量</label>
+    <div>
+        <input class="uk-input" type="text" name="style[limit]" value="{{d.style.limit}}">
+    </div>
+</div>
+<div class="uk-form-group">
+    <label class=" uk-form-label">文本图标</label>
+    <div>
+        <div class="uk-input-group uk-margin-bottom">
+            <input class="uk-input" type="text" name="style[icon]" id="icon"
+                value="{{d.style.icon ? d.style.icon : ''}}" placeholder="图片地址">
+            <span class="uk-input-group-btn">
+                <button class="uk-button uk-button-default" type="button" data-type="image" data-dux="system-attach"
+                    data-target="#icon"><i class="fa fa-upload"></i></button>
+            </span>
+            <span class="uk-input-group-btn">
+                <button class="uk-button uk-button-default" type="button" data-dux="form-preview"
+                    data-target="#icon"><i class="fa fa-image"></i></button>
+            </span>
+        </div>
+    </div>
+</div>

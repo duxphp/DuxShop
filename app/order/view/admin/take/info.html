@@ -1,0 +1,129 @@
+
+    <div class="uk-card uk-card-default uk-card-small dux-panel">
+        <div class="uk-card-header">{$assignName}自提点</div>
+        <div class="uk-card-body">
+            <form class="dux-form uk-form   uk-form-horizontal " data-dux="form-bind" method="post">
+                <fieldset>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">名称</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" name="name" value="{$info.name}" placeholder="自提点名称" required>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">自提点地区</label>
+                        <div class="uk-form-controls" data-dux="form-location">
+
+                            <div class="uk-grid uk-child-width-expand">
+                                <div>
+                                    <select class="uk-select" name="province" data-province="{$info.province}" data-dux="form-select"></select>
+                                </div>
+                                <div>
+                                    <select class="uk-select" name="city" data-city="{$info.city}" data-dux="form-select"></select>
+                                </div>
+                                <div>
+                                    <select class="uk-select" name="region" data-district="{$info.region}" data-dux="form-select"></select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">自提点地址</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" name="address" value="{$info.address}" placeholder="自提点详细地址" >
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">自提点电话</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" name="tel" value="{$info.tel}" placeholder="自提点联系电话" >
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">营业时间</label>
+                        <div class="uk-form-controls">
+                            <div class="uk-input-group">
+                                <input  class="uk-input" type="time" name="start_time"  value="{$info.start_time}">
+                                <span class="uk-input-group-label">至</span>
+                                <input  class="uk-input" type="time" name="stop_time"  value="{$info.stop_time}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">自提点坐标</label>
+                        <div class="uk-form-controls">
+                            <div class="uk-input-group">
+                                <input  class="uk-input" type="text" name="coord" value="{$info.lat ? $info.lat . ',' . $info.lng : ''}" placeholder="查询后输入坐标值">
+                                <span class="uk-input-group-btn">
+                                <a class="uk-button uk-button-default" href="#modal-map" uk-toggle>
+                                   <i class="fa fa-search"></i> 查询坐标
+                                </a>
+                            </span>
+                            </div>
+                            <div id="modal-map" class="uk-flex-top" uk-modal>
+                                <div class="uk-modal-dialog uk-width-auto uk-margin-auto-vertical">
+                                    <button class="uk-modal-close-outside" type="button" uk-close></button>
+                                    <iframe src="https://lbs.qq.com/tool/getpoint/getpoint.html" width="930"
+                                            height="600" frameborder="0"></iframe>
+                                    <div class="uk-modal-footer uk-text-right uk-text-danger">
+                                        请复制上方当前坐标后关闭本弹窗粘贴到坐标输入框
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">自提点配送费</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" name="freight" value="{$info.freight}" placeholder="自提点配送费">
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">自提点顺序</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" name="sort" value="{$info.sort}" placeholder="自提点距离排序">
+                            <div class="uk-form-help">自提点距离大->小排序</div>
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">状态</label>
+                        <div class="uk-form-controls uk-form-controls-text">
+                            <?php $info['status'] = isset($info['status']) ? $info['status'] : 1;  ?><div class="uk-grid">
+                            <label>
+                                <!--if{$info['status']}-->
+                                <input class="uk-radio" name="status" value="1" checked="checked" type="radio">
+                                <!--{else}-->
+                                <input class="uk-radio" name="status" value="1" type="radio">
+                                <!--{/if}-->
+                                正常
+                            </label>
+                            <label>
+                                <!--if{!$info['status']}-->
+                                <input class="uk-radio" name="status" checked="checked" value="0" type="radio">
+                                <!--{else}-->
+                                <input class="uk-radio" name="status" value="0" type="radio">
+                                <!--{/if}-->
+                                关闭
+                            </label>
+                        </div></div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <div class="uk-form-controls">
+                            <input type="hidden" name="take_id" value="{$info.take_id}">
+                            <button class="uk-button uk-button-primary" type="submit" disabled>保存</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>

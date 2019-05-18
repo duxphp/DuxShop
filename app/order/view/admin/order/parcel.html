@@ -1,0 +1,25 @@
+<div id="modal-parcel" uk-modal>
+    <div class="uk-modal-dialog">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <div class="uk-modal-header">
+            <h2 class="uk-modal-title">订单配货</h2>
+        </div>
+        <form class="uk-form   uk-form-horizontal " data-dux="form-bind" data-advanced="false" data-callback="parcelCallback" action="{url('order/Order/parcel')}" method="post">
+            <div class="uk-modal-body">
+                <div class="uk-form-group">
+                    <textarea class="uk-textarea" name="content" rows="5"  placeholder="配货完成备注"></textarea>
+                </div>
+            </div>
+            <div class="uk-modal-footer uk-text-right">
+                <input type="hidden" name="order_id" value="{$info.order_id}">
+                <button class="uk-button uk-button-default uk-modal-close" type="button">取消</button>
+                <button class="uk-button uk-button-primary" type="submit">保存</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    window.parcelCallback = function () {
+        window.location.reload();
+    }
+</script>

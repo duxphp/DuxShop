@@ -1,0 +1,82 @@
+<div data-dux="table-bind" class="dux-table-layout" class=" ">
+    <div class="dux-page-header uk-clearfix">
+        <div class="page-title">
+            <form class="dux-form uk-form  uk-form-inline" method="get" action="{url()}">
+                <div class="uk-form-group">
+                    <input type="text" name="keyword" class="uk-input" value="{$pageMaps.keyword}" placeholder="商品标题/编号">
+                </div>
+                <div class="uk-form-group">
+                    <select class="uk-select" name="order" placeholder="排序" data-dux="form-select">
+                        <option value="">默认排名</option>
+                        <option value="1" {$pageMaps.order == 1 ? 'selected' : ''}>销量排名</option>
+                        <option value="2" {$pageMaps.order == 2 ? 'selected' : ''}>销售额排名</option>
+                        <option value="3" {$pageMaps.order == 3 ? 'selected' : ''}>访问排名</option>
+                    </select>
+                </div>
+                <div class="uk-form-group">
+                    <input class="uk-input" type="date" name="start_time" value="{$pageMaps.start_time}" placeholder="开始时间">
+                </div>
+                <div class="uk-form-group">
+                    <input class="uk-input" type="date" name="stop_time" value="{$pageMaps.stop_time}" placeholder="结束时间">
+                </div>
+                <div class="uk-form-group">
+                    <button type="submit" class="uk-button uk-button-primary"><i class="fa fa-search"></i></button>
+                </div>
+                <div class="uk-form-group" style="padding-top: 10px;">
+                    <a href="{url('index', $dateParams[0])}">今天</a>
+                    <a href="{url('index', $dateParams[1])}">近7天</a>
+                    <a href="{url('index', $dateParams[2])}">近15天</a>
+                    <a href="{url('index', $dateParams[3])}">近30天</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="dux-page-table">
+
+        <table class="uk-table uk-table-hover uk-table-middle dux-table" data-table>
+            <thead>
+            <tr>
+                <th width="100">排名</th>
+                <th colspan="2">商品</th>
+                <th>成交销量</th>
+                <th>销售额</th>
+                <th>访问次数</th>
+                <th>转换率</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!--if{$list}-->
+            <!--loop{(array)$list as $vo}-->
+            <tr>
+                <td><span class="uk-label uk-label-success">{$vo.ranking}</span></td>
+                <td width="60"><img src="{$vo.image}" class="uk-image-thumbnail" width="80" height="80"></td>
+                <td>
+                    ({$vo.mall_id}) {$vo.title}
+                </td>
+                <td>
+                    {$vo.total_num}
+                </td>
+                <td>
+                    ￥{$vo.total_money}
+                </td>
+                <td>
+                    {$vo.total_view}
+                </td>
+                <td>
+                    {$vo.conver}%
+                    <progress class="uk-progress" value="{$vo.conver}" max="100"></progress>
+                </td>
+            </tr>
+            <!--{/loop}-->
+            <!--{else}-->
+            <tr>
+                <td class="uk-text-center" colspan="6">暂无商品</td>
+            </tr>
+            <!--{/if}-->
+            </tbody>
+        </table>
+    </div>
+    <div class="dux-page-foot uk-clearfix">
+        {$page}
+    </div>
+</div>

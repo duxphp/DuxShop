@@ -1,0 +1,65 @@
+<div class="uk-card uk-card-default uk-card-small dux-panel">
+    <div class="uk-card-body">
+        <form class="dux-form uk-form   uk-form-horizontal " method="post" action="{url()}" data-dux="form-bind">
+            <fieldset>
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">公众号名称</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="text" name="mp_name" placeholder="公众号名称" value="{$info.mp_name}">
+                    </div>
+                </div>
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">关注描述</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="text" name="mp_desc" placeholder="关注描述" value="{$info.mp_desc}">
+                    </div>
+                </div>
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">公众号二维码</label>
+                    <div class="uk-form-controls">
+                        <div class="uk-input-group">
+                            <input type="text" class="uk-input" name="mp_qrcode" id="image" value="{$info.mp_qrcode}"
+                                   placeholder="上传二维码图片">
+                            <span class="uk-input-group-btn">
+                                            <button class="uk-button uk-button-default" type="button"
+                                                    data-dux="form-upload"
+                                                    data-target="#image" data-type="jpg,png,bmp"><i
+                                                    class="fa fa-upload"></i></button>
+                                        </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-form-group">
+                        <label class="uk-form-label">强制关注</label>
+                        <div class="uk-form-controls uk-form-controls-text">
+                            <div class="uk-grid">
+                                <label>
+                                    <!--if{$info['mp_focus']}-->
+                                    <input class="uk-radio" name="mp_focus" value="1" checked="checked" type="radio">
+                                    <!--{else}-->
+                                    <input class="uk-radio" name="mp_focus" value="1" type="radio">
+                                    <!--{/if}-->
+                                    开启
+                                </label>
+                                <label>
+                                    <!--if{!$info['mp_focus']}-->
+                                    <input class="uk-radio" name="mp_focus" checked="checked" value="0" type="radio">
+                                    <!--{else}-->
+                                    <input class="uk-radio" name="mp_focus" value="0" type="radio">
+                                    <!--{/if}-->
+                                    关闭
+                                </label>
+                            </div>
+                            <div class="uk-form-help">开启后在用户部分操作时进行强制提醒</div>
+                        </div>
+                    </div>
+                <div class="uk-form-group uk-margin-remove-bottom">
+                    <div class="uk-form-controls">
+                        <button class="uk-button uk-button-primary" type="submit">保存</button>
+                    </div>
+                </div>
+
+            </fieldset>
+        </form>
+    </div>
+</div>

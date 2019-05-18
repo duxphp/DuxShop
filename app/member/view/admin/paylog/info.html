@@ -1,0 +1,74 @@
+<div class="uk-modal-body uk-form uk-form-horizontal">
+    <div class="uk-form-group">
+    <label class=" uk-form-label">支付金额: </label>
+    <div class="uk-form-controls uk-form-controls-text">
+            <!--if{$info.type}-->
+            <span class="uk-text-success">+{$info.money}</span>
+            <!--{else}-->
+            <span class="uk-text-danger">-{$info.money}</span>
+            <!--{/if}-->
+    </div>
+</div>
+<div class="uk-form-group">
+    <label class=" uk-form-label">交易类型: </label>
+    <div class="uk-form-controls uk-form-controls-text">
+            <!--if{$info.type}-->
+            <span class="uk-text-success">入账</span>
+            <!--{else}-->
+            <span class="uk-text-danger">支出</span>
+            <!--{/if}-->
+    </div>
+</div>
+<div class="uk-form-group">
+    <label class=" uk-form-label">交易状态: </label>
+    <div class="uk-form-controls uk-form-controls-text">
+            <!--if{!$info.status}-->
+            已关闭
+            <!--{else}-->
+            <span class="uk-text-success">已完成</span>
+            <!--{/if}-->
+    </div>
+</div>
+<div class="uk-form-group">
+    <label class=" uk-form-label">支付时间: </label>
+    <div class="uk-form-controls uk-form-controls-text">
+        <div class="uk-text-warning">{date('Y-m-d H:i:s', $info.time)}</div>
+    </div>
+</div>
+<div class="uk-form-group">
+    <label class=" uk-form-label">流水号: </label>
+    <div class="uk-form-controls uk-form-controls-text">
+        {$info.log_no}
+    </div>
+</div>
+<div class="uk-form-group">
+    <label class=" uk-form-label">支付方式: </label>
+    <div class="uk-form-controls uk-form-controls-text">
+        {$info.pay_name}
+    </div>
+</div>
+<div class="uk-form-group">
+    <label class=" uk-form-label">支付号: </label>
+    <div class="uk-form-controls uk-form-controls-text">
+        {$info.pay_no}
+    </div>
+</div>
+<div class="uk-form-group">
+    <label class=" uk-form-label">交易信息: </label>
+    <div class="uk-form-controls uk-form-controls-text">
+        {$info.title}
+    </div>
+</div>
+<div class="uk-form-group">
+    <label class=" uk-form-label">交易内容: </label>
+    <div class="uk-form-controls uk-form-controls-text">
+        {$info.remark ? $info.remark : '无'}
+    </div>
+</div>
+<div class="uk-form-group">
+    <label class=" uk-form-label">交易单号: </label>
+    <div class="uk-form-controls uk-form-controls-text">
+        {$info.has_no ? $info.has_no : '无'}
+    </div>
+</div>
+</div>

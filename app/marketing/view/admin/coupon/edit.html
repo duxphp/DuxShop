@@ -1,0 +1,168 @@
+
+    <div class="uk-card uk-card-default uk-card-small dux-panel">
+        <div class="uk-card-header">{$assignName}优惠券</div>
+        <div class="uk-card-body">
+            <form class="dux-form uk-form   uk-form-horizontal " data-dux="form-bind" method="post">
+                <fieldset>
+
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">优惠券描述</label>
+                        <div class="uk-form-controls uk-form-controls-text">{$info.name}</div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">优惠券类型</label>
+                        <div class="uk-form-controls uk-form-controls-text">{$info.typeInfo.name}优惠券</div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">优惠券分类</label>
+                        <div class="uk-form-controls uk-form-controls-text">{$info.class_name}</div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">封面图</label>
+                        <div class="uk-form-controls">
+                            <div class="uk-input-group">
+                                <img src="{$info.image}" class="uk-image-thumbnail" style="height: 100px;">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!--if{$proClass}-->
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">商品类目</label>
+                        <div class="uk-form-controls uk-form-controls-text">{$proClass.name}</div>
+                    </div>
+
+                    <!--{/if}-->
+
+                    <!--if{$proList}-->
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">可用商品</label>
+                        <div class="uk-form-controls">
+                            <table class="uk-table    uk-table-hover uk-table-middle dux-table dux-table-dialog">
+                                <thead>
+                                <tr>
+                                    <th>商品</th>
+                                    <th width="100">价格/库存</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <!--loop{$proList as $vo}-->
+                                <tr>
+                                    <td>[{$vo.mall_id}] {$vo.title}</td>
+                                    <td>{$vo.sell_price}/{$vo.sort}</td>
+                                </tr>
+                                <!--{/loop}-->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!--{/if}-->
+
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">优惠券金额</label>
+                        <div class="uk-form-controls">
+                            <div class="uk-input-group  uk-form-controls-text">
+                                满{$info.meet_money}减{$info.money}元
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">发放时间</label>
+                        <div class="uk-form-controls">
+                            <div class="uk-input-group  uk-form-controls-text">
+                                {date('Y-m-d H:i:s', $info.start_time)} ~ {date('Y-m-d H:i:s', $info.end_time)}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">有效时间</label>
+                        <div class="uk-form-controls  uk-form-controls-text">
+                            领取之日{$info.expiry_day}天内
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">结束时间</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" data-dux="form-date" name="end_time" data-type="datetime" value="{$info.end_time ? date('Y-m-d H:i:s', $info.end_time) : date('Y-m-d H:i:s', strtotime('+1 month'))}" required>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">发放类型</label>
+                        <div class="uk-form-controls uk-form-controls-text">
+                            <div class="uk-grid">
+                                <label>
+                                    <!--if{$info['receive_type']}-->
+                                    <input class="uk-radio" name="receive_type" value="1" checked="checked" type="radio">
+                                    <!--{else}-->
+                                    <input class="uk-radio" name="receive_type" value="1" type="radio">
+                                    <!--{/if}-->
+                                    手动发放
+                                </label>
+                                <label>
+                                    <!--if{!$info['receive_type']}-->
+                                    <input class="uk-radio" name="receive_type" checked="checked" value="0" type="radio">
+                                    <!--{else}-->
+                                    <input class="uk-radio" name="receive_type" value="0" type="radio">
+                                    <!--{/if}-->
+                                    自助领取
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">库存类型</label>
+                        <div class="uk-form-controls uk-form-controls-text">
+                            <div class="uk-grid">
+                                <label>
+                                    <!--if{$info['stock_type']}-->
+                                    <input class="uk-radio" name="stock_type" value="1" checked="checked" type="radio">
+                                    <!--{else}-->
+                                    <input class="uk-radio" name="stock_type" value="1" type="radio">
+                                    <!--{/if}-->
+                                    不限量
+                                </label>
+                                <label>
+                                    <!--if{!$info['stock_type']}-->
+                                    <input class="uk-radio" name="stock_type" checked="checked" value="0" type="radio">
+                                    <!--{else}-->
+                                    <input class="uk-radio" name="stock_type" value="0" type="radio">
+                                    <!--{/if}-->
+                                    限量
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">库存数量</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" name="stock" value="{$info.stock ? $info.stock : 100}" placeholder="" required>
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">有效天数</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="number" name="expiry_day" value="{$info.expiry_day}" required>
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <div class="uk-form-controls">
+                            <input type="hidden" name="coupon_id" value="{$info.coupon_id}">
+                            <button class="uk-button uk-button-primary" type="submit" disabled>保存</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>

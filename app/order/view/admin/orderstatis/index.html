@@ -1,0 +1,82 @@
+<div class="dux-page-header uk-clearfix">
+    <div class="page-title">
+        <form class="dux-form uk-form  uk-form-inline" method="get" action="{url()}">
+            <div class="uk-form-group">
+                <input type="date" name="start_time" class="uk-input"
+                       value="{$pageMaps.start_time}"
+                       placeholder="开始时间">
+            </div>
+            <div class="uk-form-group">
+                <input type="date" name="stop_time" class="uk-input"
+                       value="{$pageMaps.stop_time}"
+                       placeholder="结束时间">
+            </div>
+            <div class="uk-form-group">
+                <button type="submit" class="uk-button uk-button-primary"><i class="fa fa-search"></i></button>
+            </div>
+            <div class="uk-form-group" style="padding-top: 10px;">
+                <a href="{url('index', $dateParams[0])}">今天</a>
+                <a href="{url('index', $dateParams[1])}">近7天</a>
+                <a href="{url('index', $dateParams[2])}">近15天</a>
+                <a href="{url('index', $dateParams[3])}">近30天</a>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="uk-grid">
+    <div class="uk-width-1-2">
+        <div class="uk-card uk-card-small uk-card-default">
+            <div class="uk-card-header">订单数量统计</div>
+            <div class="uk-card-body">
+                {$orderNumJs}
+            </div>
+        </div>
+    </div>
+    <div class="uk-width-1-2">
+        <div class="uk-card uk-card-small uk-card-default">
+            <div class="uk-card-header">商品销量统计</div>
+            <div class="uk-card-body">
+                {$saleNumJs}
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<div class="uk-grid uk-margin-remove-top">
+    <div class="uk-width-1-2">
+        <div class="uk-card uk-card-small uk-card-default">
+            <div class="uk-card-header uk-flex">
+                <div>订单销售统计</div>
+                <div class="uk-flex-1 uk-text-primary uk-text-right">成交额：￥{$turnover} (下单 + 运费 - 退款)</div>
+            </div>
+            <div class="uk-card-body">
+                {$saleMoneyJs}
+            </div>
+        </div>
+    </div>
+    <div class="uk-width-1-2">
+        <div class="uk-card uk-card-small uk-card-default">
+            <div class="uk-card-header uk-flex">
+                <div class="uk-flex-1">订单转换率</div>
+                <div class=""><span class="uk-text-primary">客单价：￥{$avgPrice}</span></div>
+            </div>
+            <div class="uk-card-body">
+                {$percentJs}
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<div class="uk-card uk-card-default uk-card-small dux-panel">
+    <div class="uk-card-header uk-clearfix">
+        <div class="uk-float-left">
+            销售趋势统计
+        </div>
+        <div class="uk-float-right">
+
+        </div>
+    </div>
+    <div class="uk-card-body">
+        {$orderBarJs}
+    </div>
+</div>

@@ -1,0 +1,460 @@
+<div class="uk-grid">
+    <div class="uk-width-2-3">
+        <div class="uk-grid">
+            <div class="uk-width-1-2">
+                <div class="dux-stats-card uk-margin-remove-top green">
+                    <div class="card-body">
+                        <div class="content">
+                            <p>订单号</p>
+                            <div class="title">{$info.order_no}</div>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-gift"></i>
+                        </div>
+                        <i class="topic fa fa-gift"></i>
+                    </div>
+
+                </div>
+            </div>
+            <div class="uk-width-1-2">
+                <div class="dux-stats-card uk-margin-remove-top blue">
+                    <div class="card-body">
+                        <div class="content">
+                            <p>订单状态</p>
+                            <div class="title">{$info.status_data.name}</div>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-{$info.status_data.icon}"></i>
+                        </div>
+                        <i class="topic fa fa-{$info.status_data.icon}"></i>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="uk-card uk-card-default uk-card-body dux-small-box">
+            <div class="uk-card-title">收件信息</div>
+            <p>
+            <table class="uk-table uk-table-small  uk-table-middle ">
+                <tbody>
+                <tr>
+                    <td align="right" width="100">收货人</td>
+                    <td>{$info.receive_name}</td>
+                </tr>
+                <tr>
+                    <td align="right">收货电话</td>
+                    <td>{$info.receive_tel}</td>
+                </tr>
+                <tr>
+                    <td align="right">收货地址</td>
+                    <td>{$info.receive_province} {$info.receive_city} {$info.receive_region} {$info.receive_address}
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">邮政编码</td>
+                    <td>{$info.receive_zip ? $info.receive_zip : '无'}</td>
+                </tr>
+                </tbody>
+            </table>
+            </p>
+        </div>
+        <!--if{$info.take_id}-->
+        <br>
+        <div class="uk-card uk-card-default uk-card-body dux-small-box">
+            <div class="uk-card-title">自提点信息</div>
+            <p>
+            <table class="uk-table uk-table-small  uk-table-middle ">
+                <tbody>
+                <tr>
+                    <td align="right" width="100">提货点</td>
+                    <td>{$takeInfo.name}</td>
+                </tr>
+                <tr>
+                    <td align="right">网点电话</td>
+                    <td>{$info.receive_province} {$info.receive_city} {$info.receive_region} {$info.receive_address}
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">提货地址</td>
+                    <td>{$takeInfo.tel}</td>
+                </tr>
+                </tbody>
+            </table>
+            </p>
+        </div>
+        <!--{/if}-->
+
+        <!--if{$info.delivery_status}-->
+        <br>
+        <div class="uk-card uk-card-default uk-card-body dux-small-box">
+            <div class="uk-card-title">物流信息</div>
+            <p>
+            <table class="uk-table uk-table-small  uk-table-middle ">
+                <tbody>
+                <!--loop{$deliveryList as $vo}-->
+                <tr>
+                    <td align="right" width="100">快递名</td>
+                    <td>
+                        {$vo.delivery_name}
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">快递单号</td>
+                    <td>{$vo.delivery_no}
+                        <!--if{$vo.print_status}-->
+                        <a href="javascript:;" data-dux="dialog-ajax" data-title="确认取消打印状态？" data-url="{url('order/Delivery/printStatus')}" data-params='{"id" : "{$vo.delivery_id}", "status" : "0"}' class="uk-text-success">[已打印]</a>
+                        <!--{else}-->
+                        <a href="javascript:;" data-dux="dialog-ajax" data-title="确认更改打印状态？" data-url="{url('order/Delivery/printStatus')}" data-params='{"id" : "{$vo.delivery_id}", "status" : "1"}' class="uk-text-warning">[未打印]</a>
+                        <!--{/if}-->
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right" width="100">面单类型</td>
+                    <td>
+                        <!--if{$vo.api_status}-->
+                        电子面单 <a href="#modal-print" uk-toggle>[打印面单]</a>
+                        <!--{else}-->
+                        线下面单
+                        <!--{/if}-->
+                    </td>
+                </tr>
+                <!--{/loop}-->
+
+
+                <!--loop{$markiDeliveryList as $vo}-->
+                <tr>
+                        <td align="right" width="100">配送员</td>
+                        <td>
+                            {$vo.marki_name}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right">配送电话</td>
+                        <td>
+                            {$vo.marki_tel}
+                        </td>
+                    </tr>
+                <!--{/loop}-->
+
+                </tbody>
+            </table>
+            </p>
+        </div>
+        <!--{/if}-->
+
+        <br>
+        <div class="uk-card uk-card-default uk-card-body dux-small-box">
+            <div class="uk-card-title">订单信息</div>
+            <p>
+            <table class="uk-table uk-table-small  uk-table-middle ">
+                <tbody>
+
+                <tr>
+                    <td align="right" width="100">买家</td>
+                    <td><a href="javascript:;">{$info.show_name}</a>
+                        <div uk-dropdown data-id="{$info.order_user_id}" class="dux-user-show"
+                             data-dux="system-user"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right" width="100">订单备注</td>
+                    <td>{$info.order_remark ? $info.order_remark : '无'}</td>
+                </tr>
+                <tr>
+                    <td align="right" width="100">配送方式</td>
+                    <td>{$info.take_id ? '商品自提' : '快递发货'}</td>
+                </tr>
+                <tr>
+                    <td align="right" width="100">付款方式</td>
+                    <td>{$info.pay_type ? '线上支付' : '线下支付'}</td>
+                </tr>
+                <tr>
+                    <td align="right" width="100">付款状态</td>
+                    <td>
+                        <!--if{$info.pay_status}-->
+                        <span class="uk-text-success">已付款</span>
+                        <!--{else}-->
+                        <span class="uk-text-danger">未付款</span>
+                        <!--{/if}-->
+
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right" width="100">订单金额</td>
+                    <td><span class="uk-text-success">￥{$info.order_price}</span> (订单金额) <span class="uk-text-success">+ ￥{$info.delivery_price}</span>
+                        (运费) <span class="uk-text-warning"> - ￥{$info.pay_discount}</span> (优惠)
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right" width="100">付款金额</td>
+                    <td><span class="uk-text-danger">￥{$info.total_price}</span></td>
+                </tr>
+                <!--if{$info.pay_currency.exchange}-->
+                <!--loop{$info.pay_currency.exchange as $k => $v}-->
+                <tr>
+                    <td  align="right">{$v.name}</td>
+                    <td>{$v.money}{$v.unit} 抵 {$v.deduct}元</td>
+                </tr>
+                <!--{/loop}-->
+                <!--{/if}-->
+                <!--if{$info.pay_currency.append}-->
+                <!--loop{$info.pay_currency.append as $k => $v}-->
+                <tr>
+                    <td  align="right">{$v.name}</td>
+                    <td>{$v.money} {$v.unit}</td>
+                </tr>
+                <!--{/loop}-->
+                <!--{/if}-->
+                <!--if{bccomp($info.refund_price, 0, 2) === 1}-->
+                <tr>
+                    <td align="right">退款金额</td>
+                    <td>￥{$info.refund_price}</td>
+                </tr>
+                <!--{/if}-->
+                </tbody>
+            </table>
+            </p>
+        </div>
+
+
+        <br>
+        <div class="uk-card uk-card-default uk-card-body dux-small-box">
+            <div class="uk-card-title">付款信息</div>
+            <p>
+            <table class="uk-table uk-table-small  uk-table-middle ">
+                <tbody>
+                <!--if{$info.pay_type}-->
+                    <tr>
+                        <td  align="right" width="100">付款类型</td>
+                        <td>在线支付</td>
+                    </tr>
+                <!--{else}-->
+                    <tr>
+                        <td  align="right" width="100">付款类型</td>
+                        <td>货到付款</td>
+                    </tr>
+                <!--{/if}-->
+
+                </tbody>
+            </table>
+            </p>
+            <!--if{!empty($payData)}-->
+            <!--loop{$payData as $payInfo}-->
+                <p>
+                <table class="uk-table uk-table-small  uk-table-middle ">
+                    <tbody>
+                    <tr>
+                        <td align="right" width="100">付款方式</td>
+                        <td>{$payInfo.pay_name}</td>
+                    </tr>
+                    <tr>
+                        <td align="right">支付时间</td>
+                        <td>{date('Y-m-d H:i:s', $payInfo.time)}</td>
+                    </tr>
+                    <!--if{$payInfo.pay_no}-->
+                    <tr>
+                        <td align="right">支付号</td>
+                        <td>{$payInfo.pay_no}</td>
+                    </tr>
+                    <!--{/if}-->
+                    <tr>
+                        <td align="right">支付金额</td>
+                        <td>{$payInfo.money}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                </p>
+            <!--{/loop}-->
+            <!--{/if}-->
+        </div>
+
+        <br>
+        <div class="uk-card uk-card-default uk-card-body dux-small-box">
+            <div class="uk-card-title">商品信息</div>
+            <p>
+            <table class="uk-table uk-table-small  uk-table-middle dux-table">
+                <tbody>
+
+                <!--loop{$orderGoods as $vo}-->
+                <tr>
+                    <td width="100"><img src="{$vo.goods_image}" width="80" height="80"></td>
+                    <td>
+                        {$vo.goods_name}
+                        <div>
+                            {$vo.weight/1000}kg
+                            <!--if{!empty($vo.goods_options)}-->
+                            <!--loop{$vo.goods_options as $v}-->
+                            {$v.value}
+                            <!--{/loop}-->
+                            <!--{/if}-->
+                        </div>
+                        <div>
+                            <!--if{$vo.service_status == 1}-->
+                            <span class="uk-text-warning">退款/退货中</span>
+                            <!--{/if}-->
+                            <!--if{$vo.service_status == 2}-->
+                            <span class="uk-text-danger">已退款/退货</span>
+                            <!--{/if}-->
+                        </div>
+                    </td>
+                    <td>x {$vo.goods_qty}</td>
+                    <td align="right">
+                        <div>单价：￥{$vo.goods_price}</div>
+                        <div>优惠：￥{$vo.price_discount}</div>
+                        <div>小计：<span class="uk-text-danger">￥{$vo.price_total}</span></div>
+                    </td>
+                </tr>
+                <!--{/loop}-->
+                </tbody>
+            </table>
+            </p>
+        </div>
+
+
+    </div>
+    <div class="uk-width-1-3">
+        <ul class="dux-vertical-menu">
+            <li>
+                <!--if{$status.pay}-->
+                <a href="#modal-pay" uk-toggle class="active red">
+                    <div class="icon"><i class="fa fa-cny"></i></div>
+                    <div class="name">确认订单付款</div>
+                </a>
+                <!--{else}-->
+                <a href="javascript:;">
+                    <div class="icon"><i class="fa fa-cny"></i></div>
+                    <div class="name">确认订单付款</div>
+                </a>
+                <!--{/if}-->
+            </li>
+            <li>
+                <!--if{$status.parcel}-->
+                <a href="#modal-parcel" uk-toggle class="active blue">
+                    <div class="icon"><i class="fa fa-cubes"></i></div>
+                    <div class="name">进行订单配货</div>
+                </a>
+                <!--{else}-->
+                <a href="javascript:;">
+                    <div class="icon"><i class="fa fa-cubes"></i></div>
+                    <div class="name">进行订单配货</div>
+                </a>
+                <!--{/if}-->
+            </li>
+            <li>
+                <!--if{$status.delivery}-->
+                <a href="#modal-delivery" uk-toggle class="active blue">
+                    <div class="icon"><i class="fa fa-bus"></i></div>
+                    <div class="name">完成订单发货</div>
+                </a>
+                <!--{else}-->
+                <a href="javascript:;">
+                    <div class="icon"><i class="fa fa-bus"></i></div>
+                    <div class="name">完成订单发货</div>
+                </a>
+                <!--{/if}-->
+            </li>
+            <li>
+                <!--if{$status.complete}-->
+                <a href="#modal-complete" uk-toggle class="active green">
+                    <div class="icon"><i class="fa fa-check"></i></div>
+                    <div class="name">完成订单确认</div>
+                </a>
+                <!--{else}-->
+                <a href="javascript:;">
+                    <div class="icon"><i class="fa fa-check"></i></div>
+                    <div class="name">完成订单确认</div>
+                </a>
+                <!--{/if}-->
+            </li>
+            <li>
+                <!--if{$status.close}-->
+                <a href="#modal-close" uk-toggle class="active grey">
+                    <div class="icon"><i class="fa fa-close"></i></div>
+                    <div class="name">取消订单</div>
+                </a>
+                <!--{else}-->
+                <a href="javascript:;">
+                    <div class="icon"><i class="fa fa-close"></i></div>
+                    <div class="name">取消订单</div>
+                </a>
+                <!--{/if}-->
+            </li>
+            <li>
+                <a href="#modal-remark" uk-toggle class="active orange">
+                    <div class="icon"><i class="fa fa-calendar-o"></i></div>
+                    <div class="name">管理员备注</div>
+                </a>
+            </li>
+        </ul>
+        <br>
+        <div class="uk-card uk-card-default uk-card-body dux-small-box">
+            <div class="uk-card-title">管理员备注</div>
+            <p>
+            <table class="uk-table uk-table-small  uk-table-middle" style="margin-bottom: 0;">
+                <tbody>
+                <tr>
+                    <td style="padding: 0;">
+                        <div class="dux-timeline">
+                            <!--if{$remarkList}-->
+                            <!--loop{$remarkList as $vo}-->
+                            <dl>
+                                <dt>{date('Y-m-d H:i:s', $vo.time)}</dt>
+                                <dd>
+                                    {$vo.content}
+                                    <p>{$vo.nickname} ({$vo.username})</p>
+                                </dd>
+                            </dl>
+                            <!--{/loop}-->
+                            <!--{else}-->
+                            <dl>
+                                <dt>{date('Y-m-d H:i:s')}</dt>
+                                <dd>
+                                    暂无备注
+                                </dd>
+                            </dl>
+                            <!--{/if}-->
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            </p>
+        </div>
+        <br>
+        <div class="uk-card uk-card-default uk-card-body dux-small-box">
+            <div class="uk-card-title">订单历史</div>
+            <p>
+                <table class="uk-table uk-table-small  uk-table-middle" style="margin-bottom: 0;">
+                    <tbody>
+                    <tr>
+                        <td style="padding: 0;">
+                            <div class="dux-timeline">
+                                <!--loop{$logList as $vo}-->
+                                <dl>
+                                    <dt>{date('Y-m-d H:i:s', $vo.time)}</dt>
+                                    <dd>
+                                        {$vo.msg}
+                                        <!--if{$vo.remark}-->
+            <p>{$vo.remark}</p>
+            <!--{/if}-->
+            </dd>
+            </dl>
+            <!--{/loop}-->
+        </div>
+        </td>
+        </tr>
+        </tbody>
+        </table>
+        </p>
+    </div>
+</div>
+</div>
+
+<!--include{app/order/view/admin/order/pay}-->
+<!--include{app/order/view/admin/order/parcel}-->
+<!--include{app/order/view/admin/order/delivery}-->
+<!--include{app/order/view/admin/order/complete}-->
+<!--include{app/order/view/admin/order/close}-->
+<!--include{app/order/view/admin/order/remark}-->
+<!--include{app/order/view/admin/order/print}-->

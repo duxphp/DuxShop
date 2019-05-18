@@ -1,0 +1,46 @@
+<div class="uk-form-group">
+    <div class="uk-flex uk-margin-small-bottom">
+        <div class="uk-flex-1" style="padding-top: 5px;">轮播图片</div>
+        <div>
+            <button class="uk-button uk-button-small uk-button-success" type="button" data-js="addSwiper">增加</button>
+        </div>
+    </div>
+    <div data-editor-swiper>
+        {{# for(var i in d.data) { }}
+        <div data-item="{{i}}" class="uk-input-group uk-margin-bottom">
+            <input class="uk-input" type="text" name="data[{{i}}][image]" id="swiper-image-{{i}}" value="{{d.data[i] ? d.data[i].image : ''}}" placeholder="轮播图片">
+            <span class="uk-input-group-btn">
+                <button class="uk-button uk-button-default" type="button" data-type="image" data-dux="system-attach" data-target="#swiper-image-{{i}}"><i class="fa fa-upload"></i></button>
+            </span>
+            <input class="uk-input" type="text" name="data[{{i}}][url]" value="{{d.data[i] ? d.data[i].url : ''}}" placeholder="图片链接">
+            <span class="uk-input-group-btn"><button class="uk-button uk-button-default" data-del type="button">删除</button></span>
+        </div>
+        {{# } }}
+    </div>
+</div>
+<div class="uk-form-group">
+    <label class=" uk-form-label">导航圆点</label>
+    <div class="uk-grid">
+        <label><input class="uk-radio" type="radio" name="style[indicatorDots]" value="1" {{d.style.indicatorDots ? 'checked' : ''}}> 显示</label>
+        <label><input class="uk-radio" type="radio" name="style[indicatorDots]" value="0" {{d.style.indicatorDots ? '' : 'checked'}}> 隐藏</label>
+    </div>
+</div>
+<div class="uk-form-group">
+    <label class=" uk-form-label">自动播放</label>
+    <div class="uk-grid">
+        <label><input class="uk-radio" type="radio" name="style[autoplay]" value="1" {{d.style.autoplay ? 'checked' : ''}}> 播放</label>
+        <label><input class="uk-radio" type="radio" name="style[autoplay]" value="0" {{d.style.autoplay ? '' : 'checked'}}> 不播放</label>
+    </div>
+</div>
+<div class="uk-form-group">
+    <label class=" uk-form-label">轮播时间 (毫秒)</label>
+    <div>
+        <input class="uk-input" type="text" name="style[interval]" value="{{d.style.interval}}">
+    </div>
+</div>
+<div class="uk-form-group">
+    <label class=" uk-form-label">图片高度</label>
+    <div>
+        <input class="uk-input" type="text" name="style[height]" value="{{d.style.height}}">
+    </div>
+</div>

@@ -1,0 +1,80 @@
+ 
+    <div class="uk-card uk-card-default uk-card-small dux-panel">
+        <div class="uk-card-header">{$assignName}活动</div>
+        <div class="uk-card-body">
+            <form class="dux-form uk-form   uk-form-horizontal " data-dux="form-bind" method="post">
+                <fieldset>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">活动名称</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" name="name" value="{$info.name}" placeholder="请输入活动名称" required>
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">活动优惠券</label>
+                        <div class="uk-form-controls">
+                            <select class="uk-select" name="coupon_id" data-dux="form-select">
+                                <option value="">请选择优惠券</option>
+                                <!--loop{$couponList as $vo}-->
+                                <option  value="{$vo.coupon_id}" {$vo.coupon_id == $info.coupon_id ? 'selected' : ''}>
+                                    {$vo.name}
+                                    (满 {$vo.meet_money}减{$vo.money})
+                                </option>
+                                <!--{/loop}-->
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">开始时间</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" data-dux="form-date" name="start_time" data-type="datetime"
+                                   value="{$info.start_time ? date('Y-m-d H:i:s', $info.start_time) : date('Y-m-d H:i:s')}"
+                                   required>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">结束时间</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" data-dux="form-date" name="stop_time" data-type="datetime"
+                                   value="{$info.stop_time ? date('Y-m-d H:i:s', $info.stop_time) : date('Y-m-d H:i:s', strtotime('+1 month'))}"
+                                   required>
+                        </div>
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">活动状态</label>
+                        <div class="uk-form-controls uk-form-controls-text">
+                            <?php $info['status'] = isset($info['status']) ? $info['status'] : 1;  ?>
+                            <div class="uk-grid">
+                                <label>
+                                    <!--if{$info['status']}-->
+                                    <input class="uk-radio" name="status" value="1" checked="checked" type="radio">
+                                    <!--{else}-->
+                                    <input class="uk-radio" name="status" value="1" type="radio">
+                                    <!--{/if}-->
+                                    开启
+                                </label>
+                                <label>
+                                    <!--if{!$info['status']}-->
+                                    <input class="uk-radio" name="status" checked="checked" value="0" type="radio">
+                                    <!--{else}-->
+                                    <input class="uk-radio" name="status" value="0" type="radio">
+                                    <!--{/if}-->
+                                    关闭
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <div class="uk-form-controls">
+                            <input type="hidden" name="gift_id" value="{$info.gift_id}">
+                            <button class="uk-button uk-button-primary" type="submit" disabled>保存</button>
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+        </div>
+    </div> 

@@ -1,0 +1,18 @@
+<div class="phone-tpl-goods">
+    {{# for(var num = 1; num <= 4; num++) { }}
+    <div class="item">
+        <div style="background: #fff; margin: 5px; padding: 5px; text-align: center" class="uk-flex">
+            <div class="image">
+                <img width="100%" height="150"
+                     src="{url('controller/tools/Placeholder/index', ['width' => 80, 'height' => 80])}">
+            </div>
+            <div class="uk-flex-1" style="padding-left:10px">
+                <div class="title uk-text-left" style="margin-top: 5px; margin-bottom: 5px;">这里是商品标题</div>
+                <div class="info">
+                    <div class="price uk-text-left" style="color: red">￥100.00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{# } }}
+</div>

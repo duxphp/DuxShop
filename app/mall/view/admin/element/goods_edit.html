@@ -1,0 +1,37 @@
+<div class="uk-form-group">
+    <label class=" uk-form-label">商品属性</label>
+    <div class="uk-grid">
+        <label><input class="uk-radio" type="radio" name="style[attr]" value="0" {{d.style.attr == 0 ? 'checked' : ''}}> 全部</label>
+        <label><input class="uk-radio" type="radio" name="style[attr]" value="1" {{d.style.attr == 1 ? 'checked' : ''}}> 新品</label>
+        <label><input class="uk-radio" type="radio" name="style[attr]" value="2" {{d.style.attr == 2 ? 'checked' : ''}}> 热门</label>
+        <label><input class="uk-radio" type="radio" name="style[attr]" value="3" {{d.style.attr == 3 ? 'checked' : ''}}> 推荐</label>
+        <label><input class="uk-radio" type="radio" name="style[attr]" value="4" {{d.style.attr == 4 ? 'checked' : ''}}> 包邮</label>
+    </div>
+</div>
+<div class="uk-form-group">
+    <label class=" uk-form-label">商品排序</label>
+    <div class="uk-grid">
+        <label><input class="uk-radio" type="radio" name="style[order]" value="0" {{d.style.order == 0 ? 'checked' : ''}}> 默认</label>
+        <label><input class="uk-radio" type="radio" name="style[order]" value="1" {{d.style.order == 1 ? 'checked' : ''}}> 销量</label>
+        <label><input class="uk-radio" type="radio" name="style[order]" value="2" {{d.style.order == 2 ? 'checked' : ''}}> 价格倒序</label>
+        <label><input class="uk-radio" type="radio" name="style[order]" value="3" {{d.style.order == 3 ? 'checked' : ''}}> 价格顺序</label>
+    </div>
+</div>
+<?php $treeList = target('mall/MallClass')->loadTreeList(); ?>
+<div class="uk-form-group">
+    <label class=" uk-form-label">商品分类</label>
+    <div>
+        <select name="style[class]" class="uk-select">
+            <option value="0">全部商品</option>
+            <!--loop{$treeList as $vo}-->
+            <option value="{$vo.class_id}" {{d.style.class == {$vo.class_id} ? 'selected' : ''}}>{$vo.cname}</option>
+            <!--{/loop}-->
+        </select>
+    </div>
+</div>
+<div class="uk-form-group">
+    <label class=" uk-form-label">商品数量</label>
+    <div>
+        <input class="uk-input" type="text" name="style[limit]" value="{{d.style.limit}}">
+    </div>
+</div>

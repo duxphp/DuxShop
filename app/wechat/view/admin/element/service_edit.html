@@ -1,0 +1,54 @@
+<div class="uk-form-group">
+    <label class=" uk-form-label">客服链接</label>
+    <div>
+        <input class="uk-input" type="text" name="data[url]" value="{{d.data.url}}">
+    </div>
+</div>
+
+<div class="uk-form-group">
+    <label class=" uk-form-label">图标大小</label>
+    <div>
+        <input class="uk-input" type="text" name="style[size]" value="{{d.style.size}}">
+    </div>
+</div>
+<div class="uk-form-group">
+    <label class=" uk-form-label">客服图标</label>
+    <div>
+        <div class="uk-input-group uk-margin-bottom">
+            <input class="uk-input" type="text" name="style[icon]" id="icon"
+                value="{{d.style.icon ? d.style.icon : ''}}" placeholder="图标地址">
+            <span class="uk-input-group-btn">
+                <button class="uk-button uk-button-default" type="button" data-type="image" data-dux="system-attach"
+                    data-target="#icon"><i class="fa fa-upload"></i></button>
+            </span>
+            <span class="uk-input-group-btn">
+                <button class="uk-button uk-button-default" type="button" data-dux="form-preview" data-target="#icon"><i
+                        class="fa fa-image"></i></button>
+            </span>
+        </div>
+    </div>
+</div>
+
+<div class="uk-form-group">
+    <label class=" uk-form-label">浮动位置</label>
+    <div class="uk-grid">
+        <label><input class="uk-radio" type="radio" name="style[type]" value="left"
+                {{d.style.type == 'left' ? 'checked' : ''}}>
+            左边</label>
+        <label><input class="uk-radio" type="radio" name="style[type]" value="right"
+                {{d.style.type == 'right' ? 'checked' : ''}}>
+            右边</label>
+    </div>
+</div>
+<div class="uk-form-group">
+    <label class=" uk-form-label">左右边距</label>
+    <div>
+        <input class="uk-input" type="text" name="style[distance]" value="{{d.style.distance}}">
+    </div>
+</div>
+<div class="uk-form-group">
+    <label class=" uk-form-label">上边距</label>
+    <div>
+        <input class="uk-input" type="text" name="style[top]" value="{{d.style.top}}">
+    </div>
+</div>

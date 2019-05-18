@@ -1,0 +1,104 @@
+<div class="dux-page-header uk-clearfix">
+    <div class="page-title">
+        <a class="uk-button uk-button-primary" href="{url('index')}"> 接口列表</a>
+    </div>
+    <div class="page-action">
+        <a class="uk-button uk-button-danger" href="javascript:location.reload();"><i class="fa fa-refresh"></i></a>
+    </div>
+</div>
+<div class="uk-margin-top">
+    <div class="uk-card uk-card-default uk-card-small dux-panel">
+        <div class="uk-card-header">{$typeInfo.name}设置</div>
+        <div class="uk-card-body">
+            <form class="dux-form uk-form   uk-form-horizontal " data-dux="form-bind" method="post">
+                <fieldset>
+                    <!--loop{$ruleList as $key => $vo}-->
+                    <!--if{is_array($vo)}-->
+                    <div class="uk-form-group">
+                        <label class="uk-form-label">{$vo.name}</label>
+                        <!--if{$vo.type == 'radio'}-->
+                        <div class="uk-form-controls uk-form-controls-text">
+                            <div class="uk-grid">
+                                <label>
+                                    <input class="uk-radio" name="{$key}" value="1" {$settingInfo[$key] ? 'checked' : '' } type="radio">
+                                    开启
+                                </label>
+                                <label>
+                                    <input class="uk-radio" name="{$key}" value="0" {$settingInfo[$key] ? '' : 'checked' } type="radio">
+                                    关闭
+                                </label>
+                            </div>
+                        </div>
+                        <!--{else}-->
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" name="{$key}" value="{$settingInfo[$key]}" required>
+                        </div>
+                        <!--{/if}-->
+
+                    </div>
+                    <!--{else}-->
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">{$vo}</label>
+                        <div class="uk-form-controls">
+                            <!--if{strstr($key, '_file')}-->
+                            <div class="uk-input-group">
+                                <input class="uk-input" name="{$key}" id="{$key}" type="hidden"
+                                    value="{$settingInfo[$key]}">
+                                <input class="uk-input" type="text" value="{$settingInfo[$key] ? '已上传' : '未上传'}"
+                                    readonly>
+                                <span class="uk-input-group-btn"><button class="uk-button uk-button-default"
+                                        type="button" data-dux="form-upload" data-target="#{$key}" data-type="pem"
+                                        data-callback="upload"><i class="fa fa-upload"></i></button></span>
+                            </div>
+                            <!--{else}-->
+                            <input class="uk-input" type="text" name="{$key}" value="{$settingInfo[$key]}" required>
+                            <!--{/if}-->
+                        </div>
+                    </div>
+                    <!--{/if}-->
+
+                    <!--{/loop}-->
+                    <div class="uk-form-group">
+                        <label class=" uk-form-label">状态</label>
+                        <div class="uk-form-controls uk-form-controls-text">
+                            <div class="uk-grid">
+                                <label>
+                                    <!--if{$info['status']}-->
+                                    <input class="uk-radio" name="status" value="1" checked="checked" type="radio">
+                                    <!--{else}-->
+                                    <input class="uk-radio" name="status" value="1" type="radio">
+                                    <!--{/if}-->
+                                    开启
+                                </label>
+                                <label>
+                                    <!--if{!$info['status']}-->
+                                    <input class="uk-radio" name="status" checked="checked" value="0" type="radio">
+                                    <!--{else}-->
+                                    <input class="uk-radio" name="status" value="0" type="radio">
+                                    <!--{/if}-->
+                                    关闭
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-form-group">
+                        <div class="uk-form-controls">
+                            <input type="hidden" name="config_id" value="{$info.config_id}">
+                            <input type="hidden" name="type" value="{$type}">
+                            <button class="uk-button uk-button-primary" type="submit" disabled>保存</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    Do('base', function () {
+        window.upload = function (info) {
+            $($(this).data('target')).val(info.file);
+            $(this).parent().prev('input').val('文件已上传');
+        };
+    });
+</script>

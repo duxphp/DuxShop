@@ -1,0 +1,92 @@
+<div class="uk-card uk-card-default uk-card-small dux-panel">
+    <div class="uk-card-body">
+        <form class="dux-form uk-form   uk-form-horizontal " method="post" action="{url()}" data-dux="form-bind">
+            <fieldset>
+                <div class="uk-form-group">
+                    <label class="uk-form-label">提现方式</label>
+                    <div class="uk-form-controls uk-form-controls-text">
+                        <div class="uk-grid">
+                            <!--loop{$typeList as $key => $vo}-->
+                            <label>
+                                <input class="uk-checkbox" name="clear_type[]" {in_array((string)$key, $info.clear_type) ? 'checked' : '', true} value="{$key}" type="checkbox">
+                                {$vo}
+                            </label>
+                            <!--{/if}-->
+                        </div>
+                        <div class="uk-form-help">佣金提现可使用的提现方式</div>
+                    </div>
+                </div>
+
+                <div class="uk-form-group">
+                    <label class="uk-form-label">提现审核</label>
+                    <div class="uk-form-controls uk-form-controls-text">
+                        <div class="uk-grid">
+                            <!--loop{$typeList as $key => $vo}-->
+                            <!--if{$key == 3}-->
+                            <?php continue; ?>
+                            <!--{/if}-->
+                            <label>
+                                <input class="uk-checkbox" name="clear_audit[]" {in_array($key, $info.clear_audit) ? 'checked' : ''} value="{$key}" type="checkbox">
+                                {$vo}
+                            </label>
+                            <!--{/if}-->
+                        </div>
+                        <div class="uk-form-help">选中的提现方式将由管理进行审核</div>
+                    </div>
+                </div>
+
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">最低提现</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="number" name="clear_withdraw" placeholder="" value="{$info.clear_withdraw}" required>
+                        <div class="uk-form-help">提现最低额度，单位：元</div>
+                    </div>
+                </div>
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">提现手续费</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="number" name="clear_tax" value="{$info.clear_tax}" required>
+                        <div class="uk-form-help">提现时扣除手续费，单位：百分比</div>
+                    </div>
+                </div>
+
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">免手续费额度</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="number" name="clear_tax_free" placeholder="" value="{$info.clear_tax_free}" required>
+                        <div class="uk-form-help">每月提现免手续费额度，单位：元</div>
+                    </div>
+                </div>
+
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">提现限额</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="number" name="clear_withdraw_max" value="{$info.clear_withdraw_max}" required>
+                        <div class="uk-form-help">每月提现最高额度，单位：元</div>
+                    </div>
+                </div>
+
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">提现次数</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="number" name="clear_num" value="{$info.clear_num}" required>
+                        <div class="uk-form-help">每月提现总次数，0为不限</div>
+                    </div>
+                </div>
+
+                <div class="uk-form-group">
+                    <label class="uk-form-label">提现说明</label>
+                    <div class="uk-form-controls">
+                        <textarea data-dux="form-editor" name="clear_info" id="clear_info">{html_out($info.clear_info)}</textarea>
+                        <div class="uk-form-help">提现规则说明</div>
+                    </div>
+                </div>
+                <div class="uk-form-group">
+                    <div class="uk-form-controls">
+                        <button class="uk-button uk-button-primary" type="submit">保存</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

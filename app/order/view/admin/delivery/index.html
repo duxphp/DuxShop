@@ -1,0 +1,154 @@
+<div data-dux="table-bind" class="dux-table-layout">
+    <div class="dux-page-header uk-clearfix">
+        <div class="page-title">
+            <form class="dux-form uk-form  uk-form-inline" method="get" action="{url()}">
+                <div class="uk-form-group">
+                    <input type="text" name="keyword"  class="uk-input" value="{$pageMaps.keyword}"
+                           placeholder="搜索">
+                </div>
+                <div class="uk-form-group">
+                    <button type="submit" class="uk-button uk-button-primary"><i class="fa fa-search"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="dux-page-table">
+        <table class="uk-table uk-table-hover uk-table-middle dux-table" data-table>
+            <thead>
+            <tr>
+
+                <th width="100">
+                    <input class="uk-checkbox" type="checkbox" data-all value="">
+                </th>
+                <th>订单号</th>
+                <th>物流信息</th>
+                <th>运单信息</th>
+                <th>打印状态</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!--loop{$list as $vo}-->
+            <tr>
+                <td>
+                    <input class="uk-checkbox" type="checkbox" name="id[]" value="{$vo.delivery_id}">
+                </td>
+                <td>
+                    {$vo.order_no}
+                </td>
+                <td>
+                    {$vo.delivery_name}
+                    <p>{$vo.delivery_no}</p>
+                </td>
+                <td>
+                    <!--if{$vo.api_status}-->
+                    <span class="uk-text-success">电子运单</span>
+                    <!--{else}-->
+                    <span class="uk-text-primary">线下运单</span>
+                    <!--{/if}-->
+                    <p>{date('Y-m-d H:i:s', $vo.create_time)}</p>
+                </td>
+                <td>
+                    <!--if{$vo.print_status}-->
+                    <span class="uk-text-success">已打印</span>
+                    <!--{else}-->
+                    <span class="uk-text-danger">未打印</span>
+                    <!--{/if}-->
+                </td>
+            </tr>
+            <!--{/loop}-->
+            </tbody>
+        </table>
+    </div>
+    <div class="dux-page-foot uk-clearfix">
+        <form class="dux-form uk-form  uk-form-inline foot-batch"  data-batch action="{url('action')}">
+            <div class="uk-form-group">
+                <select class="uk-select" name="action">
+                    <option value="1">已打印</option>
+                    <option value="0">未打印</option>
+                </select>
+            </div>
+            <div class="uk-form-group">
+                <button type="submit" class="uk-button uk-button-primary">批量处理</button>
+                <button type="button" href="#modal-print" uk-toggle class="uk-button uk-button-success">运单打印</button>
+            </div>
+        </form>
+        {$page}
+    </div>
+</div>
+
+
+<div id="modal-print" uk-modal>
+    <div class="uk-modal-dialog">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <div class="uk-modal-header">
+            <h2 class="uk-modal-title">运单打印</h2>
+        </div>
+        <div class="uk-form uk-form-horizontal" id="form">
+            <div class="uk-modal-body">
+                <div class="uk-form-group">
+                    <select class="uk-select" name="print" data-dux="form-select" style="width: 100%" required>
+                        <option value="1">已打印</option>
+                        <option value="0">未打印</option>
+                    </select>
+                    <div class="uk-form-help">运单打印只支持电子运单</div>
+                </div>
+                <div class="uk-form-group">
+                    <select class="uk-select" name="type" data-dux="form-select" style="width: 100%" required>
+                        <!--loop{$printList as $vo}-->
+                        <option value="{$vo.name}">{$vo.name} ({$vo.description})</option>
+                        <!--{/loop}-->
+                    </select>
+                </div>
+
+            </div>
+            <div class="uk-modal-footer uk-text-right">
+                <input type="hidden" name="order_id" value="{$info.order_id}">
+                <button class="uk-button uk-button-default uk-modal-close" type="button">取消</button>
+                <button class="uk-button uk-button-primary" type="button" id="print">打印</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+    $('#print').on('click', function () {
+        var ids = [];
+        $('[data-table] tbody').find('input[type="checkbox"]').each(function () {
+            if($(this).prop('checked')) {
+                ids.push($(this).val());
+            }
+        });
+        app.ajax({
+            url : '{url("print")}',
+            type : 'post',
+            data : {
+                id: ids,
+                print: $('#form').find('[name="print"]').val(),
+                type: $('#form').find('[name="type"]').val(),
+            },
+            success: function (data) {
+                printCallback(data);
+            }
+        });
+    });
+
+
+    var printCallback = function (data) {
+        if (data.type == 'js') {
+            eval($data.data);
+        } else if (data.type == 'url') {
+            window.location.href = data.data;
+        } else if (data.type == 'form') {
+            var form = $(data.data);
+            $(document.body).append(form);
+            form.submit();
+        } else {
+            app.error('未知打印类型');
+            return;
+        }
+        UIkit.modal('#modal-print').hide();
+        setTimeout(function () {
+            window.location.reload();
+        }, 2000);
+    }
+</script>
