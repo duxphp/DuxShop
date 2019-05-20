@@ -93,22 +93,8 @@ class OrderService extends \app\base\service\BaseService {
             $proInfo = target('mall/MallProducts')->getMallInfo([
                 'A.products_id' => $vo['sub_id']
             ]);
-            if ($proInfo['purchase_status'] && $proInfo['purchase_limit']) {
-                if ($proInfo['purchase_status'] == 1 && $qty > $proInfo['purchase_limit']) {
-                    return $this->error('您不能超过限购数量！');
-                }
-                $orderGoodsCount = target('order/OrderGoods')
-                    ->table('order_goods(A)')
-                    ->join('order(B)', ['B.order_id', 'A.order_id'])
-                    ->where([
-                        'A.has_id' => $proInfo['mall_id'],
-                        'B.order_status' => 1,
-                        'B.order_user_id' => $vo['user_id'],
-                        'B.order_app' => 'mall'
-                    ])->sum('goods_qty');
-                if ($proInfo['purchase_status'] == 2 && $orderGoodsCount > $proInfo['purchase_limit']) {
-                    return $this->error('您不能超过限购数量！');
-                }
+            if(!target('mall/Mall')->purchase($proInfo, $vo['user_id'], $qty, 0)) {
+                return $this->error(target('mall/Mall')->getError());
             }
 
             //库存处理

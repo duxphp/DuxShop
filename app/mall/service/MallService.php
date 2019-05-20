@@ -45,24 +45,9 @@ class MallService extends \app\base\service\BaseService {
             return $this->error('赠品无法直接购买!');
         }
 
-        if ($info['purchase_status'] && $info['purchase_limit']) {
-            if ($info['purchase_status'] == 1 && $qty > $info['purchase_limit']) {
-                return $this->error('您不能超过限购数量！');
-            }
-            $orderGoodsCount = target('order/OrderGoods')
-                ->table('order_goods(A)')
-                ->join('order(B)', ['B.order_id', 'A.order_id'])
-                ->field(['A.goods_qty'])
-                ->where([
-                    'A.has_id' => $info['mall_id'],
-                    'B.order_status' => 1,
-                    'B.order_user_id' => $userId,
-                    'B.order_app' => 'mall'
-                ])->sum('goods_qty');
-            $orderGoodsCount = $orderGoodsCount ? $orderGoodsCount : 0;
-
-            if ($info['purchase_status'] == 2 && ($qty + $orderGoodsCount) > $info['purchase_limit']) {
-                return $this->error('您不能超过限购数量！');
+        if ($proInfo['purchase_status'] && $proInfo['purchase_limit']) {
+            if(!$this->purchase($proInfo, $userId, $qty, 1)) {
+                return false;
             }
         }
 
@@ -124,23 +109,8 @@ class MallService extends \app\base\service\BaseService {
 
         //限购处理
         if ($qty > $info['qty'] && $proInfo['purchase_status'] && $proInfo['purchase_limit']) {
-            if ($proInfo['purchase_status'] == 1 && $qty > $proInfo['purchase_limit']) {
-                return $this->error('您不能超过限购数量！');
-            }
-            $orderGoodsCount = target('order/OrderGoods')
-                ->table('order_goods(A)')
-                ->join('order(B)', ['B.order_id', 'A.order_id'])
-                ->field(['A.goods_qty'])
-                ->where([
-                    'A.has_id' => $proInfo['mall_id'],
-                    'B.order_status' => 1,
-                    'B.order_user_id' => $userId,
-                    'B.order_app' => 'mall'
-                ])->sum('goods_qty');
-            $orderGoodsCount = $orderGoodsCount ? $orderGoodsCount : 0;
-
-            if ($proInfo['purchase_status'] == 2 && ($qty + $orderGoodsCount) > $proInfo['purchase_limit']) {
-                return $this->error('您不能超过限购数量！');
+            if(!$this->purchase($proInfo, $userId, $qty, 1)) {
+                return false;
             }
         }
 
@@ -153,6 +123,31 @@ class MallService extends \app\base\service\BaseService {
         }
 
         return $this->success(['qty' => $qty]);
+    }
+
+
+    public function purchase($proInfo, $userId, $qty, $type = 1) {
+        if ($proInfo['purchase_status'] == 1 && $qty > $proInfo['purchase_limit']) {
+            return $this->error('您不能超过限购数量！');
+        }
+        if ($proInfo['purchase_status'] == 2) {
+            $orderGoodsCount = target('order/OrderGoods')
+                ->table('order_goods(A)')
+                ->join('order(B)', ['B.order_id', 'A.order_id'])
+                ->field(['A.goods_qty'])
+                ->where([
+                    'A.has_id' => $proInfo['mall_id'],
+                    'B.order_status' => 1,
+                    'B.order_user_id' => $userId,
+                    'B.order_app' => 'mall'
+                ])->sum('goods_qty');
+            $orderGoodsCount = $orderGoodsCount ? $orderGoodsCount : 0;
+            $orderGoodsCount = $type ?  $qty + $orderGoodsCount : $orderGoodsCount;
+            if($orderGoodsCount > $proInfo['purchase_limit']) {
+                return $this->error('您不能超过限购数量！');
+            }
+        }
+        return true;
     }
 
 }
