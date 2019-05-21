@@ -31,7 +31,7 @@ class MallService extends \app\base\service\BaseService {
             return $this->error('该商品已售完！');
         }
 
-        if ($proInfo['min_num'] < $qty) {
+        if ($qty < $proInfo['min_num']) {
             $qty = $proInfo['min_num'];
         }
 
