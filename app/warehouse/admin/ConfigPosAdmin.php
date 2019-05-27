@@ -5,12 +5,12 @@
  * @author  Mr.L <349865361@qq.com>
  */
 
-namespace app\order\admin;
+namespace app\warehouse\admin;
 
 
-class ConfigWaybillAdmin extends \app\system\admin\SystemAdmin {
+class ConfigPosAdmin extends \app\system\admin\SystemAdmin {
 
-    protected $_model = 'OrderConfigWaybill';
+    protected $_model = 'WarehouseConfigPos';
 
     /**
      * 模块信息
@@ -18,23 +18,17 @@ class ConfigWaybillAdmin extends \app\system\admin\SystemAdmin {
     protected function _infoModule() {
         return array(
             'info' => array(
-                'name' => '物流设置',
-                'description' => '设置物流接口信息',
+                'name' => '打印机设置',
+                'description' => '设置小票打印机接口信息',
             ),
         );
     }
 
-    /**
-     * 站点设置
-     */
     public function index() {
         $this->assign('list', target($this->_model)->typeList());
         $this->systemDisplay();
     }
 
-    /**
-     * 配置
-     */
     public function setting() {
         if (!isPost()) {
             $type = request('get', 'type');
@@ -47,7 +41,7 @@ class ConfigWaybillAdmin extends \app\system\admin\SystemAdmin {
             $where['type'] = $type;
             $info = target($this->_model)->getWhereInfo($where);
             $this->assign('info', $info);
-            $this->assign('settingInfo', unserialize($info['setting']));
+            $this->assign('settingInfo', json_decode($info['setting'], true));
             $this->assign('typeInfo', $typeInfo);
             $this->assign('ruleList', $typeInfo['configRule']);
             $this->assign('type', $type);
@@ -57,9 +51,9 @@ class ConfigWaybillAdmin extends \app\system\admin\SystemAdmin {
             $data = array();
             $data['status'] = $post['status'];
             $data['type'] = $post['type'];
-            $data['setting'] = serialize($post);
-            if ($post['config_id']) {
-                $data['config_id'] = $post['config_id'];
+            $data['setting'] = $post;
+            if ($post['pos_id']) {
+                $data['pos_id'] = $post['pos_id'];
                 $type = 'edit';
             } else {
                 $type = 'add';

@@ -51,8 +51,12 @@ class ConfigAdmin extends \app\system\admin\SystemAdmin {
                 }
                 return true;
             });
+            $posList = target('warehouse/WarehousePosDriver')->loadList([], 0, 'driver_id asc');
+            $posTplList = target('warehouse/WarehousePosTpl')->loadList([], 0, 'tpl_id asc');
             $this->assign('info', $info);
             $this->assign('waybillList', $waybillList);
+            $this->assign('posList', $posList);
+            $this->assign('posTplList', $posTplList);
             $this->assign('hookMenu', $this->menu());
             $this->systemDisplay();
         }else{

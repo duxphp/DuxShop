@@ -152,7 +152,8 @@ class OrderAdmin extends \app\system\admin\SystemExtendAdmin {
             'name' => $post['name'],
             'no' => $post['no'],
             'remark' => $post['remark'],
-            'marki_id' => $post['marki_id'] 
+            'marki_id' => $post['marki_id'],
+            'pos_print' => $post['pos_print']
         ])) {
             $model->rollBack();
             $this->error(target('order/Order', 'service')->getError());

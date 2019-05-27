@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.7.25)
 # Database: duxshop
-# Generation Time: 2019-05-18 08:24:33 +0000
+# Generation Time: 2019-05-27 02:06:03 +0000
 # ************************************************************
 
 
@@ -770,7 +770,9 @@ VALUES
 	(54,'cancel_hour','30',''),
 	(55,'pay_type','0',''),
 	(56,'pay_tip','请您在收到货物时在订单详情进行支付',''),
-	(57,'pay_agreement','&lt;p&gt;您确认，在您申请使用淘宝（中国）有限公司（以下简称“淘宝”）和支付宝（中国）网络技术有限公司（以下简称“支付宝”）联合提供给您的货到付款服务（以下简称“本服务”）前，您已经充分阅读本协议内容，一旦您在淘宝网站平台签约页面点击“同意并申请服务”按钮，即表示您对本协议内容完全理解并同意接受本协议所有条款的约定，本协议即对您和支付宝、淘宝产生法律约束力。&lt;/p&gt;\r\n&lt;p&gt;您签订本协议的前提是您已经完全理解并接受您与支付宝之间签订的《支付宝服务协议》及相应的规则中对本服务的约定。&lt;/p&gt;\r\n&lt;p&gt;您同意并接受，您在使用本服务时，您只能在淘宝物流平台选择物流公司为您提供货物运送服务。但相关物流公司公示的物流价格或单独向您明示的物流价格是该物流公司自身的行为，对此需要您与该物流公司单独协商确定最终的物流价格，支付宝和淘宝不对此提供任何形式的担保和承诺。&lt;/p&gt;\r\n&lt;p&gt;基于本服务本身的特殊性，您理解并同意，在您向您的交易对方发送交易货物后，您能否收到来自交易对方的付款，取决于您委托的物流公司能够送达收货地址、您交付运送的货物是否符合您与交易对方的约定、您的交易对方是否同意签收付款，支付宝和淘宝对您使用本服务时能否收到交易货款不提供任何形式的担保和承诺。如因上述因素导致您未收到或未及时收到交易货款，您应当自行承担相应后果（包括但不限于运费的承担）。&lt;/p&gt;\r\n&lt;p&gt;在您使用本服务的过程中，您收取交易货款的唯一依据是您的交易对方向物流公司支付了交易货款。支付宝将在物流公司向“支付宝”软件系统中声称，其已收到您的交易对方支付的交易货款之日起的第三日向您支付交易货款。您理解并同意，物流公司自收到货款至在“支付宝”软件系统中声称已经收到交易货款是需要时间的，且该时间完全取决于物流公司的内部运作方式。因此，您不得以买家已实际付款、物流公司应该可以完成声称行为等理由向支付宝或淘宝主张要求支付交易货款。&lt;/p&gt;\r\n&lt;p&gt;您同意并接受，使用本服务您应当向支付宝支付服务费用，服务费用按照卖家最后成交，进行收取每笔交易款项(包含运费)的1%收取，且按照四舍五入原则按单位“元”取整数，交易不成功，不收取服务费用。另，商城用户订购该服务不收取服务费用。&lt;/p&gt;\r\n&lt;p&gt;您使用本服务，可以选择由您向物流公司支付货到付款服务费用，并且对商品做包邮设置时(如买家承担运费，满就包邮等)需要由您承担货到付款服务费用。服务费用的具体收取标准按照淘宝页面实时公布的信息为准，交易不&lt;/p&gt;\r\n&lt;p&gt;成功，不收取服务费用。&lt;/p&gt;\r\n&lt;p&gt;您同意并接&lt;/p&gt;\r\n&lt;p&gt;受，卖家承担服务费时，如果买家签收后发现货物质量等问题，发起退货维权，维权成立则卖家需按商品价格退款给买家。&lt;/p&gt;\r\n&lt;p&gt;因快递代收款需按单位“元”取整，由您向物流公司支付货到付款服务费时，快递代收款取整将舍掉零头。你同意并接受，该舍掉的零头将作为货到付款优惠从您的交易货款中扣除。&lt;/p&gt;','');
+	(57,'pay_agreement','&lt;p&gt;您确认，在您申请使用淘宝（中国）有限公司（以下简称“淘宝”）和支付宝（中国）网络技术有限公司（以下简称“支付宝”）联合提供给您的货到付款服务（以下简称“本服务”）前，您已经充分阅读本协议内容，一旦您在淘宝网站平台签约页面点击“同意并申请服务”按钮，即表示您对本协议内容完全理解并同意接受本协议所有条款的约定，本协议即对您和支付宝、淘宝产生法律约束力。&lt;/p&gt;\r\n&lt;p&gt;您签订本协议的前提是您已经完全理解并接受您与支付宝之间签订的《支付宝服务协议》及相应的规则中对本服务的约定。&lt;/p&gt;\r\n&lt;p&gt;您同意并接受，您在使用本服务时，您只能在淘宝物流平台选择物流公司为您提供货物运送服务。但相关物流公司公示的物流价格或单独向您明示的物流价格是该物流公司自身的行为，对此需要您与该物流公司单独协商确定最终的物流价格，支付宝和淘宝不对此提供任何形式的担保和承诺。&lt;/p&gt;\r\n&lt;p&gt;基于本服务本身的特殊性，您理解并同意，在您向您的交易对方发送交易货物后，您能否收到来自交易对方的付款，取决于您委托的物流公司能够送达收货地址、您交付运送的货物是否符合您与交易对方的约定、您的交易对方是否同意签收付款，支付宝和淘宝对您使用本服务时能否收到交易货款不提供任何形式的担保和承诺。如因上述因素导致您未收到或未及时收到交易货款，您应当自行承担相应后果（包括但不限于运费的承担）。&lt;/p&gt;\r\n&lt;p&gt;在您使用本服务的过程中，您收取交易货款的唯一依据是您的交易对方向物流公司支付了交易货款。支付宝将在物流公司向“支付宝”软件系统中声称，其已收到您的交易对方支付的交易货款之日起的第三日向您支付交易货款。您理解并同意，物流公司自收到货款至在“支付宝”软件系统中声称已经收到交易货款是需要时间的，且该时间完全取决于物流公司的内部运作方式。因此，您不得以买家已实际付款、物流公司应该可以完成声称行为等理由向支付宝或淘宝主张要求支付交易货款。&lt;/p&gt;\r\n&lt;p&gt;您同意并接受，使用本服务您应当向支付宝支付服务费用，服务费用按照卖家最后成交，进行收取每笔交易款项(包含运费)的1%收取，且按照四舍五入原则按单位“元”取整数，交易不成功，不收取服务费用。另，商城用户订购该服务不收取服务费用。&lt;/p&gt;\r\n&lt;p&gt;您使用本服务，可以选择由您向物流公司支付货到付款服务费用，并且对商品做包邮设置时(如买家承担运费，满就包邮等)需要由您承担货到付款服务费用。服务费用的具体收取标准按照淘宝页面实时公布的信息为准，交易不&lt;/p&gt;\r\n&lt;p&gt;成功，不收取服务费用。&lt;/p&gt;\r\n&lt;p&gt;您同意并接&lt;/p&gt;\r\n&lt;p&gt;受，卖家承担服务费时，如果买家签收后发现货物质量等问题，发起退货维权，维权成立则卖家需按商品价格退款给买家。&lt;/p&gt;\r\n&lt;p&gt;因快递代收款需按单位“元”取整，由您向物流公司支付货到付款服务费时，快递代收款取整将舍掉零头。你同意并接受，该舍掉的零头将作为货到付款优惠从您的交易货款中扣除。&lt;/p&gt;',''),
+	(58,'pos_type','1',''),
+	(59,'pos_tpl','1','');
 
 /*!40000 ALTER TABLE `dux_order_config` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -1814,6 +1816,15 @@ CREATE TABLE `dux_statis_views` (
   KEY `species` (`species`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+LOCK TABLES `dux_statis_views` WRITE;
+/*!40000 ALTER TABLE `dux_statis_views` DISABLE KEYS */;
+
+INSERT INTO `dux_statis_views` (`view_id`, `user_id`, `date`, `has_id`, `species`, `type`, `num`)
+VALUES
+	(1,0,20190527,0,'site','',40);
+
+/*!40000 ALTER TABLE `dux_statis_views` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table dux_system_debug
@@ -1875,7 +1886,7 @@ LOCK TABLES `dux_system_role` WRITE;
 
 INSERT INTO `dux_system_role` (`role_id`, `name`, `description`, `purview`)
 VALUES
-	(1,'管理员','系统后台管理员','a:289:{i:0;s:21:\"article.Content.index\";i:1;s:19:\"article.Content.add\";i:2;s:20:\"article.Content.edit\";i:3;s:22:\"article.Content.status\";i:4;s:19:\"article.Content.del\";i:5;s:19:\"article.Class.index\";i:6;s:17:\"article.Class.add\";i:7;s:18:\"article.Class.edit\";i:8;s:20:\"article.Class.status\";i:9;s:17:\"article.Class.del\";i:10;s:18:\"mall.Content.index\";i:11;s:16:\"mall.Content.add\";i:12;s:17:\"mall.Content.edit\";i:13;s:19:\"mall.Content.status\";i:14;s:16:\"mall.Content.del\";i:15;s:16:\"mall.Class.index\";i:16;s:14:\"mall.Class.add\";i:17;s:15:\"mall.Class.edit\";i:18;s:17:\"mall.Class.status\";i:19;s:14:\"mall.Class.del\";i:20;s:16:\"mall.Order.index\";i:21;s:15:\"mall.Order.info\";i:22;s:18:\"mall.Comment.index\";i:23;s:19:\"mall.Comment.status\";i:24;s:22:\"mall.SellRanking.index\";i:25;s:19:\"mall.SellList.index\";i:26;s:22:\"marketing.Coupon.index\";i:27;s:20:\"marketing.Coupon.add\";i:28;s:21:\"marketing.Coupon.edit\";i:29;s:23:\"marketing.Coupon.status\";i:30;s:20:\"marketing.Coupon.del\";i:31;s:27:\"marketing.CouponClass.index\";i:32;s:25:\"marketing.CouponClass.add\";i:33;s:26:\"marketing.CouponClass.edit\";i:34;s:28:\"marketing.CouponClass.status\";i:35;s:25:\"marketing.CouponClass.del\";i:36;s:25:\"marketing.CouponLog.index\";i:37;s:23:\"marketing.CouponLog.del\";i:38;s:26:\"marketing.CouponGift.index\";i:39;s:24:\"marketing.CouponGift.add\";i:40;s:25:\"marketing.CouponGift.edit\";i:41;s:27:\"marketing.CouponGift.status\";i:42;s:24:\"marketing.CouponGift.del\";i:43;s:25:\"marketing.CouponRec.index\";i:44;s:23:\"marketing.CouponRec.add\";i:45;s:24:\"marketing.CouponRec.edit\";i:46;s:26:\"marketing.CouponRec.status\";i:47;s:23:\"marketing.CouponRec.del\";i:48;s:23:\"member.MemberUser.index\";i:49;s:21:\"member.MemberUser.add\";i:50;s:22:\"member.MemberUser.edit\";i:51;s:24:\"member.MemberUser.status\";i:52;s:21:\"member.MemberUser.del\";i:53;s:24:\"member.MemberGrade.index\";i:54;s:22:\"member.MemberGrade.add\";i:55;s:23:\"member.MemberGrade.edit\";i:56;s:25:\"member.MemberGrade.status\";i:57;s:22:\"member.MemberGrade.del\";i:58;s:23:\"member.MemberReal.index\";i:59;s:23:\"member.MemberReal.check\";i:60;s:23:\"member.MemberRole.index\";i:61;s:21:\"member.MemberRole.add\";i:62;s:22:\"member.MemberRole.edit\";i:63;s:21:\"member.MemberRole.del\";i:64;s:23:\"member.PayAccount.index\";i:65;s:19:\"member.PayLog.index\";i:66;s:20:\"member.PayCash.index\";i:67;s:20:\"member.PayCard.index\";i:68;s:18:\"member.PayCard.add\";i:69;s:19:\"member.PayCard.edit\";i:70;s:18:\"member.PayCard.del\";i:71;s:20:\"member.PayConf.index\";i:72;s:22:\"member.PayConf.setting\";i:73;s:20:\"member.PayBank.index\";i:74;s:18:\"member.PayBank.add\";i:75;s:19:\"member.PayBank.edit\";i:76;s:18:\"member.PayBank.del\";i:77;s:26:\"member.PointsAccount.index\";i:78;s:22:\"member.PointsLog.index\";i:79;s:25:\"member.MemberConfig.index\";i:80;s:23:\"member.MemberConfig.reg\";i:81;s:25:\"member.MemberVerify.index\";i:82;s:26:\"member.MemberVerify.status\";i:83;s:23:\"member.MemberVerify.del\";i:84;s:26:\"member.MemberRanking.index\";i:85;s:24:\"member.MemberTrend.index\";i:86;s:18:\"order.Config.index\";i:87;s:25:\"order.ConfigExpress.index\";i:88;s:25:\"order.ConfigPrinter.index\";i:89;s:23:\"order.ConfigPrinter.add\";i:90;s:24:\"order.ConfigPrinter.edit\";i:91;s:26:\"order.ConfigPrinter.status\";i:92;s:23:\"order.ConfigPrinter.del\";i:93;s:26:\"order.ConfigDelivery.index\";i:94;s:25:\"order.ConfigWaybill.index\";i:95;s:27:\"order.ConfigWaybill.setting\";i:96;s:18:\"order.Parcel.index\";i:97;s:18:\"order.Parcel.print\";i:98;s:19:\"order.Parcel.status\";i:99;s:16:\"order.Parcel.del\";i:100;s:20:\"order.Delivery.index\";i:101;s:20:\"order.Delivery.print\";i:102;s:21:\"order.Delivery.status\";i:103;s:18:\"order.Delivery.del\";i:104;s:19:\"order.Receipt.index\";i:105;s:20:\"order.Receipt.status\";i:106;s:17:\"order.Receipt.del\";i:107;s:19:\"order.Comment.index\";i:108;s:18:\"order.Refund.index\";i:109;s:17:\"order.Refund.info\";i:110;s:16:\"order.Take.index\";i:111;s:14:\"order.Take.add\";i:112;s:15:\"order.Take.edit\";i:113;s:17:\"order.Take.status\";i:114;s:14:\"order.Take.del\";i:115;s:19:\"order.Invoice.index\";i:116;s:20:\"order.Invoice.status\";i:117;s:17:\"order.Invoice.del\";i:118;s:24:\"order.InvoiceClass.index\";i:119;s:22:\"order.InvoiceClass.add\";i:120;s:23:\"order.InvoiceClass.edit\";i:121;s:25:\"order.InvoiceClass.status\";i:122;s:22:\"order.InvoiceClass.del\";i:123;s:23:\"order.OrderStatis.index\";i:124;s:19:\"school.School.index\";i:125;s:17:\"school.School.add\";i:126;s:18:\"school.School.edit\";i:127;s:20:\"school.School.status\";i:128;s:17:\"school.School.del\";i:129;s:18:\"school.Floor.index\";i:130;s:16:\"school.Floor.add\";i:131;s:17:\"school.Floor.edit\";i:132;s:19:\"school.Floor.status\";i:133;s:16:\"school.Floor.del\";i:134;s:21:\"school.Director.index\";i:135;s:19:\"school.Director.add\";i:136;s:20:\"school.Director.edit\";i:137;s:22:\"school.Director.status\";i:138;s:19:\"school.Director.del\";i:139;s:20:\"school.Partner.index\";i:140;s:18:\"school.Partner.add\";i:141;s:19:\"school.Partner.edit\";i:142;s:21:\"school.Partner.status\";i:143;s:18:\"school.Partner.del\";i:144;s:17:\"school.User.index\";i:145;s:15:\"school.User.add\";i:146;s:16:\"school.User.edit\";i:147;s:18:\"school.User.status\";i:148;s:15:\"school.User.del\";i:149;s:18:\"school.Order.index\";i:150;s:16:\"school.Order.add\";i:151;s:17:\"school.Order.edit\";i:152;s:19:\"school.Order.status\";i:153;s:16:\"school.Order.del\";i:154;s:23:\"school.MarkiOrder.index\";i:155;s:21:\"school.MarkiOrder.add\";i:156;s:22:\"school.MarkiOrder.edit\";i:157;s:24:\"school.MarkiOrder.status\";i:158;s:21:\"school.MarkiOrder.del\";i:159;s:20:\"school.Account.index\";i:160;s:23:\"school.AccountLog.index\";i:161;s:24:\"school.AccountCash.index\";i:162;s:19:\"school.Config.index\";i:163;s:16:\"shop.Brand.index\";i:164;s:14:\"shop.Brand.add\";i:165;s:15:\"shop.Brand.edit\";i:166;s:17:\"shop.Brand.status\";i:167;s:14:\"shop.Brand.del\";i:168;s:21:\"shop.BrandApply.index\";i:169;s:19:\"shop.BrandApply.add\";i:170;s:20:\"shop.BrandApply.edit\";i:171;s:22:\"shop.BrandApply.status\";i:172;s:19:\"shop.BrandApply.del\";i:173;s:24:\"shop.BrandContract.index\";i:174;s:22:\"shop.BrandContract.add\";i:175;s:23:\"shop.BrandContract.edit\";i:176;s:25:\"shop.BrandContract.status\";i:177;s:22:\"shop.BrandContract.del\";i:178;s:15:\"shop.Spec.index\";i:179;s:13:\"shop.Spec.add\";i:180;s:14:\"shop.Spec.edit\";i:181;s:16:\"shop.Spec.status\";i:182;s:13:\"shop.Spec.del\";i:183;s:20:\"shop.SpecGroup.index\";i:184;s:18:\"shop.SpecGroup.add\";i:185;s:19:\"shop.SpecGroup.edit\";i:186;s:21:\"shop.SpecGroup.status\";i:187;s:18:\"shop.SpecGroup.del\";i:188;s:17:\"shop.Config.index\";i:189;s:17:\"site.Config.index\";i:190;s:15:\"site.Config.tpl\";i:191;s:17:\"site.Search.index\";i:192;s:15:\"site.Search.add\";i:193;s:16:\"site.Search.edit\";i:194;s:15:\"site.Search.del\";i:195;s:19:\"site.Fragment.index\";i:196;s:17:\"site.Fragment.add\";i:197;s:18:\"site.Fragment.edit\";i:198;s:20:\"site.Fragment.status\";i:199;s:17:\"site.Fragment.del\";i:200;s:14:\"site.Diy.index\";i:201;s:12:\"site.Diy.add\";i:202;s:13:\"site.Diy.edit\";i:203;s:15:\"site.Diy.status\";i:204;s:12:\"site.Diy.del\";i:205;s:18:\"site.DiyData.index\";i:206;s:16:\"site.DiyData.add\";i:207;s:17:\"site.DiyData.edit\";i:208;s:19:\"site.DiyData.status\";i:209;s:16:\"site.DiyData.del\";i:210;s:14:\"site.Tpl.index\";i:211;s:12:\"site.Tpl.add\";i:212;s:13:\"site.Tpl.edit\";i:213;s:12:\"site.Tpl.del\";i:214;s:22:\"statis.SiteViews.index\";i:215;s:18:\"system.Index.index\";i:216;s:21:\"system.Index.userData\";i:217;s:19:\"system.Notice.index\";i:218;s:17:\"system.Notice.del\";i:219;s:19:\"system.Update.index\";i:220;s:19:\"system.Config.index\";i:221;s:18:\"system.Config.user\";i:222;s:18:\"system.Config.info\";i:223;s:20:\"system.Config.upload\";i:224;s:25:\"system.ConfigManage.index\";i:225;s:23:\"system.ConfigManage.add\";i:226;s:24:\"system.ConfigManage.edit\";i:227;s:26:\"system.ConfigManage.status\";i:228;s:23:\"system.ConfigManage.del\";i:229;s:22:\"system.ConfigApi.index\";i:230;s:20:\"system.ConfigApi.add\";i:231;s:21:\"system.ConfigApi.edit\";i:232;s:23:\"system.ConfigApi.status\";i:233;s:20:\"system.ConfigApi.del\";i:234;s:25:\"system.ConfigUpload.index\";i:235;s:24:\"system.ConfigUpload.edit\";i:236;s:17:\"system.User.index\";i:237;s:15:\"system.User.add\";i:238;s:16:\"system.User.edit\";i:239;s:18:\"system.User.status\";i:240;s:15:\"system.User.del\";i:241;s:17:\"system.Role.index\";i:242;s:15:\"system.Role.add\";i:243;s:16:\"system.Role.edit\";i:244;s:15:\"system.Role.del\";i:245;s:18:\"system.Debug.index\";i:246;s:16:\"system.Debug.del\";i:247;s:22:\"system.SystemLog.index\";i:248;s:20:\"system.SystemLog.del\";i:249;s:24:\"system.Application.index\";i:250;s:22:\"system.Application.add\";i:251;s:23:\"system.Application.edit\";i:252;s:22:\"system.Application.del\";i:253;s:20:\"tools.SendData.index\";i:254;s:16:\"tools.Send.index\";i:255;s:14:\"tools.Send.add\";i:256;s:15:\"tools.Send.info\";i:257;s:20:\"tools.SendConf.index\";i:258;s:22:\"tools.SendConf.setting\";i:259;s:19:\"tools.SendTpl.index\";i:260;s:17:\"tools.SendTpl.add\";i:261;s:18:\"tools.SendTpl.edit\";i:262;s:17:\"tools.SendTpl.del\";i:263;s:23:\"tools.SendDefault.index\";i:264;s:17:\"tools.Label.index\";i:265;s:17:\"tools.Queue.index\";i:266;s:21:\"tools.QueueConf.index\";i:267;s:15:\"tools.Api.index\";i:268;s:14:\"tools.Api.make\";i:269;s:21:\"warehouse.Marki.index\";i:270;s:19:\"warehouse.Marki.add\";i:271;s:20:\"warehouse.Marki.edit\";i:272;s:19:\"warehouse.Marki.del\";i:273;s:29:\"warehouse.MarkiDelivery.index\";i:274;s:28:\"warehouse.MarkiWarning.index\";i:275;s:31:\"warehouse.MarkiWarningLog.index\";i:276;s:24:\"warehouse.Supplier.index\";i:277;s:22:\"warehouse.Supplier.add\";i:278;s:23:\"warehouse.Supplier.edit\";i:279;s:22:\"warehouse.Supplier.del\";i:280;s:29:\"warehouse.SupplierOrder.index\";i:281;s:28:\"warehouse.MarkiAccount.index\";i:282;s:31:\"warehouse.MarkiAccountLog.index\";i:283;s:32:\"warehouse.MarkiAccountCash.index\";i:284;s:22:\"warehouse.Config.index\";i:285;s:25:\"wechat.WechatConfig.index\";i:286;s:23:\"wechat.MenuConfig.index\";i:287;s:26:\"wechat.MiniappConfig.index\";i:288;s:22:\"wechat.AppConfig.index\";}');
+	(1,'管理员','系统后台管理员','a:260:{i:0;s:21:\"article.Content.index\";i:1;s:19:\"article.Content.add\";i:2;s:20:\"article.Content.edit\";i:3;s:22:\"article.Content.status\";i:4;s:19:\"article.Content.del\";i:5;s:19:\"article.Class.index\";i:6;s:17:\"article.Class.add\";i:7;s:18:\"article.Class.edit\";i:8;s:20:\"article.Class.status\";i:9;s:17:\"article.Class.del\";i:10;s:18:\"mall.Content.index\";i:11;s:16:\"mall.Content.add\";i:12;s:17:\"mall.Content.edit\";i:13;s:19:\"mall.Content.status\";i:14;s:16:\"mall.Content.del\";i:15;s:16:\"mall.Class.index\";i:16;s:14:\"mall.Class.add\";i:17;s:15:\"mall.Class.edit\";i:18;s:17:\"mall.Class.status\";i:19;s:14:\"mall.Class.del\";i:20;s:16:\"mall.Order.index\";i:21;s:15:\"mall.Order.info\";i:22;s:18:\"mall.Comment.index\";i:23;s:19:\"mall.Comment.status\";i:24;s:22:\"mall.SellRanking.index\";i:25;s:19:\"mall.SellList.index\";i:26;s:22:\"marketing.Coupon.index\";i:27;s:20:\"marketing.Coupon.add\";i:28;s:21:\"marketing.Coupon.edit\";i:29;s:23:\"marketing.Coupon.status\";i:30;s:20:\"marketing.Coupon.del\";i:31;s:27:\"marketing.CouponClass.index\";i:32;s:25:\"marketing.CouponClass.add\";i:33;s:26:\"marketing.CouponClass.edit\";i:34;s:28:\"marketing.CouponClass.status\";i:35;s:25:\"marketing.CouponClass.del\";i:36;s:25:\"marketing.CouponLog.index\";i:37;s:23:\"marketing.CouponLog.del\";i:38;s:26:\"marketing.CouponGift.index\";i:39;s:24:\"marketing.CouponGift.add\";i:40;s:25:\"marketing.CouponGift.edit\";i:41;s:27:\"marketing.CouponGift.status\";i:42;s:24:\"marketing.CouponGift.del\";i:43;s:25:\"marketing.CouponRec.index\";i:44;s:23:\"marketing.CouponRec.add\";i:45;s:24:\"marketing.CouponRec.edit\";i:46;s:26:\"marketing.CouponRec.status\";i:47;s:23:\"marketing.CouponRec.del\";i:48;s:23:\"member.MemberUser.index\";i:49;s:21:\"member.MemberUser.add\";i:50;s:22:\"member.MemberUser.edit\";i:51;s:24:\"member.MemberUser.status\";i:52;s:21:\"member.MemberUser.del\";i:53;s:24:\"member.MemberGrade.index\";i:54;s:22:\"member.MemberGrade.add\";i:55;s:23:\"member.MemberGrade.edit\";i:56;s:25:\"member.MemberGrade.status\";i:57;s:22:\"member.MemberGrade.del\";i:58;s:23:\"member.MemberReal.index\";i:59;s:23:\"member.MemberReal.check\";i:60;s:23:\"member.MemberRole.index\";i:61;s:21:\"member.MemberRole.add\";i:62;s:22:\"member.MemberRole.edit\";i:63;s:21:\"member.MemberRole.del\";i:64;s:23:\"member.PayAccount.index\";i:65;s:19:\"member.PayLog.index\";i:66;s:20:\"member.PayCash.index\";i:67;s:20:\"member.PayCard.index\";i:68;s:18:\"member.PayCard.add\";i:69;s:19:\"member.PayCard.edit\";i:70;s:18:\"member.PayCard.del\";i:71;s:20:\"member.PayConf.index\";i:72;s:22:\"member.PayConf.setting\";i:73;s:20:\"member.PayBank.index\";i:74;s:18:\"member.PayBank.add\";i:75;s:19:\"member.PayBank.edit\";i:76;s:18:\"member.PayBank.del\";i:77;s:26:\"member.PointsAccount.index\";i:78;s:22:\"member.PointsLog.index\";i:79;s:25:\"member.MemberConfig.index\";i:80;s:23:\"member.MemberConfig.reg\";i:81;s:25:\"member.MemberVerify.index\";i:82;s:26:\"member.MemberVerify.status\";i:83;s:23:\"member.MemberVerify.del\";i:84;s:26:\"member.MemberRanking.index\";i:85;s:24:\"member.MemberTrend.index\";i:86;s:18:\"order.Config.index\";i:87;s:25:\"order.ConfigExpress.index\";i:88;s:25:\"order.ConfigPrinter.index\";i:89;s:23:\"order.ConfigPrinter.add\";i:90;s:24:\"order.ConfigPrinter.edit\";i:91;s:26:\"order.ConfigPrinter.status\";i:92;s:23:\"order.ConfigPrinter.del\";i:93;s:26:\"order.ConfigDelivery.index\";i:94;s:25:\"order.ConfigWaybill.index\";i:95;s:27:\"order.ConfigWaybill.setting\";i:96;s:18:\"order.Parcel.index\";i:97;s:18:\"order.Parcel.print\";i:98;s:19:\"order.Parcel.status\";i:99;s:16:\"order.Parcel.del\";i:100;s:20:\"order.Delivery.index\";i:101;s:20:\"order.Delivery.print\";i:102;s:21:\"order.Delivery.status\";i:103;s:18:\"order.Delivery.del\";i:104;s:19:\"order.Receipt.index\";i:105;s:20:\"order.Receipt.status\";i:106;s:17:\"order.Receipt.del\";i:107;s:19:\"order.Comment.index\";i:108;s:18:\"order.Refund.index\";i:109;s:17:\"order.Refund.info\";i:110;s:16:\"order.Take.index\";i:111;s:14:\"order.Take.add\";i:112;s:15:\"order.Take.edit\";i:113;s:17:\"order.Take.status\";i:114;s:14:\"order.Take.del\";i:115;s:19:\"order.Invoice.index\";i:116;s:20:\"order.Invoice.status\";i:117;s:17:\"order.Invoice.del\";i:118;s:24:\"order.InvoiceClass.index\";i:119;s:22:\"order.InvoiceClass.add\";i:120;s:23:\"order.InvoiceClass.edit\";i:121;s:25:\"order.InvoiceClass.status\";i:122;s:22:\"order.InvoiceClass.del\";i:123;s:23:\"order.OrderStatis.index\";i:124;s:16:\"shop.Brand.index\";i:125;s:14:\"shop.Brand.add\";i:126;s:15:\"shop.Brand.edit\";i:127;s:17:\"shop.Brand.status\";i:128;s:14:\"shop.Brand.del\";i:129;s:21:\"shop.BrandApply.index\";i:130;s:19:\"shop.BrandApply.add\";i:131;s:20:\"shop.BrandApply.edit\";i:132;s:22:\"shop.BrandApply.status\";i:133;s:19:\"shop.BrandApply.del\";i:134;s:24:\"shop.BrandContract.index\";i:135;s:22:\"shop.BrandContract.add\";i:136;s:23:\"shop.BrandContract.edit\";i:137;s:25:\"shop.BrandContract.status\";i:138;s:22:\"shop.BrandContract.del\";i:139;s:15:\"shop.Spec.index\";i:140;s:13:\"shop.Spec.add\";i:141;s:14:\"shop.Spec.edit\";i:142;s:16:\"shop.Spec.status\";i:143;s:13:\"shop.Spec.del\";i:144;s:20:\"shop.SpecGroup.index\";i:145;s:18:\"shop.SpecGroup.add\";i:146;s:19:\"shop.SpecGroup.edit\";i:147;s:21:\"shop.SpecGroup.status\";i:148;s:18:\"shop.SpecGroup.del\";i:149;s:17:\"shop.Config.index\";i:150;s:17:\"site.Config.index\";i:151;s:15:\"site.Config.tpl\";i:152;s:17:\"site.Search.index\";i:153;s:15:\"site.Search.add\";i:154;s:16:\"site.Search.edit\";i:155;s:15:\"site.Search.del\";i:156;s:19:\"site.Fragment.index\";i:157;s:17:\"site.Fragment.add\";i:158;s:18:\"site.Fragment.edit\";i:159;s:20:\"site.Fragment.status\";i:160;s:17:\"site.Fragment.del\";i:161;s:14:\"site.Diy.index\";i:162;s:12:\"site.Diy.add\";i:163;s:13:\"site.Diy.edit\";i:164;s:15:\"site.Diy.status\";i:165;s:12:\"site.Diy.del\";i:166;s:18:\"site.DiyData.index\";i:167;s:16:\"site.DiyData.add\";i:168;s:17:\"site.DiyData.edit\";i:169;s:19:\"site.DiyData.status\";i:170;s:16:\"site.DiyData.del\";i:171;s:14:\"site.Tpl.index\";i:172;s:12:\"site.Tpl.add\";i:173;s:13:\"site.Tpl.edit\";i:174;s:12:\"site.Tpl.del\";i:175;s:22:\"statis.SiteViews.index\";i:176;s:18:\"system.Index.index\";i:177;s:21:\"system.Index.userData\";i:178;s:19:\"system.Notice.index\";i:179;s:17:\"system.Notice.del\";i:180;s:19:\"system.Update.index\";i:181;s:19:\"system.Config.index\";i:182;s:18:\"system.Config.user\";i:183;s:18:\"system.Config.info\";i:184;s:20:\"system.Config.upload\";i:185;s:25:\"system.ConfigManage.index\";i:186;s:23:\"system.ConfigManage.add\";i:187;s:24:\"system.ConfigManage.edit\";i:188;s:26:\"system.ConfigManage.status\";i:189;s:23:\"system.ConfigManage.del\";i:190;s:22:\"system.ConfigApi.index\";i:191;s:20:\"system.ConfigApi.add\";i:192;s:21:\"system.ConfigApi.edit\";i:193;s:23:\"system.ConfigApi.status\";i:194;s:20:\"system.ConfigApi.del\";i:195;s:25:\"system.ConfigUpload.index\";i:196;s:24:\"system.ConfigUpload.edit\";i:197;s:17:\"system.User.index\";i:198;s:15:\"system.User.add\";i:199;s:16:\"system.User.edit\";i:200;s:18:\"system.User.status\";i:201;s:15:\"system.User.del\";i:202;s:17:\"system.Role.index\";i:203;s:15:\"system.Role.add\";i:204;s:16:\"system.Role.edit\";i:205;s:15:\"system.Role.del\";i:206;s:18:\"system.Debug.index\";i:207;s:16:\"system.Debug.del\";i:208;s:22:\"system.SystemLog.index\";i:209;s:20:\"system.SystemLog.del\";i:210;s:24:\"system.Application.index\";i:211;s:22:\"system.Application.add\";i:212;s:23:\"system.Application.edit\";i:213;s:22:\"system.Application.del\";i:214;s:20:\"tools.SendData.index\";i:215;s:16:\"tools.Send.index\";i:216;s:14:\"tools.Send.add\";i:217;s:15:\"tools.Send.info\";i:218;s:20:\"tools.SendConf.index\";i:219;s:22:\"tools.SendConf.setting\";i:220;s:19:\"tools.SendTpl.index\";i:221;s:17:\"tools.SendTpl.add\";i:222;s:18:\"tools.SendTpl.edit\";i:223;s:17:\"tools.SendTpl.del\";i:224;s:23:\"tools.SendDefault.index\";i:225;s:17:\"tools.Label.index\";i:226;s:17:\"tools.Queue.index\";i:227;s:21:\"tools.QueueConf.index\";i:228;s:15:\"tools.Api.index\";i:229;s:14:\"tools.Api.make\";i:230;s:21:\"warehouse.Marki.index\";i:231;s:19:\"warehouse.Marki.add\";i:232;s:20:\"warehouse.Marki.edit\";i:233;s:19:\"warehouse.Marki.del\";i:234;s:29:\"warehouse.MarkiDelivery.index\";i:235;s:28:\"warehouse.MarkiWarning.index\";i:236;s:31:\"warehouse.MarkiWarningLog.index\";i:237;s:24:\"warehouse.Supplier.index\";i:238;s:22:\"warehouse.Supplier.add\";i:239;s:23:\"warehouse.Supplier.edit\";i:240;s:22:\"warehouse.Supplier.del\";i:241;s:29:\"warehouse.SupplierOrder.index\";i:242;s:22:\"warehouse.PosLog.index\";i:243;s:20:\"warehouse.PosLog.del\";i:244;s:25:\"warehouse.ConfigPos.index\";i:245;s:23:\"warehouse.ConfigPos.add\";i:246;s:24:\"warehouse.ConfigPos.edit\";i:247;s:23:\"warehouse.ConfigPos.del\";i:248;s:25:\"warehouse.PosDriver.index\";i:249;s:23:\"warehouse.PosDriver.add\";i:250;s:24:\"warehouse.PosDriver.edit\";i:251;s:23:\"warehouse.PosDriver.del\";i:252;s:22:\"warehouse.PosTpl.index\";i:253;s:20:\"warehouse.PosTpl.add\";i:254;s:21:\"warehouse.PosTpl.edit\";i:255;s:20:\"warehouse.PosTpl.del\";i:256;s:25:\"wechat.WechatConfig.index\";i:257;s:23:\"wechat.MenuConfig.index\";i:258;s:26:\"wechat.MiniappConfig.index\";i:259;s:22:\"wechat.AppConfig.index\";}');
 
 /*!40000 ALTER TABLE `dux_system_role` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -2086,6 +2097,29 @@ CREATE TABLE `dux_tools_send_tpl` (
 
 
 
+# Dump of table dux_warehouse_config_pos
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `dux_warehouse_config_pos`;
+
+CREATE TABLE `dux_warehouse_config_pos` (
+  `pos_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `type` varchar(250) DEFAULT '' COMMENT '类型名',
+  `setting` text COMMENT '配置内容',
+  PRIMARY KEY (`pos_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
+
+LOCK TABLES `dux_warehouse_config_pos` WRITE;
+/*!40000 ALTER TABLE `dux_warehouse_config_pos` DISABLE KEYS */;
+
+INSERT INTO `dux_warehouse_config_pos` (`pos_id`, `type`, `setting`)
+VALUES
+	(1,'yilianyun','');
+
+/*!40000 ALTER TABLE `dux_warehouse_config_pos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
 # Dump of table dux_warehouse_marki
 # ------------------------------------------------------------
 
@@ -2100,6 +2134,91 @@ CREATE TABLE `dux_warehouse_marki` (
   PRIMARY KEY (`marki_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+
+
+# Dump of table dux_warehouse_marki_delivery
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `dux_warehouse_marki_delivery`;
+
+CREATE TABLE `dux_warehouse_marki_delivery` (
+  `delivery_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `marki_id` int(10) NOT NULL DEFAULT '0',
+  `order_id` int(10) NOT NULL DEFAULT '0',
+  `goods_ids` varchar(250) DEFAULT '',
+  `create_time` int(10) NOT NULL DEFAULT '0',
+  `receive_time` int(10) NOT NULL DEFAULT '0',
+  `receive_status` tinyint(1) NOT NULL DEFAULT '0',
+  `remark` varchar(250) DEFAULT '',
+  PRIMARY KEY (`delivery_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# Dump of table dux_warehouse_pos_driver
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `dux_warehouse_pos_driver`;
+
+CREATE TABLE `dux_warehouse_pos_driver` (
+  `driver_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `pos_id` int(10) NOT NULL DEFAULT '0',
+  `name` varchar(100) DEFAULT '',
+  `description` varchar(250) DEFAULT '',
+  `number` varchar(250) DEFAULT '',
+  `status` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`driver_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+LOCK TABLES `dux_warehouse_pos_driver` WRITE;
+/*!40000 ALTER TABLE `dux_warehouse_pos_driver` DISABLE KEYS */;
+
+INSERT INTO `dux_warehouse_pos_driver` (`driver_id`, `pos_id`, `name`, `description`, `number`, `status`)
+VALUES
+	(1,1,'默认打印机','默认','0',1);
+
+/*!40000 ALTER TABLE `dux_warehouse_pos_driver` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table dux_warehouse_pos_log
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `dux_warehouse_pos_log`;
+
+CREATE TABLE `dux_warehouse_pos_log` (
+  `log_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `driver_id` int(10) NOT NULL DEFAULT '0',
+  `pos_no` varchar(250) DEFAULT '',
+  `time` int(10) NOT NULL DEFAULT '0',
+  `content` text,
+  PRIMARY KEY (`log_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# Dump of table dux_warehouse_pos_tpl
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `dux_warehouse_pos_tpl`;
+
+CREATE TABLE `dux_warehouse_pos_tpl` (
+  `tpl_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `pos_id` int(10) NOT NULL DEFAULT '0',
+  `name` varchar(100) DEFAULT '',
+  `tpl` text,
+  PRIMARY KEY (`tpl_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+LOCK TABLES `dux_warehouse_pos_tpl` WRITE;
+/*!40000 ALTER TABLE `dux_warehouse_pos_tpl` DISABLE KEYS */;
+
+INSERT INTO `dux_warehouse_pos_tpl` (`tpl_id`, `pos_id`, `name`, `tpl`)
+VALUES
+	(1,1,'配送订单','<FH><FB><center>DuxShop</center></FB></FH>\r\n********************************\\r\r\n<FH>\r\n姓名：{$orderInfo.receive_name}\\r\r\n电话:   {$orderInfo.receive_tel}\\r\r\n地址：{$orderInfo.receive_school} {$orderInfo.receive_floor} {$orderInfo.receive_address}\\r\r\n日期：{date(\'Y-m-d H:i:s\', $orderInfo.order_create_time)}\\r\r\n单号：{$orderInfo.order_no}</FH>\\r\r\n********************************\\r<FH>\r\n\r\n名称 单价 数量 付款\r\n<!--loop{$goodsData as $vo}-->\r\n{$vo.name}  {$vo.option}\r\n        {$vo.price} {$vo.num} {$vo.total}\r\n<!--{/loop}-->\r\n买家备注：\r\n{$orderInfo.remark}\r\n\\r\r\n</FH>\r\n********************************\\r\r\n<FH>\r\n<right>总价：{$totalPrice}元</right>\r\n</FH>\r\n********************************\\r\r\n<QR>{$deliveryNo}</QR>');
+
+/*!40000 ALTER TABLE `dux_warehouse_pos_tpl` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table dux_warehouse_supplier

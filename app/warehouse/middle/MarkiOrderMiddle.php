@@ -5,6 +5,35 @@ namespace app\warehouse\middle;
 class MarkiOrderMiddle extends \app\base\middle\BaseMiddle {
 
 
+    protected function bind() {
+        $userId = intval($this->params['user_id']);
+        $markiInfo = target('warehouse/WarehouseMarki')->getWhereInfo([
+            'A.user_id' => $userId,
+        ]);
+        if(empty($markiInfo)) {
+            return $this->stop('配送员未绑定！');
+        }
+        $code = $this->params['code'];
+        $data = explode('D', $code);
+        $orderNo = $data[0];
+        $deliveryId = $data[1];
+        if(empty($orderNo) || empty($deliveryId)) {
+            return $this->stop('配送码不正确！');
+        }
+        $deliveryInfo = target('warehouse/WarehouseMarkiDelivery')->getInfo($deliveryId);
+        if($deliveryInfo['order_no'] <> $orderNo) {
+            return $this->stop('该配送码不正确！');
+        }
+        if($deliveryInfo['marki_id']) {
+            return $this->stop('该配送单已绑定！');
+        }
+        $status = target('warehouse/WarehouseMarkiDelivery')->where(['delivery_id' => $deliveryId])->data(['marki_id' => $markiInfo['marki_id']])->update();
+        if(empty($status)) {
+            return $this->stop(target('warehouse/WarehouseMarkiDelivery')->getError());
+        }
+        return $this->run([], '配送单领取成功！');
+    }
+
     protected function data() {
         $userId = intval($this->params['user_id']);
         $type = intval($this->params['type']);

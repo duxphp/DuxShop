@@ -978,6 +978,7 @@ class OrderService extends \app\base\service\BaseService {
                 'delivery_status' => 0,
             ]);
         }
+        $goodsIds = array_column($goodsList, 'id');
 
         if (empty($goodsList)) {
             return $this->error('订单暂无需发货商品！');
@@ -998,6 +999,7 @@ class OrderService extends \app\base\service\BaseService {
                 'delivery_name' => html_clear($name),
                 'delivery_no' => html_clear($no),
                 'create_time' => $time,
+                'goods_ids' => implode(',', $goodsIds),
                 'remark' => html_clear($remark),
             ];
             $deliveryId = target('order/OrderDelivery')->add($data);
@@ -1008,14 +1010,11 @@ class OrderService extends \app\base\service\BaseService {
 
         if ($deliveryType == 2) {
             $markiId = intval($params['marki_id']);
-            if (!$markiId) {
-                return $this->error('请选择配送员!');
-            }
-
             $data = [
                 'order_id' => $orderId,
                 'marki_id' => $markiId,
                 'create_time' => $time,
+                'goods_ids' => implode(',', $goodsIds),
                 'remark' => html_clear($params['remark']),
             ];
             $deliveryId = target('warehouse/WarehouseMarkiDelivery')->add($data);
@@ -1057,7 +1056,7 @@ class OrderService extends \app\base\service\BaseService {
         }
 
         $app = $orderInfo['order_app'];
-        if (!target($app . '/Order', 'service')->deliveryOrder($orderInfo, $ids, $deliveryType)) {
+        if (!target($app . '/Order', 'service')->deliveryOrder($orderInfo, $goodsList, $deliveryType, $params, $log)) {
             return $this->error(target($app . '/Order', 'service')->getError());
         }
 
@@ -1069,6 +1068,7 @@ class OrderService extends \app\base\service\BaseService {
         }
 
         //被动接口
+        $params['delivery_id'] = $deliveryId;
         $hookList = run('service', 'Order', 'hookDeliveryOrder', [$orderInfo, $goodsList, $deliveryType, $params, $log]);
         if (!empty($hookList)) {
             foreach ($hookList as $a => $vo) {
@@ -1123,6 +1123,57 @@ class OrderService extends \app\base\service\BaseService {
             ];
             $no = $placeInfo['express_no'];
             target('order/OrderDelivery')->edit($data);
+        }
+
+        //小票接口
+        if($deliveryType == 2 && $params['pos_print']) {
+            $config = target('order/OrderConfig')->getConfig();
+            if(!$config['pos_type'] && !$config['pos_tpl']) {
+                return $this->error('打印机未配置！');
+            }
+            $driverInfo = target('warehouse/WarehousePosDriver')->getInfo($config['pos_type']);
+            if(empty($driverInfo)) {
+                return $this->error('打印机不存在！');
+            }
+            $tplInfo = target('warehouse/WarehousePosTpl')->getInfo($config['pos_tpl']);
+            if(empty($tplInfo)) {
+                return $this->error('打印机不存在！');
+            }
+            if($driverInfo['pos_id'] <> $tplInfo['pos_id']) {
+                return $this->error('打印机模板不匹配！');
+            }
+
+            $goodsData = [];
+            $totalPrice = 0;
+            foreach ($goodsList as $vo) {
+                $options = [];
+                if($vo['goods_options']) {
+                    foreach ($vo['goods_options'] as $v) {
+                        $options[] = $v['value'];
+                    }
+                }
+                $goodsData[] = [
+                    'name' => $vo['goods_name'],
+                    'option' => implode(' ', $options),
+                    'num' => $vo['goods_qty'],
+                    'price' => $vo['goods_price'],
+                    'weight' => $vo['goods_weight'],
+                    'unit' => $vo['goods_unit'],
+                    'total' => $vo['price_total'],
+                ];
+                $totalPrice = price_calculate($totalPrice, '+', $vo['price_total']);
+            }
+            $orderNo = $orderInfo['order_no'] . 'D' . $deliveryId;
+            $printInfo = target($driverInfo['type_target'], 'service')->print($orderNo, [
+                'orderInfo' => $orderInfo,
+                'goodsData' => $goodsData,
+                'totalPrice' => $totalPrice,
+                'deliveryNo' => $orderNo
+            ], $config['pos_type'], $tplInfo['tpl'], 'text');
+            if (!$printInfo) {
+                return $this->error(target($driverInfo['type_target'], 'service')->getError());
+            }
+
         }
 
         //用户通知
@@ -1278,6 +1329,11 @@ class OrderService extends \app\base\service\BaseService {
         // 确认配送完成
         if (!target('order/OrderDelivery')->where(['order_id' => $orderId])->data(['receive_status' => 1, 'receive_time' => time()])->update()) {
             return $this->error(target('order/OrderDelivery')->getError());
+        }
+
+        $count = target('warehouse/WarehouseMarkiDelivery')->where(['order_id' => $orderId, 'marki_id' => 0])->count();
+        if($count) {
+            return $this->error('该订单配送员暂未接单!');
         }
 
         if (!target('warehouse/WarehouseMarkiDelivery')->where(['order_id' => $orderId])->data(['receive_status' => 1, 'receive_time' => time()])->update()) {

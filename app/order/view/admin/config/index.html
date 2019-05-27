@@ -77,6 +77,31 @@
                         <div class="uk-form-help">货到付款协议</div>
                     </div>
                 </div>
+
+
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">小票打印机</label>
+                    <div class="uk-form-controls">
+                        <select name="pos_type" class="uk-select" data-dux="form-select" required>
+                            <!--loop{$posList as $key => $vo}-->
+                            <option value="{$vo.driver_id}" {$vo.driver_id == $info.pos_type ? 'selected' : ''}>{$vo.name}</option>
+                            <!--{/loop}-->
+                        </select>
+                        <div class="uk-form-help">选择订单小票打印机</div>
+                    </div>
+                </div>
+
+                <div class="uk-form-group">
+                    <label class=" uk-form-label">小票模板</label>
+                    <div class="uk-form-controls">
+                        <select name="pos_tpl" class="uk-select" data-dux="form-select" required>
+                            <!--loop{$posTplList as $key => $vo}-->
+                            <option value="{$vo.tpl_id}" {$vo.tpl_id == $info.pos_tpl ? 'selected' : ''}>{$vo.name}</option>
+                            <!--{/loop}-->
+                        </select>
+                        <div class="uk-form-help">针对商城配送打印模板</div>
+                    </div>
+                </div>
                 
                 <div class="uk-form-group">
                     <div class="uk-form-controls">

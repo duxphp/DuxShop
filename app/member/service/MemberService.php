@@ -596,6 +596,7 @@ class MemberService extends \app\base\service\BaseService {
         ]);
         target('member/MemberUser')->beginTransaction();
         if (empty($info)) {
+            target('member/MemberConnect')->where(['type' => $type])->lock()->select();
             $data = [
                 'union_id' => $unionId,
                 'open_id' => $openId,
@@ -605,7 +606,7 @@ class MemberService extends \app\base\service\BaseService {
                     'avatar' => $avatar,
                 ]),
             ];
-            $connentId = target('member/MemberConnect')->add($data);
+            $connentId = target('member/MemberConnect')->data($data)->insert();
             if (!$connentId) {
                 return $this->error('保存登录数据失败!');
             }
@@ -631,6 +632,11 @@ class MemberService extends \app\base\service\BaseService {
                 return false;
             }
             $userId = $logInfo['uid'];
+        }else {
+            target('member/MemberUser')->edit([
+                'user_id' => $userId,
+                'avatar' =>  $avatar,
+            ]);
         }
         //创建关联
         if (empty($info)) {
@@ -747,9 +753,6 @@ class MemberService extends \app\base\service\BaseService {
         $userId = target('member/MemberUser')->saveData('add', $data);
         if (!$userId) {
             return $this->error(target('member/MemberUser')->getError());
-        }
-        if($avatar) {
-            target('member/MemberUser')->avatarUser($userId, $avatar);
         }
         $hookList = run('service', 'member', 'reg', [$userId, $nickname, $avatar]);
         foreach ($hookList as $app => $vo) {

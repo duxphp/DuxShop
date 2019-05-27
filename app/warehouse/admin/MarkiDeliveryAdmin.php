@@ -45,6 +45,11 @@ class MarkiDeliveryAdmin extends \app\system\admin\SystemExtendAdmin {
     }
 
     public function _indexWhere($whereMaps) {
+
+        if($whereMaps['A.marki_id'] == -1) {
+            $whereMaps['A.marki_id'] = 0;
+        }
+
         switch ($whereMaps['status']) {
         case 1:
             $whereMaps['receive_status'] = 0;

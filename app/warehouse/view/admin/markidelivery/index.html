@@ -21,14 +21,15 @@
                         </select>
                     </div>
                     <div class="uk-form-group">
-                            <select class="uk-select" name="marki_id" data-dux="form-select"
+                        <select class="uk-select" name="marki_id" data-dux="form-select"
                                 data-minimum-results-for-search="-1">
-                                <option value="">请选择配送员</option>
-                                <!--loop{$markiList as $vo}-->
-                                <option value="{$vo.marki_id}" {$pageMaps.marki_id == $vo.marki_id ? 'selected' : '' }>{$vo.name}</option>
-                                <!--{/loop}-->
-                            </select>
-                        </div>
+                            <option value="">请选择配送员</option>
+                            <option value="-1" {$pageMaps.marki_id == -1 ? 'selected' : '' }>未绑定配送</option>
+                            <!--loop{$markiList as $vo}-->
+                            <option value="{$vo.marki_id}" {$pageMaps.marki_id == $vo.marki_id ? 'selected' : '' }>{$vo.name}</option>
+                            <!--{/loop}-->
+                        </select>
+                    </div>
                 </div>
                 <div class="dux-form uk-form  uk-form-inline uk-margin-top" >
                     
@@ -93,8 +94,17 @@
                         <p>{date('Y-m-d H:i:s', $vo.order_create_time)}</p>
                     </td>
                     <td>
+                        <!--if{$vo.marki_id}-->
                         {$vo.marki_name}
                         <p>{$vo.marki_tel}</p>
+                        <!--{else}-->
+                        <div>
+                            <a class="uk-text-success" href="javascript:;">[二维码绑定]</a>
+                            <div uk-dropdown>
+                                <div data-dux="show-qrcode" data-text="{$vo.order_no}D{$vo.delivery_id}"></div>
+                            </div>
+                        </div>
+                        <!--{/if}-->
                     </td>
                     <td>
                         {$vo.receive_name}

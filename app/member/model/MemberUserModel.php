@@ -279,10 +279,7 @@ class MemberUserModel extends SystemModel {
                 return false;
             }
         }
-        if (strpos($image, 'http') !== false && strpos($image, 'https') !== false) {
-            $image = realpath(ROOT_PATH . $image);
-        }
-        $data = \dux\lib\Http::curlGet($image);
+        $data = \dux\lib\Http::curlGet($image, 20);
         if(empty($data)) {
             return true;
         }

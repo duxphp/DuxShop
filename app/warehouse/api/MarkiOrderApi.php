@@ -20,5 +20,15 @@ class MarkiOrderApi extends \app\member\api\MemberApi {
         });
     }
 
+    public function bind() {
+        target($this->_middle, 'middle')->setParams([
+            'user_id' => $this->userInfo['user_id'],
+            'code' => $this->data['code'],
+        ])->bind()->export(function ($data, $msg) {
+            $this->success($msg, $data);
+        }, function ($message, $code) {
+            $this->error($message, $code);
+        });
+    }
 
 }

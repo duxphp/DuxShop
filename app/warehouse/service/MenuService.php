@@ -30,16 +30,6 @@ class MenuService {
                                 'url' => url('warehouse/MarkiDelivery/index'),
                                 'order' => 1
                             ),
-                            array(
-                                'name' => '下单预警',
-                                'url' => url('warehouse/MarkiWarning/index'),
-                                'order' => 2
-                            ),
-                            array(
-                                'name' => '取消记录',
-                                'url' => url('warehouse/MarkiWarningLog/index'),
-                                'order' => 3
-                            ),
                         )
                     ),
                     array(
@@ -55,6 +45,32 @@ class MenuService {
                                 'name' => '供货订单',
                                 'url' => url('warehouse/SupplierOrder/index'),
                                 'order' => 1
+                            ),
+                        )
+                    ),
+                    array(
+                        'name' => '小票打印',
+                        'order' => 2,
+                        'menu' => array(
+                            /*array(
+                                'name' => '打印记录',
+                                'url' => url('warehouse/PosLog/index'),
+                                'order' => 0
+                            ),*/
+                            array(
+                                'name' => '打印接口',
+                                'url' => url('warehouse/ConfigPos/index'),
+                                'order' => 1
+                            ),
+                            array(
+                                'name' => '设备管理',
+                                'url' => url('warehouse/PosDriver/index'),
+                                'order' => 2
+                            ),
+                            array(
+                                'name' => '打印模板',
+                                'url' => url('warehouse/PosTpl/index'),
+                                'order' => 3
                             ),
                         )
                     ),
