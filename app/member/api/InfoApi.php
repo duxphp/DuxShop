@@ -6,9 +6,7 @@
 
 namespace app\member\api;
 
-use \app\base\api\BaseApi;
-
-class InfoApi extends BaseApi {
+class InfoApi extends \app\member\api\MemberApi {
 
     /**
      * 会员中心首页
