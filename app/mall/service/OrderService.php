@@ -93,7 +93,7 @@ class OrderService extends \app\base\service\BaseService {
             $proInfo = target('mall/MallProducts')->getMallInfo([
                 'A.products_id' => $vo['sub_id']
             ]);
-            if(!target('mall/Mall')->purchase($proInfo, $vo['user_id'], $qty, 0)) {
+            if(!target('mall/Mall', 'service')->purchase($proInfo, $vo['user_id'], $qty, 0)) {
                 return $this->error(target('mall/Mall')->getError());
             }
 
